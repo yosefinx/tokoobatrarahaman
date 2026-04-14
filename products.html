@@ -41,70 +41,175 @@
             </div>
         </section>
         <!-- END HERO SECTION -->
-        <!-- START PRODUCTS SECTION  -->
-        <section class="products-grid-2 reveal" >
-            <div class="product-card-2">
-                <div class="imgcon">
-                    <img src="img/products/paracetamol.jpeg" alt="Paracetamol">
-                </div>
-                <div class="text-card">
-                    <h2>Paracetamol 500mg</h2>
-                    <p class="explanation">Pereda nyeri dan penurun demam untuk penggunaan sehari-hari.</p>
-                    <div class="bottom">
-                        <p class="price">Rp 12.000</p>
-                            <button class="btn">Detail ></button>
+        <!-- START CATEGORY SECTION -->
+        <section class="category-section reveal">
+            <div class="category-buttons">
+                <button onclick="showCategory('obat-sehari-hari', this)" class="category-btn active">Obat Sehari-hari</button>
+                <button onclick="showCategory('suplemen', this)" class="category-btn">Suplemen</button>
+                <button onclick="showCategory('obat-herbal-tradisional', this)" class="category-btn">Obat Herbal Tradisional</button>
+            </div>
+            <!-- CATEGORY 1 -->
+            <div id="obat-sehari-hari" class="category-content active">
+                <div class="products-grid-2">
+                    <div class="product-card-2">
+                        <img src="img/products/obat-sehari-hari/Antimo 50 mg 10 Tablet - Rp 7000.png" alt="Antimo 50 mg 10 Tablet">
+                        <div class="text-card">
+                            <h2>Antimo 50 mg 10 Tablet</h2>
+                            <p class="explanation">Antibiotik spektrum luas untuk mengatasi berbagai infeksi bakteri.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 7.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-sehari-hari/Mixagrip.png" alt="Mixagrip">
+                        <div class="text-card">
+                            <h2>Mixagrip</h2>
+                            <p class="explanation">Obat untuk mengatasi gejala flu dan batuk.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 12.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-sehari-hari/Mylanta Sirup 150 mL - Rp 54000.png" alt="Mylanta Sirup 150 mL">
+                        <div class="text-card">
+                            <h2>Mylanta Sirup 150 mL</h2>
+                            <p class="explanation">Obat untuk mengatasi gejala maag dan asam lambung.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 54.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-sehari-hari/Panadol Extra 10 kaplet - Rp 15000.png" alt="Panadol Extra 10 kaplet">
+                        <div class="text-card">
+                            <h2>Panadol Extra 10 kaplet</h2>
+                            <p class="explanation">Obat untuk mengatasi nyeri dan demam.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 15.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-sehari-hari/Woods Obat Batuk Herbal 60 mL - Rp 29200.png" alt="Woods Obat Batuk Herbal 60 mL">
+                        <div class="text-card">
+                            <h2>Woods Obat Batuk Herbal 60 mL</h2>
+                            <p class="explanation">Obat untuk mengatasi gejala batuk dan pilek.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 29.200</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-card-2">
-                <div class="imgcon">
-                    <img src="img/products/amoxicillin.jpg" alt="Amoxicillin">
-                </div>
-                <div class="text-card">
-                    <h2>Amoxicillin 500mg</h2>
-                    <p class="explanation">Antibiotik spektrum luas untuk mengatasi berbagai infeksi bakteri.</p>
-                    <div class="bottom">
-                        <p class="price">Rp 25.000</p>
-                            <button class="btn">Detail ></button>
+            <!-- CATEGORY 2 -->
+            <div id="suplemen" class="category-content">
+                <div class="products-grid-2">
+                    <div class="product-card-2">
+                        <img src="img/products/suplemen/Blackmores Pregnancy & Breast Feeding Gold - Rp 315000.png" alt="Blackmores Pregnancy & Breast Feeding Gold">
+                        <div class="text-card">
+                            <h2>Blackmores Pregnancy & Breast Feeding Gold</h2>
+                            <p class="explanation">Suplemen untuk mendukung kesehatan ibu hamil dan menyusui.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 315.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png" alt="Enervon-C Multivitamin 4 Tablet">
+                        <div class="text-card">
+                            <h2>Enervon-C Multivitamin 4 Tablet</h2>
+                            <p class="explanation">Suplemen untuk mendukung sistem kekebalan tubuh.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 10.500</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/suplemen/Halowell D3 1000 10 Tablet - Rp 28000.png" alt="Halowell D3 1000 10 Tablet">
+                        <div class="text-card">
+                            <h2>Halowell D3 1000 10 Tablet</h2>
+                            <p class="explanation">Suplemen untuk mendukung kesehatan tulang dan gigi.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 28.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/suplemen/Holisti Care Super Ester C 90 Tablet - Rp 150000.png" alt="Holisti Care Super Ester C 90 Tablet">
+                        <div class="text-card">
+                            <h2>Holisti Care Super Ester C 90 Tablet</h2>
+                            <p class="explanation">Suplemen untuk mendukung sistem kekebalan tubuh.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 150.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/suplemen/Natur-e 16 Kapsul - Rp 37000.png" alt="Natur-e 16 Kapsul">
+                        <div class="text-card">
+                            <h2>Natur-e 16 Kapsul</h2>
+                            <p class="explanation">Suplemen untuk mendukung kesehatan jantung dan sirkulasi darah.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 37.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
-            <div class="product-card-2">
-                <div class="imgcon">
-                    <img src="img/products/cetirizine.jpeg" alt="Cetirizine">
-                </div>
-                <div class="text-card">
-                    <h2>Cetirizine 10mg</h2>
-                    <p class="explanation">Antihistamin untuk meredakan gejala alergi seperti bersin dan gatal.</p>
-                    <div class="bottom">
-                        <p class="price">Rp 18.000</p>
-                            <button class="btn">Detail ></button>
+            <!-- CATEGORY 3 -->
+            <div id="obat-herbal-tradisional" class="category-content">
+                <div class="products-grid-2">
+                    <div class="product-card-2">
+                        <img src="img/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png" alt="Chi Kit Teck Aun 2,25 g">
+                        <div class="text-card">
+                            <h2>Chi Kit Teck Aun 2,25 g</h2>
+                            <p class="explanation">Obat herbal tradisional untuk mengatasi berbagai masalah kesehatan.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 7.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
                     </div>
-                </div>
-            </div>
-            <div class="product-card-2">
-                <div class="imgcon">
-                    <img src="img/products/ibuprofen.jpg" alt="Ibuprofen">
-                </div>
-                <div class="text-card">
-                    <h2>Ibuprofen 400mg</h2>
-                    <p class="explanation">Pereda nyeri dan antiinflamasi untuk berbagai kondisi seperti sakit kepala dan nyeri otot.</p>
-                    <div class="bottom">
-                        <p class="price">Rp 15.000</p>
-                            <button class="btn">Detail ></button>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-herbal-tradisional/Go Thak Sua (Lima Pagoda) 30 g - Rp 68000.jpg" alt="Go Thak Sua (Lima Pagoda) 30 g">
+                        <div class="text-card">
+                            <h2>Go Thak Sua (Lima Pagoda) 30 g</h2>
+                            <p class="explanation">Obat herbal tradisional untuk mengatasi berbagai masalah kesehatan.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 68.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
                     </div>
-                </div>
-            </div>
-            <div class="product-card-2">
-                <div class="imgcon">
-                    <img src="img/products/omeprazole.jpg" alt="Omeprazole">
-                </div>
-                <div class="text-card">
-                    <h2>Omeprazole 20mg</h2>
-                    <p class="explanation">Obat untuk mengurangi produksi asam lambung, digunakan untuk mengatasi maag dan GERD.</p>
-                    <div class="bottom">
-                        <p class="price">Rp 20.000</p>
-                            <button class="btn">Detail ></button>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-herbal-tradisional/New Hau Fung San 1,2 g - Rp 7800.png" alt="New Hau Fung San 1,2 g">
+                        <div class="text-card">
+                            <h2>New Hau Fung San 1,2 g</h2>
+                            <p class="explanation">Obat herbal tradisional untuk mengatasi berbagai masalah kesehatan.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 7.800</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-herbal-tradisional/Obat batuk ibu dan anak 75 ml - Rp 40000.png" alt="Obat batuk ibu dan anak 75 ml">
+                        <div class="text-card">
+                            <h2>Obat batuk ibu dan anak 75 ml</h2>
+                            <p class="explanation">Obat herbal tradisional untuk mengatasi berbagai masalah kesehatan.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 40.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="product-card-2">
+                        <img src="img/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg" alt="Tolak Angin 15 ml">
+                        <div class="text-card">
+                            <h2>Tolak Angin 15 ml</h2>
+                            <p class="explanation">Obat herbal tradisional untuk mengatasi berbagai masalah kesehatan.</p>
+                            <div class="bottom">
+                                <p class="price">Rp 6.000</p> <button class="btn">Detail ></button>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -129,84 +234,44 @@
         <footer>
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="logo">
-                        <img
-                        src="/img/logo.png"
-                        alt="Toko Obat Arah Aman Logo"
-                        height="30" />
-                        <a href="#home" style="font-weight: 600; font-size: 1.25rem"
-                        >Toko Obat Arah Aman</a
-                        >
-                    </div>
-                    <p>Toko Obat Terpercaya dan Berkualitas Tinggi</p>
-                    <div class="footer-socials">
-                        <a href="#" title="Facebook">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                            </svg>
-                        </a>
-                        <a href="#" title="Instagram">
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="2" y="2" width="20" height="20" rx="5" />
-                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                            </svg>
-                        </a>
-                        <a href="#" title="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                            </svg>
-                        </a>
-                        <a href="#" title="YouTube">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-                                <polygon
-                                points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"
-                                fill="#1c1f1b" />
-                            </svg>
-                        </a>
-                    </div>
+                <div class="logo">
+                    <img
+                    src="/img/logo.png"
+                    alt="Toko Obat Arah Aman Logo"
+                    height="30" />
+                    <a href="#home" style="font-weight: 600; font-size: 1.25rem"
+                    >Toko Obat Arah Aman</a
+                    >
                 </div>
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">Tentang Kami</a></li>
-                        <li><a href="#products">Produk</a></li>
-                        <li><a href="#contact">Kontak</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
+                <p>Toko Obat Terpercaya dan Berkualitas Tinggi</p>
                 </div>
 
+                <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                </div>
                 <div class="footer-subscribe">
-                    <h4>Tetap terkoneksi</h4>
-                    <p>
-                        Ada pertanyaan atau masukan? Kami senang mendengarnya dari Anda.
-                    </p>
-                    <div class="subscribe-form">
-                        <input type="email" placeholder="Email address…" />
-                        <button>Send</button>
-                    </div>
+                <h4>Tetap terkoneksi</h4>
+                <p>
+                    Ada pertanyaan atau masukan? Kami senang mendengarnya dari Anda.
+                </p>
+                <a
+                    href="https://wa.me/62895405243652?text=Halo%20saya%20ingin%20bertanya"
+                    target="_blank"
+                    class="whatsapp-btn">
+                    Chat via WhatsApp
+                </a>
                 </div>
             </div>
             <div class="footer-bottom">
                 © 2026 Toko Obat Arah Aman. All Rights Reserved
             </div>
-        </footer>
+            </footer>
         <!-- END FOOTER -->
         <script>
             // START NAVBAR TOGGLE
@@ -247,6 +312,27 @@
 
             reveals.forEach((el) => observer.observe(el));
             // END SCROLL REVEAL
+            // START CATEGORY TOGGLE
+            function showCategory(id, btn) {
+                // reset semua content
+                const allContent = document.querySelectorAll(".category-content");
+                allContent.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                // reset semua button
+                const allBtn = document.querySelectorAll(".category-btn");
+                allBtn.forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+                // aktifkan content
+                document.getElementById(id).classList.add("active");
+
+                // aktifkan button yang diklik
+                btn.classList.add("active");
+            }
+            // END CATEGORY TOGGLE
         </script>
     </body>
 </html>

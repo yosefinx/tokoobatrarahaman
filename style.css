@@ -24,7 +24,7 @@ nav {
   position: relative;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 40px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -467,11 +467,25 @@ nav .nav-links a:hover::after {
   transform: scaleX(1);
 }
 
+.product-image {
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
 .products-content p {
   font-size: 1.1rem;
   color: #555;
   line-height: 1.8;
   margin-bottom: 10px;
+}
+
+.button-products-more {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 40px;
 }
 
 #contact {
@@ -523,6 +537,16 @@ nav .nav-links a:hover::after {
   transition: 0.3s;
 }
 
+.card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+
 .contact-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(30, 102, 65, 0.3);
@@ -556,6 +580,26 @@ nav .nav-links a:hover::after {
   line-height: 1.6;
 }
 
+.cta-btn {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: left;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #25d366;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.3s ease;
+  width: fit-content;
+}
+
+.card-link:hover .cta-btn {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+}
+
 .contact-map {
   border-radius: 25px;
   min-height: 350px;
@@ -576,7 +620,7 @@ footer {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.5fr 1fr 1.2fr;
   gap: 40px;
   margin-bottom: 40px;
 }
@@ -602,27 +646,6 @@ footer {
   display: flex;
   gap: 12px;
   margin-top: 15px;
-}
-
-.footer-socials a {
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #fff;
-  transition: 0.3s ease;
-}
-
-.footer-socials a:hover {
-  background: var(--primary-color);
-}
-
-.footer-socials svg {
-  width: 16px;
-  height: 16px;
 }
 
 .footer-grid h4 {
@@ -654,31 +677,25 @@ footer {
   margin-bottom: 12px;
 }
 
-.subscribe-form {
-  display: flex;
-  background: #fff;
-  border-radius: 50px;
-  overflow: hidden;
-}
-
-.subscribe-form input {
-  flex: 1;
-  border: none;
-  padding: 12px 16px;
-  outline: none;
-}
-
-.subscribe-form button {
-  background: var(--primary-color);
-  border: none;
-  color: #fff;
-  padding: 0 18px;
-  cursor: pointer;
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 12px 18px;
+  background: #25d366;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
   transition: 0.3s ease;
+  width: fit-content;
 }
 
-.subscribe-form button:hover {
-  filter: brightness(1.1);
+.whatsapp-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
 }
 
 .footer-bottom {
@@ -766,18 +783,13 @@ footer {
   transform: scaleX(1);
 }
 
-.imgcon {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.imgcon img {
+.product-card-2 img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+  height: 180px;
+  object-fit: contain;
+  background: #f5f5f5;
+  border-radius: 12px;
+  display: block;
 }
 
 .text-card {
@@ -870,6 +882,44 @@ footer {
 }
 
 .btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.category-content {
+  display: none;
+}
+
+.category-content.active {
+  display: block;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 30px 40px 0px;
+}
+
+.category-btn {
+  position: relative;
+  padding: 10px 18px;
+  border-radius: 50px;
+  border: 1px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.category-btn:hover {
+  background: rgba(42, 53, 203, 0.15);
+}
+
+.category-btn.active {
   background: var(--primary-color);
   color: white;
 }
@@ -1298,5 +1348,14 @@ footer {
 
   .hero-text-products p {
     font-size: 18px;
+  }
+
+  .products-content h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .products-content p {
+    font-size: 1.2rem;
   }
 }
