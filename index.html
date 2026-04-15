@@ -21,27 +21,47 @@
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">Tentang Kami</a></li>
-        <li><a href="products.html">Produk</a></li>
+        <li><a href="#products">Produk</a></li>
         <li><a href="#contact">Kontak</a></li>
       </ul>
       <button class="menu-toggle">☰</button>
     </nav>
     <!-- END NAVBAR -->
     <!-- START HERO SECTION -->
-    <section id="home" class="reveal">
-      <div class="hero-image">
-        <img src="/img/hero-image.jpg" alt="Toko Obat Arah Aman Hero Image" />
-      </div>
-      <div class="hero-text">
-        <div class="hero-label"><span></span>Terpercaya Sejak 1980</div>
-        <h1>Toko Obat Terpercaya dan <br /><em>Berkualitas Tinggi </em></h1>
-        <p>
-          Produk yang berkualitas tinggi mulai dari obat-obatan, suplemen dan
-          lainnya dengan pelayanan yang profesional.
-        </p>
-        <div class="hero-btns">
-          <a href="#contact" class="btn-main">Hubungi Kami</a>
-          <a href="products.html" class="btn-ghost">Produk Kami</a>
+    <section id="home" class="hero-section reveal">
+      <div class="container-hero">
+        <!-- SISI KIRI: TEKS -->
+        <div class="hero-text">
+          <div class="custom-tagline-home">
+            <span></span> TERPERCAYA SEJAK 1980
+          </div>
+          <h1>Solusi Kesehatan Terpercaya & <em>Berkualitas Tinggi</em></h1>
+          <p>
+            Menghadirkan berbagai macam obat-obatan, suplemen, dan kebutuhan
+            kesehatan lainnya dengan pelayanan profesional dan harga yang tetap
+            terjangkau.
+          </p>
+          <div class="hero-btns">
+            <a href="#contact" class="btn-primary-home">Hubungi Kami</a>
+            <a href="products.html" class="btn-secondary-home">Lihat Produk</a>
+          </div>
+        </div>
+
+        <!-- SISI KANAN: GAMBAR DENGAN AKSEN -->
+        <div class="hero-image-wrapper">
+          <div class="image-accent-blob"></div>
+          <!-- Dekorasi Belakang -->
+          <div class="main-image-box">
+            <img src="img/hero-image.jpg" alt="Toko Obat Arah Aman" />
+            <!-- Badge Melayang -->
+            <div class="hero-floating-badge">
+              <div class="badge-icon">✓</div>
+              <div class="badge-text">
+                <strong>100% Original</strong>
+                <span>Produk Terjamin</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -50,7 +70,7 @@
     <section id="stats" class="reveal">
       <div class="stats-container">
         <h2>
-          <span id="counter">0</span><span id="plus"></span> Tahun Pengalaman
+          <span id="counter">0</span><span id="plus"></span>Tahun Pengalaman
         </h2>
         <p>
           Berdiri selama lebih dari 40 tahun sejak tahun 1980, Toko Obat Arah
@@ -61,136 +81,215 @@
     </section>
     <!-- END STATS BAND -->
     <!-- START ABOUT US -->
-    <section id="about" class="reveal">
-      <div class="about-content">
-        <div class="about-label"><span></span>Tentang Kami</div>
-        <h2>Sejarah kami</h2>
-        <p>
-          Toko Obat Arah Aman didirikan sejak tahun 1980 dengan tujuan untuk
-          menyediakan produk kesehatan berkualitas tinggi dan pelayanan yang
-          profesional kepada masyarakat. Kami percaya bahwa kesehatan adalah
-          aset berharga, dan kami berkomitmen untuk membantu pelanggan kami
-          menjaga dan meningkatkan kesejahteraan mereka melalui produk-produk
-          yang aman, efektif, dan terpercaya.
-        </p>
+    <section id="about" class="about-modern-section reveal">
+      <div class="container-about">
+        <div class="about-text-content">
+          <span class="custom-pill-about">TENTANG KAMI</span>
+          <h2>Dedikasi Kesehatan Sejak 1980</h2>
+          <p>
+            Toko Obat Arah Aman lahir dari visi sederhana: menghadirkan akses
+            kesehatan yang mudah dan terpercaya. Selama lebih dari 4 dekade,
+            kami terus berkomitmen menjaga standar kualitas produk farmasi dan
+            memberikan edukasi profesional bagi setiap pelanggan kami.
+          </p>
 
-        <a href="#about" class="btn-main">Selengkapnya...</a>
-      </div>
-      <div class="about-video">
-        <video autoplay muted loop playsinline>
-          <source src="/videos/about-us.mp4" type="video/mp4" />
-          Maaf, browser Anda tidak mendukung video HTML5
-        </video>
+          <div class="about-stats-row">
+            <div class="stat-box">
+              <span class="stat-number">40</span>
+              <span class="stat-desc">Tahun Pengalaman</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">100%</span>
+              <span class="stat-desc">Produk Original</span>
+            </div>
+          </div>
+
+          <a href="#more" class="about-btn-premium">Pelajari Selengkapnya →</a>
+        </div>
+        <div class="about-visual-content">
+          <div class="visual-inner">
+            <div class="visual-accent"></div>
+            <div class="video-frame">
+              <video autoplay muted loop playsinline>
+                <source src="videos/about-us.mp4" type="video/mp4" />
+              </video>
+              <div class="floating-badge">
+                <svg viewBox="0 0 24 24" fill="#ffcc00" width="18" height="18">
+                  <path
+                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+                <span>Pilihan Utama</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <!-- END ABOUT US -->
     <!-- START WHY CHOOSE US -->
-    <section id="why" class="reveal">
-      <div class="why-content">
-        <h2>Mengapa harus memilih kami?</h2>
-        <p>
-          Kami berkomitmen untuk memberikan pelayanan terbaik dan produk
-          berkualitas tinggi kepada pelanggan kami.
-        </p>
-      </div>
-      <div class="why-grid">
-        <div class="why-card reveal">
-          <div class="why-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 14l-3-3 1.41-1.41L11 12.17l4.59-4.58L17 9l-6 6z" />
-            </svg>
-          </div>
-          <h3>Toko obat yang terpercaya</h3>
+    <section id="why" class="why-section reveal">
+      <div class="why-container">
+        <!-- Header -->
+        <div class="why-header-content">
+          <span class="why-tagline">KEUNGGULAN KAMI</span>
+          <h2>Mengapa harus memilih kami?</h2>
           <p>
-            Menyediakan obat-obatan yang aman dan terjangkau yang dapat
-            dipercaya oleh konsumen.
+            Memberikan standar pelayanan kesehatan terbaik dengan dedikasi penuh
+            untuk kualitas hidup Anda.
           </p>
         </div>
-        <div class="why-card reveal">
-          <div class="why-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
-            </svg>
+        <div class="why-grid-layout">
+          <div class="why-card-solid">
+            <div class="why-icon-circle">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+            </div>
+            <h3>Toko Terpercaya</h3>
+            <p>
+              Seluruh produk kami terjamin keasliannya dan telah melalui
+              pengawasan ketat standar BPOM.
+            </p>
           </div>
-          <h3>Harga Terjangkau</h3>
-          <p>
-            Produk kesehatan berkualitas tinggi dengan harga yang kompetitif,
-            membuat kesehatan bisa dijangkau oleh semua orang.
-          </p>
-        </div>
-        <div class="why-card reveal">
-          <div class="why-icon">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M9 7C9 5.34315 10.3431 4 12 4H36C37.6569 4 39 5.34315 39 7V15C39 16.6569 37.6569 18 36 18V41C36 42.6569 34.6569 44 33 44H15C13.3431 44 12 42.6569 12 41L12 18C10.3431 18 9 16.6569 9 15V7ZM16 16L16 6H12C11.4477 6 11 6.44772 11 7V15C11 15.5523 11.4477 16 12 16H16ZM18 16H23L23 6H18V16ZM25 16H30V6H25V16ZM32 16H36C36.5523 16 37 15.5523 37 15V7C37 6.44772 36.5523 6 36 6H32V16ZM23 30V35H25V30H30V28H25V23H23V28H18V30H23Z"
-                fill="currentColor" />
-            </svg>
+          <div class="why-card-solid">
+            <div class="why-icon-circle">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3>Harga Kompetitif</h3>
+            <p>
+              Kesehatan adalah hak semua orang. Kami pastikan harga produk tetap
+              terjangkau & transparan.
+            </p>
           </div>
-          <h3>Kelengkapan Produk</h3>
-          <p>
-            Menghadirkan berbagai macam produk yang dapat menjangkau kebutuhan
-            para konsumen.
-          </p>
+          <div class="why-card-solid">
+            <div class="why-icon-circle">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+              </svg>
+            </div>
+            <h3>Produk Terlengkap</h3>
+            <p>
+              Kebutuhan obat rutin, vitamin, hingga alat kesehatan tersedia
+              lengkap dalam satu tempat.
+            </p>
+          </div>
         </div>
       </div>
     </section>
     <!-- END WHY CHOOSE US -->
     <!-- START PRODUCTS -->
-    <section id="products" class="reveal">
-      <div class="products-content reveal">
-        <h2>Produk Kami</h2>
-        <p>Kami menyediakan berbagai macam produk kesehatan.</p>
-      </div>
-      <div class="products-grid reveal">
-        <div class="product-card reveal">
-          <img
-            src="/img/products/everyday-medicines.jpg"
-            alt="Obat Sehari-hari"
-            class="product-image" />
-          <h3>Obat Sehari-hari</h3>
+    <section id="products" class="products-section reveal">
+      <div class="container">
+        <div class="products-header">
+          <span class="why-tagline">PRODUK TERBAIK</span>
+          <h2>Produk Unggulan Kami</h2>
           <p>
-            Obat-obatan untuk mengatasi berbagai masalah kesehatan sehari-hari.
+            Menghadirkan obat-obatan, suplemen, dan produk kesehatan berkualitas
+            untuk kebutuhan keluarga Anda.
           </p>
         </div>
-        <div class="product-card reveal">
-          <img
-            src="/img/products/vitamin.jpg"
-            alt="Suplemen Imunitas"
-            class="product-image" />
-          <h3>Suplemen Imunitas Harian</h3>
-          <p>
-            Suplemen yang dirancang untuk memperkuat sistem kekebalan tubuh dan
-            melindungi Anda dari berbagai penyakit.
-          </p>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <img
+                src="img/products/obat-sehari-hari/Antimo 50 mg 10 Tablet - Rp 7000.png"
+                alt="Antimo" />
+            </div>
+            <div class="product-info">
+              <span class="product-badge">Obat Bebas</span>
+              <h3>Antimo 50 mg 10 Tablet</h3>
+              <p class="product-desc">
+                Solusi efektif untuk mengatasi mabuk perjalanan dan mual.
+              </p>
+              <div class="product-footer">
+                <span class="product-price">Rp 7.000</span>
+                <button class="btn-detail">Detail</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <img
+                src="img/products/obat-sehari-hari/Mixagrip.png"
+                alt="Mixagrip" />
+            </div>
+            <div class="product-info">
+              <span class="product-badge">Flu & Batuk</span>
+              <h3>Mixagrip Flu</h3>
+              <p class="product-desc">
+                Meringankan gejala flu seperti demam dan bersin.
+              </p>
+              <div class="product-footer">
+                <span class="product-price">Rp 12.000</span>
+                <button class="btn-detail">Detail</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <img
+                src="img/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png"
+                alt="Enervon-C" />
+            </div>
+            <div class="product-info">
+              <span class="product-badge">Suplemen</span>
+              <h3>Enervon-C Multivitamin</h3>
+              <p class="product-desc">
+                Membantu menjaga daya tahan tubuh setiap hari.
+              </p>
+              <div class="product-footer">
+                <span class="product-price">Rp 10.500</span>
+                <button class="btn-detail">Detail</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <img
+                src="img/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg"
+                alt="Tolak Angin" />
+            </div>
+            <div class="product-info">
+              <span class="product-badge">Herbal</span>
+              <h3>Tolak Angin Cair 15 ml</h3>
+              <p class="product-desc">
+                Obat herbal untuk masuk angin dan meningkatkan imun.
+              </p>
+              <div class="product-footer">
+                <span class="product-price">Rp 6.000</span>
+                <button class="btn-detail">Detail</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="product-card reveal">
-          <img
-            src="/img/products/pharmacy.jpg"
-            alt="Panduan Kesehatan"
-            class="product-image" />
-          <h3>Panduan Kesehatan/Konsultasi</h3>
-          <p>
-            Layanan konsultasi kesehatan untuk membantu Anda memahami kondisi
-            kesehatan Anda dan memberikan panduan yang tepat.
-          </p>
+        <div class="products-action">
+          <a href="products.html" class="btn-view-all"
+            >Lihat Selengkapnya <span>→</span></a
+          >
         </div>
-      </div>
-      <div class="button-products-more">
-        <a href="products.html" class="btn-main">Selengkapnya...</a>
       </div>
     </section>
     <!-- END PRODUCTS -->
     <!-- START CONTACT -->
-    <section id="contact" class="reveal">
+    <!-- <section id="contact" class="reveal">
       <div class="contact-content">
         <h2>Hubungi Kami</h2>
         <p>
@@ -252,6 +351,79 @@
           </div>
         </div>
       </div>
+    </section> -->
+    <section id="contact" class="contact-section reveal">
+      <div class="container">
+        <!-- Header Konsisten -->
+        <div class="contact-header">
+          <span class="why-tagline">HUBUNGI KAMI</span>
+          <h2>Siap Melayani Anda</h2>
+          <p>
+            Kunjungi toko fisik kami atau hubungi melalui WhatsApp untuk
+            konsultasi kesehatan.
+          </p>
+        </div>
+
+        <div class="contact-grid-layout">
+          <!-- Area Map -->
+          <div class="contact-map-wrapper">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8179516666387!2d109.33969309999999!3d-0.0246311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d59007e4aaf63%3A0x60581fed3db5d6be!2sToko%20Obat%20Arah%20Aman!5e0!3m2!1sid!2sid!4v1775661964164!5m2!1sid!2sid"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <!-- Area Kartu Informasi -->
+          <div class="contact-cards-container">
+            <!-- Lokasi -->
+            <div class="contact-card-solid">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+              </div>
+              <div class="contact-info-text">
+                <h4>Lokasi</h4>
+                <p>Jl. Nusa Indah 1, Darat Sekip, Kec. Pontianak Kota</p>
+              </div>
+            </div>
+
+            <!-- WhatsApp -->
+            <a
+              href="https://wa.me/62895405243652"
+              target="_blank"
+              class="contact-card-solid link-card">
+              <div class="contact-icon-box wa-bg">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.63 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </div>
+              <div class="contact-info-text">
+                <h4>WhatsApp</h4>
+                <span class="contact-cta-label">Chat Sekarang →</span>
+              </div>
+            </a>
+
+            <!-- Jam Kerja -->
+            <div class="contact-card-solid full-width">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+                </svg>
+              </div>
+              <div class="contact-info-text">
+                <h4>Jam Operasional</h4>
+                <p>Senin – Minggu | 08:00 – 17:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- END CONTACT -->
     <!-- START FOOTER -->
@@ -280,15 +452,22 @@
           </ul>
         </div>
         <div class="footer-subscribe">
-          <h4>Tetap terkoneksi</h4>
-          <p>
+          <h4 style="color: #ffffff; margin-bottom: 15px">Tetap Terkoneksi</h4>
+          <p style="color: #cbd5e1; margin-bottom: 20px">
             Ada pertanyaan atau masukan? Kami senang mendengarnya dari Anda.
           </p>
+
           <a
             href="https://wa.me/62895405243652?text=Halo%20saya%20ingin%20bertanya"
             target="_blank"
-            class="whatsapp-btn">
-            Chat via WhatsApp
+            class="wa-btn-flat">
+            <div class="wa-icon-box">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.63 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </div>
+            <span>Chat via WhatsApp</span>
           </a>
         </div>
       </div>
