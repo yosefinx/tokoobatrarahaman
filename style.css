@@ -2,6 +2,11 @@
   --primary-color: #3945d9;
 }
 
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/DMSans-VariableFont_opsz,wght.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +18,7 @@ html {
 }
 
 body {
-  font-family: "Outfit", sans-serif;
+  font-family: "DM Sans", sans-serif;
   background-color: #ffffff;
 }
 
@@ -26,7 +31,7 @@ nav {
   position: relative;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 20px 80px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -487,6 +492,148 @@ nav .nav-links a:hover::after {
   line-height: 1.6;
 }
 
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.value-section {
+  padding: 10px 0 50px;
+  overflow: hidden;
+}
+
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.side-content {
+  flex: 1;
+  min-width: 400px;
+}
+
+.side-cards {
+  flex: 1;
+  min-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.main-title {
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #1a1a1a;
+}
+
+.main-title span {
+  color: #3945d9;
+}
+
+.vision-misi-box {
+  border-left: 3px solid #f0f2f5;
+  padding-left: 10px;
+}
+
+.vm-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+}
+
+.vm-number {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #3945d9;
+  opacity: 0.4;
+}
+
+.vm-text h4 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.vm-text p {
+  color: #636e72;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.feature-card {
+  flex: 1;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  margin-left: 0 !important;
+}
+
+.feature-card.highlighted {
+  background-color: #3945d9;
+  color: #ffffff;
+  z-index: 1;
+}
+
+.feature-card:not(.highlighted) {
+  background: #ffffff;
+}
+
+.icon-wrap {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.highlighted .icon-wrap {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.feature-card:not(.highlighted) .icon-wrap {
+  background: rgba(57, 69, 217, 0.1);
+  color: #3945d9;
+}
+
+.feature-card h5 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Hover Effect */
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(57, 69, 217, 0.15);
+}
 #why.why-section {
   background-color: var(--primary-color);
   background-image:
@@ -972,6 +1119,10 @@ footer {
   margin-bottom: 12px;
 }
 
+.footer-bottom {
+  text-align: center;
+}
+
 .wa-btn-flat {
   display: inline-flex;
   align-items: center;
@@ -1154,7 +1305,7 @@ footer {
   border-radius: 100px;
   background: transparent;
   color: #64748b;
-  font-family: "Outfit", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
@@ -1578,6 +1729,19 @@ footer {
   span#plus {
     font-size: 2.1rem;
   }
+  .flex-wrapper {
+    gap: 40px;
+  }
+
+  .card-stack {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-card {
+    width: 100%;
+    max-width: 450px;
+  }
 
   .container-about {
     flex-direction: column;
@@ -1839,38 +2003,38 @@ footer {
   }
 
   .modal-container {
-    width: 90%; /
+    width: 90%;
     max-height: 85vh;
-    border-radius: 20px; 
-    overflow-y: auto; 
+    border-radius: 20px;
+    overflow-y: auto;
   }
 
   .modal-body {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   .modal-image {
-    padding: 15px; 
-    height: 180px; 
+    padding: 15px;
+    height: 180px;
   }
 
   .modal-image img {
-    max-height: 100%; 
+    max-height: 100%;
     width: auto;
   }
 
   .modal-details {
-    padding: 15px 20px 20px; 
+    padding: 15px 20px 20px;
   }
 
   .modal-details h2 {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     margin: 5px 0;
   }
 
   .modal-details p {
-    font-size: 0.85rem; 
+    font-size: 0.85rem;
     line-height: 1.4;
     margin-bottom: 15px;
   }
@@ -1885,7 +2049,7 @@ footer {
   }
 
   .modal-price {
-    font-size: 1.1rem; 
+    font-size: 1.1rem;
   }
 
   .btn-buy {
