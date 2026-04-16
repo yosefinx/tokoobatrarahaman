@@ -19,7 +19,7 @@
         >
       </div>
       <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
+        <li class="active"><a href="#home">Home</a></li>
         <li><a href="#about">Tentang Kami</a></li>
         <li><a href="#products">Produk</a></li>
         <li><a href="#contact">Kontak</a></li>
@@ -30,11 +30,8 @@
     <!-- START HERO SECTION -->
     <section id="home" class="hero-section reveal">
       <div class="container-hero">
-        <!-- SISI KIRI: TEKS -->
         <div class="hero-text">
-          <div class="custom-tagline-home">
-            <span></span> TERPERCAYA SEJAK 1980
-          </div>
+          <div class="custom-pill"><span></span> TERPERCAYA SEJAK 1980</div>
           <h1>Solusi Kesehatan Terpercaya & <em>Berkualitas Tinggi</em></h1>
           <p>
             Menghadirkan berbagai macam obat-obatan, suplemen, dan kebutuhan
@@ -47,13 +44,10 @@
           </div>
         </div>
 
-        <!-- SISI KANAN: GAMBAR DENGAN AKSEN -->
         <div class="hero-image-wrapper">
           <div class="image-accent-blob"></div>
-          <!-- Dekorasi Belakang -->
           <div class="main-image-box">
             <img src="img/hero-image.jpg" alt="Toko Obat Arah Aman" />
-            <!-- Badge Melayang -->
             <div class="hero-floating-badge">
               <div class="badge-icon">✓</div>
               <div class="badge-text">
@@ -84,7 +78,7 @@
     <section id="about" class="about-modern-section reveal">
       <div class="container-about">
         <div class="about-text-content">
-          <span class="custom-pill-about">TENTANG KAMI</span>
+          <span class="custom-pill">TENTANG KAMI</span>
           <h2>Dedikasi Kesehatan Sejak 1980</h2>
           <p>
             Toko Obat Arah Aman lahir dari visi sederhana: menghadirkan akses
@@ -92,7 +86,6 @@
             kami terus berkomitmen menjaga standar kualitas produk farmasi dan
             memberikan edukasi profesional bagi setiap pelanggan kami.
           </p>
-
           <div class="about-stats-row">
             <div class="stat-box">
               <span class="stat-number">40</span>
@@ -103,7 +96,6 @@
               <span class="stat-desc">Produk Original</span>
             </div>
           </div>
-
           <a href="#more" class="about-btn-premium">Pelajari Selengkapnya →</a>
         </div>
         <div class="about-visual-content">
@@ -129,9 +121,8 @@
     <!-- START WHY CHOOSE US -->
     <section id="why" class="why-section reveal">
       <div class="why-container">
-        <!-- Header -->
         <div class="why-header-content">
-          <span class="why-tagline">KEUNGGULAN KAMI</span>
+          <span class="custom-pill">KEUNGGULAN KAMI</span>
           <h2>Mengapa harus memilih kami?</h2>
           <p>
             Memberikan standar pelayanan kesehatan terbaik dengan dedikasi penuh
@@ -199,7 +190,7 @@
     <section id="products" class="products-section reveal">
       <div class="container">
         <div class="products-header">
-          <span class="why-tagline">PRODUK TERBAIK</span>
+          <span class="custom-pill">PRODUK TERBAIK</span>
           <h2>Produk Unggulan Kami</h2>
           <p>
             Menghadirkan obat-obatan, suplemen, dan produk kesehatan berkualitas
@@ -210,18 +201,29 @@
           <div class="product-card">
             <div class="product-img-wrapper">
               <img
-                src="img/products/obat-sehari-hari/Antimo 50 mg 10 Tablet - Rp 7000.png"
+                src="img/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png"
                 alt="Antimo" />
             </div>
             <div class="product-info">
-              <span class="product-badge">Obat Bebas</span>
-              <h3>Antimo 50 mg 10 Tablet</h3>
+              <span class="product-badge badge-herbal">Obat Herbal</span>
+              <h3>Chi Kit Teck Aun 2,25 g</h3>
               <p class="product-desc">
-                Solusi efektif untuk mengatasi mabuk perjalanan dan mual.
+                Obat ramuan herbal tradisional yang disajikan dalam bentuk pil.
+                Sangat efektif membantu meredakan sakit perut, diare ringan,
+                muntah, mabuk perjalanan, dan membantu memperbaiki nafsu makan.
               </p>
               <div class="product-footer">
                 <span class="product-price">Rp 7.000</span>
-                <button class="btn-detail">Detail</button>
+                <button
+                  class="btn-detail"
+                  data-name="Chi Kit Teck Aun 2,25 g"
+                  data-price="Rp 7.000"
+                  data-desc="Obat ramuan herbal tradisional yang disajikan dalam bentuk pil. Sangat efektif membantu meredakan sakit perut, diare ringan, muntah, mabuk perjalanan, dan membantu memperbaiki nafsu makan."
+                  data-img="img/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png"
+                  data-badge="Herbal"
+                  data-class="badge-herbal">
+                  Detail
+                </button>
               </div>
             </div>
           </div>
@@ -232,14 +234,27 @@
                 alt="Mixagrip" />
             </div>
             <div class="product-info">
-              <span class="product-badge">Flu & Batuk</span>
+              <span class="product-badge badge-general">Obat Sehari-hari</span>
               <h3>Mixagrip Flu</h3>
               <p class="product-desc">
-                Meringankan gejala flu seperti demam dan bersin.
+                Obat yang mengandung Paracetamol, Dekstrometorfan HBr dan
+                Phenylephrine HCl yang bekerja sebagai analgesik-antipiretik,
+                antitusif dan dekongestan hidung. Digunakan untuk mengobati
+                gejala flu seperti demam, sakit kepala, hidung tersumbat, bersin
+                disertai batuk.
               </p>
               <div class="product-footer">
-                <span class="product-price">Rp 12.000</span>
-                <button class="btn-detail">Detail</button>
+                <span class="product-price">Rp 16.000</span>
+                <button
+                  class="btn-detail"
+                  data-name="Mixagrip Flu"
+                  data-price="Rp 16.000"
+                  data-desc="Obat yang mengandung Paracetamol, Dekstrometorfan HBr dan Phenylephrine HCl yang bekerja sebagai analgesik-antipiretik, antitusif dan dekongestan hidung. Digunakan untuk mengobati gejala flu seperti demam, sakit kepala, hidung tersumbat, bersin disertai batuk."
+                  data-img="img/products/obat-sehari-hari/Mixagrip.png"
+                  data-badge="Obat Sehari-hari"
+                  data-class="badge-general">
+                  Detail
+                </button>
               </div>
             </div>
           </div>
@@ -250,14 +265,26 @@
                 alt="Enervon-C" />
             </div>
             <div class="product-info">
-              <span class="product-badge">Suplemen</span>
+              <span class="product-badge badge-suplemen">Suplemen</span>
               <h3>Enervon-C Multivitamin</h3>
               <p class="product-desc">
-                Membantu menjaga daya tahan tubuh setiap hari.
+                Suplemen kesehatan yang mengandung kombinasi Vitamin B kompleks
+                dan Vitamin C, diformulasikan untuk membantu memenuhi kebutuhan
+                vitamin harian dan memelihara daya tahan tubuh agar tetap fit
+                sepanjang hari.
               </p>
               <div class="product-footer">
                 <span class="product-price">Rp 10.500</span>
-                <button class="btn-detail">Detail</button>
+                <button
+                  class="btn-detail"
+                  data-name="Enervon-C Multivitamin 4 Tablet"
+                  data-price="Rp 10.500"
+                  data-desc="Suplemen kesehatan yang mengandung kombinasi Vitamin B kompleks dan Vitamin C, diformulasikan untuk membantu memenuhi kebutuhan vitamin harian dan memelihara daya tahan tubuh agar tetap fit sepanjang hari."
+                  data-img="img/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png"
+                  data-badge="Suplemen"
+                  data-class="badge-suplemen">
+                  Detail
+                </button>
               </div>
             </div>
           </div>
@@ -268,14 +295,25 @@
                 alt="Tolak Angin" />
             </div>
             <div class="product-info">
-              <span class="product-badge">Herbal</span>
+              <span class="product-badge badge-herbal">Obat Herbal</span>
               <h3>Tolak Angin Cair 15 ml</h3>
               <p class="product-desc">
-                Obat herbal untuk masuk angin dan meningkatkan imun.
+                Obat herbal terstandar untuk membantu meredakan gejala masuk
+                angin seperti mual, perut kembung, meriang, dan pusing. Juga
+                membantu meningkatkan daya tahan tubuh.
               </p>
               <div class="product-footer">
                 <span class="product-price">Rp 6.000</span>
-                <button class="btn-detail">Detail</button>
+                <button
+                  class="btn-detail"
+                  data-name="Tolak Angin Cair 15 ml"
+                  data-price="Rp 6.000"
+                  data-desc="Obat herbal terstandar untuk membantu meredakan gejala masuk angin seperti mual, perut kembung, meriang, dan pusing. Juga membantu meningkatkan daya tahan tubuh."
+                  data-img="img/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg"
+                  data-badge="Herbal"
+                  data-class="badge-herbal">
+                  Detail
+                </button>
               </div>
             </div>
           </div>
@@ -354,18 +392,15 @@
     </section> -->
     <section id="contact" class="contact-section reveal">
       <div class="container">
-        <!-- Header Konsisten -->
         <div class="contact-header">
-          <span class="why-tagline">HUBUNGI KAMI</span>
+          <span class="custom-pill">HUBUNGI KAMI</span>
           <h2>Siap Melayani Anda</h2>
           <p>
             Kunjungi toko fisik kami atau hubungi melalui WhatsApp untuk
             konsultasi kesehatan.
           </p>
         </div>
-
         <div class="contact-grid-layout">
-          <!-- Area Map -->
           <div class="contact-map-wrapper">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8179516666387!2d109.33969309999999!3d-0.0246311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d59007e4aaf63%3A0x60581fed3db5d6be!2sToko%20Obat%20Arah%20Aman!5e0!3m2!1sid!2sid!4v1775661964164!5m2!1sid!2sid"
@@ -374,10 +409,7 @@
               referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
-
-          <!-- Area Kartu Informasi -->
           <div class="contact-cards-container">
-            <!-- Lokasi -->
             <div class="contact-card-solid">
               <div class="contact-icon-box">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -390,8 +422,6 @@
                 <p>Jl. Nusa Indah 1, Darat Sekip, Kec. Pontianak Kota</p>
               </div>
             </div>
-
-            <!-- WhatsApp -->
             <a
               href="https://wa.me/62895405243652"
               target="_blank"
@@ -407,8 +437,6 @@
                 <span class="contact-cta-label">Chat Sekarang →</span>
               </div>
             </a>
-
-            <!-- Jam Kerja -->
             <div class="contact-card-solid full-width">
               <div class="contact-icon-box">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -476,6 +504,28 @@
       </div>
     </footer>
     <!-- END FOOTER -->
+    <div id="productModal" class="product-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <button class="modal-close">&times;</button>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="" alt="" id="modalImg" />
+          </div>
+          <div class="modal-details">
+            <span class="product-badge" id="modalBadge"></span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+            <div class="modal-footer">
+              <span class="modal-price" id="modalPrice"></span>
+              <a href="#" id="modalWA" target="_blank" class="btn-buy">
+                Pesan via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
       // START NAVBAR TOGGLE
       const menuToggle = document.querySelector(".menu-toggle");
@@ -563,6 +613,45 @@
         });
       });
       // END NAVBAR ACTIVE LINK ON SCROLL
+      // MODAL PRODUCT POPUP
+      const modal = document.getElementById("productModal");
+      const btnDetails = document.querySelectorAll(".btn-detail");
+      const btnClose = document.querySelector(".modal-close");
+      const overlay = document.querySelector(".modal-overlay");
+
+      btnDetails.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const name = btn.getAttribute("data-name");
+          const price = btn.getAttribute("data-price");
+          const desc = btn.getAttribute("data-desc");
+          const img = btn.getAttribute("data-img");
+          const badge = btn.getAttribute("data-badge");
+          const badgeClass = btn.getAttribute("data-class");
+
+          document.getElementById("modalTitle").innerText = name;
+          document.getElementById("modalPrice").innerText = price;
+          document.getElementById("modalDesc").innerText = desc;
+          document.getElementById("modalImg").src = img;
+          document.getElementById("modalBadge").innerText = badge;
+
+          const modalBadge = document.getElementById("modalBadge");
+          modalBadge.className = "product-badge " + badgeClass;
+
+          const waLink = `https://wa.me/62895405243652?text=Halo, saya ingin memesan: ${name}`;
+          document.getElementById("modalWA").href = waLink;
+
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      btnClose.addEventListener("click", closeModal);
+      overlay.addEventListener("click", closeModal);
     </script>
   </body>
 </html>
