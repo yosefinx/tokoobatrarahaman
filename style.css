@@ -1581,6 +1581,10 @@ footer {
 
 /* MOBILE */
 @media (max-width: 768px) {
+  nav {
+    padding: 20px 40px;
+  }
+
   #about {
     flex-direction: column;
     padding: 40px 20px;
@@ -1768,6 +1772,16 @@ footer {
 
   .about-text-content p {
     font-size: 1rem;
+  }
+
+  .main-title {
+    text-align: center;
+    font-size: 2.2rem;
+  }
+
+  .badge-container {
+    display: flex;
+    justify-content: center;
   }
 
   .why-grid-layout {
