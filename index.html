@@ -14,7 +14,10 @@
     <nav id="navbar">
       <div class="logo">
         <img src="/img/logo.png" alt="Toko Obat Arah Aman Logo" height="30" />
-        <a href="#home" style="font-weight: 600; font-size: 1.25rem"
+        <a
+          href="#home"
+          style="font-weight: 600; font-size: 1.25rem"
+          class="text-logo"
           >Toko Obat Arah Aman</a
         >
       </div>
@@ -29,7 +32,7 @@
     <!-- END NAVBAR -->
     <!-- START HERO SECTION -->
     <section id="home" class="hero-section reveal">
-      <div class="container-hero">
+      <div class="hero-container">
         <div class="hero-text">
           <div class="custom-pill"><span></span> TERPERCAYA SEJAK 1980</div>
           <h1>Solusi Kesehatan Terpercaya & <em>Berkualitas Tinggi</em></h1>
@@ -38,13 +41,12 @@
             kesehatan lainnya dengan pelayanan profesional dan harga yang tetap
             terjangkau.
           </p>
-          <div class="hero-btns">
-            <a href="#contact" class="btn-primary-home">Hubungi Kami</a>
-            <a href="products.html" class="btn-secondary-home">Lihat Produk</a>
+          <div class="btn-container">
+            <a href="#contact" class="btn-primary">Hubungi Kami</a>
+            <a href="products.html" class="btn-secondary">Lihat Produk</a>
           </div>
         </div>
         <div class="hero-image-wrapper">
-          <div class="image-accent-blob"></div>
           <div class="main-image-box">
             <img src="img/hero-image.jpg" alt="Toko Obat Arah Aman" />
             <div class="hero-floating-badge">
@@ -60,7 +62,7 @@
     </section>
     <!-- END HERO SECTION -->
     <!-- START STATS BAND -->
-    <section id="stats" class="reveal">
+    <section id="stats" class="stats-section reveal">
       <div class="stats-container">
         <h2>
           <span id="counter">0</span><span id="plus"></span>Tahun Pengalaman
@@ -74,99 +76,62 @@
     </section>
     <!-- END STATS BAND -->
     <!-- START ABOUT US -->
-    <section id="about" class="about-modern-section reveal">
-      <div class="container-about">
-        <div class="about-text-content">
+    <section id="about" class="about-section reveal">
+      <div class="about-container">
+        <div class="about-text">
           <span class="custom-pill">TENTANG KAMI</span>
           <h2>Dedikasi Kesehatan Sejak 1980</h2>
-          <p>
-            Toko Obat Arah Aman lahir dari visi sederhana: menghadirkan akses
-            kesehatan yang mudah dan terpercaya. Selama lebih dari 4 dekade,
-            kami terus berkomitmen menjaga standar kualitas produk farmasi dan
-            memberikan edukasi profesional bagi setiap pelanggan kami.
+          <p class="intro-p">
+            Toko Obat Arah Aman lahir dari visi sederhana yakni menghadirkan
+            akses kesehatan yang mudah dan terpercaya. Selama lebih dari 4
+            dekade, kami terus berkomitmen menjaga standar kualitas produk obat.
           </p>
-          <div class="about-stats-row">
-            <div class="stat-box">
-              <span class="stat-number">40</span>
-              <span class="stat-desc">Tahun Pengalaman</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-number">100%</span>
-              <span class="stat-desc">Produk Original</span>
-            </div>
-          </div>
-          <a href="#more" class="about-btn-premium">Pelajari Selengkapnya →</a>
-        </div>
-        <div class="about-visual-content">
-          <div class="visual-inner">
-            <div class="visual-accent"></div>
-            <div class="video-frame">
-              <video autoplay muted loop playsinline>
-                <source src="videos/about-us.mp4" type="video/mp4" />
-              </video>
-              <div class="floating-badge">
-                <svg viewBox="0 0 24 24" fill="#ffcc00" width="18" height="18">
-                  <path
-                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                </svg>
-                <span>Pilihan Utama</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="value-section reveal">
-      <div class="container flex-wrapper">
-        <div class="side-content">
-          <div class="badge-container">
-            <span class="custom-pill">VALUE KAMI</span>
-          </div>
-          <h1 class="main-title">
-            Solusi Kesehatan Terpercaya untuk <span>Masa Depan</span>
-          </h1>
           <div class="vision-misi-box">
             <div class="vm-item">
-              <div class="vm-number">01</div>
-              <div class="vm-text">
-                <h4>Visi Kami</h4>
-                <p>
-                  Menjadi toko obat yang terpercaya dan berkualitas tinggi
-                  sehingga bisa menjadi solusi kebutuhan kesehatan konsumen.
-                </p>
+              <div class="vm-header">
+                <span class="vm-number">01</span>
+                <h4>Visi</h4>
               </div>
+              <p class="vm-text">
+                Menjadi solusi kesehatan terpercaya dan berkualitas tinggi bagi
+                konsumen.
+              </p>
             </div>
             <div class="vm-item">
-              <div class="vm-number">02</div>
-              <div class="vm-text">
-                <h4>Misi Kami</h4>
-                <p>
-                  Menjaga kualitas obat-obatan dengan aman dan konsisten
-                  memberikan pelayanan terbaik bagi para konsumen.
-                </p>
+              <div class="vm-header">
+                <span class="vm-number">02</span>
+                <h4>Misi</h4>
+              </div>
+              <p class="vm-text">
+                Menjaga kualitas obat secara konsisten dan memberikan pelayanan
+                profesional.
+              </p>
+            </div>
+          </div>
+          <div class="about-footer">
+            <div class="about-stats-row">
+              <div class="stat-box">
+                <span class="stat-number">40+</span>
+                <span class="stat-desc">Tahun Pengalaman</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number">100%</span>
+                <span class="stat-desc">Produk Original</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="side-cards">
-          <div class="card-stack">
-            <div class="feature-card highlighted">
-              <div class="icon-wrap">
-                <i class="fa-solid fa-handshake-angle"></i>
-              </div>
-              <h5>Komitmen Kami</h5>
-              <p>
-                Kualitas obat-obatan aman, terjangkau, dan tinggi dengan
-                pelayanan ramah & profesional.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="icon-wrap"><i class="fa-solid fa-microchip"></i></div>
-              <h5>Inovasi</h5>
-              <p>
-                Mengadopsi solusi modern yang berfokus pada kenyamanan dan
-                kepuasan konsumen.
-              </p>
+        <div class="about-visual-content">
+          <div class="video-frame">
+            <video autoplay muted loop playsinline>
+              <source src="videos/about-us.mp4" type="video/mp4" />
+            </video>
+            <div class="floating-badge">
+              <svg viewBox="0 0 24 24" fill="#ffcc00" width="18" height="18">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <span>Pilihan Utama</span>
             </div>
           </div>
         </div>
@@ -177,7 +142,7 @@
     <!-- START WHY CHOOSE US -->
     <section id="why" class="why-section reveal">
       <div class="why-container">
-        <div class="why-header-content">
+        <div class="why-text">
           <span class="custom-pill">KEUNGGULAN KAMI</span>
           <h2>Mengapa harus memilih kami?</h2>
           <p>
@@ -238,14 +203,37 @@
               lengkap dalam satu tempat.
             </p>
           </div>
+          <div class="why-card-solid">
+            <div class="why-icon-circle">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M18.5 2h-13a.5.5 0 0 0-.5.5V4h14V2.5a.5.5 0 0 0-.5-.5Z" />
+                <path d="M5 4v1a7 7 0 0 0 14 0V4" />
+                <path d="M9 11.5a3 3 0 0 0 6 0V4" />
+                <path d="m14 2 2 11.5" />
+                <path d="M8 22h8" />
+              </svg>
+            </div>
+            <h3>Racikan Sinshe & Herbal</h3>
+            <p>
+              Kami menerima resep Sinshe dan melayani peracikan obat tradisional
+              menggunakan bahan herbal pilihan.
+            </p>
+          </div>
         </div>
       </div>
     </section>
     <!-- END WHY CHOOSE US -->
     <!-- START PRODUCTS -->
     <section id="products" class="products-section reveal">
-      <div class="container">
-        <div class="products-header">
+      <div class="products-container">
+        <div class="products-text">
           <span class="custom-pill">PRODUK TERBAIK</span>
           <h2>Produk Unggulan Kami</h2>
           <p>
@@ -384,8 +372,8 @@
     <!-- END PRODUCTS -->
     <!-- START CONTACT -->
     <section id="contact" class="contact-section reveal">
-      <div class="container">
-        <div class="contact-header">
+      <div class="contact-container">
+        <div class="contact-text">
           <span class="custom-pill">HUBUNGI KAMI</span>
           <h2>Siap Melayani Anda</h2>
           <p>
@@ -521,6 +509,9 @@
       </div>
     </div>
     <!-- END MODAL -->
+    <button id="backToTop" title="Kembali ke Atas">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
     <script>
       // START NAVBAR TOGGLE
       const menuToggle = document.querySelector(".menu-toggle");
@@ -647,6 +638,27 @@
 
       btnClose.addEventListener("click", closeModal);
       overlay.addEventListener("click", closeModal);
+
+      // START BACK TO UP
+      const backToTopBtn = document.getElementById("backToTop");
+
+      window.onscroll = function () {
+        if (
+          document.body.scrollTop > 300 ||
+          document.documentElement.scrollTop > 300
+        ) {
+          backToTopBtn.style.display = "block";
+        } else {
+          backToTopBtn.style.display = "none";
+        }
+      };
+      backToTopBtn.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+      // END BACK TO UP
     </script>
   </body>
 </html>
