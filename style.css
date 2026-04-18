@@ -617,6 +617,7 @@ nav .nav-links a:hover::after {
   display: flex;
   flex-direction: column;
   width: 100%;
+  cursor: pointer;
 }
 
 .product-card:hover {
