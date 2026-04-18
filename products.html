@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toko Obat Arah Aman</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
     <nav id="navbar">
       <div class="logo">
         <img src="img/logo.png" alt="Toko Obat Arah Aman Logo" height="30" />
-        <a href="index.html#home" style="font-weight: 600; font-size: 1.25rem" class="logo-nav"
+        <a
+          href="index.html#home"
+          style="font-weight: 600; font-size: 1.25rem"
+          class="text-logo"
           >Toko Obat Arah Aman</a
         >
       </div>
@@ -26,7 +30,7 @@
     </nav>
     <!-- END NAVBAR -->
     <!-- START HERO SECTION PRODUCTS -->
-    <section id="hero-image-products" class="hero-overlay-modern reveal">
+    <section id="hero-products" class="hero-products-section reveal">
       <div class="overlay-container">
         <div class="hero-visual-frame">
           <img
@@ -36,7 +40,7 @@
           <div class="hero-image-gradient"></div>
         </div>
         <div class="hero-floating-card">
-          <span class="custom-tag-blue">KATALOG KESEHATAN</span>
+          <span class="custom-pill">KATALOG KESEHATAN</span>
           <h1>Produk <em>Unggulan</em> Kami</h1>
           <p>
             Menyediakan pilihan produk perawatan kesehatan yang telah teruji,
@@ -59,6 +63,10 @@
     </section>
     <!-- START CATEGORY & PRODUCTS -->
     <section class="products-catalog-section reveal">
+      <div class="products-catalog-text">
+        <h2>Pilih Kategori Obatmu</h2>
+        <p>Cari kebutuhan medismu berdasarkan kategori yang tersedia.</p>
+      </div>
       <div class="category-filter-wrapper">
         <div class="category-pill-box">
           <button
@@ -78,8 +86,7 @@
           </button>
         </div>
       </div>
-
-      <div class="container">
+      <div class="products-container">
         <div id="obat-sehari-hari" class="category-content active">
           <div class="product-grid">
             <div class="product-card">
@@ -520,7 +527,7 @@
         </div>
       </div>
     </section>
-    <section id="closing" class="reveal">
+    <section id="closing" class="closing-section reveal">
       <div class="closing-container">
         <div class="closing-content-box">
           <span class="pill-tag-gold">SOLUSI TERPERCAYA</span>
@@ -546,20 +553,19 @@
               src="/img/logo.png"
               alt="Toko Obat Arah Aman Logo"
               height="30" />
-            <a href="#home" style="font-weight: 600; font-size: 1.25rem"
+            <a href="index.html" style="font-weight: 600; font-size: 1.25rem"
               >Toko Obat Arah Aman</a
             >
           </div>
           <p>Toko Obat Terpercaya dan Berkualitas Tinggi</p>
         </div>
-
         <div>
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Tentang Kami</a></li>
-            <li><a href="#products">Produk</a></li>
-            <li><a href="#contact">Kontak</a></li>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">Tentang Kami</a></li>
+            <li><a href="index.html#products">Produk</a></li>
+            <li><a href="index.html#contact">Kontak</a></li>
           </ul>
         </div>
         <div class="footer-subscribe">
@@ -608,6 +614,9 @@
         </div>
       </div>
     </div>
+    <button id="backToTop" title="Kembali ke Atas">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
     <script>
       // NAVBAR TOGGLE
       const menuToggle = document.querySelector(".menu-toggle");
@@ -695,6 +704,27 @@
 
       btnClose.addEventListener("click", closeModal);
       overlay.addEventListener("click", closeModal);
+
+      // START BACK TO UP
+      const backToTopBtn = document.getElementById("backToTop");
+
+      window.onscroll = function () {
+        if (
+          document.body.scrollTop > 300 ||
+          document.documentElement.scrollTop > 300
+        ) {
+          backToTopBtn.style.display = "block";
+        } else {
+          backToTopBtn.style.display = "none";
+        }
+      };
+      backToTopBtn.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+      // END BACK TO UP
     </script>
   </body>
 </html>

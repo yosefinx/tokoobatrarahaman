@@ -120,7 +120,7 @@ nav .nav-links a:hover::after {
 }
 
 .hero-section {
-  background-color: #fcfcfd;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   padding: 60px;
@@ -577,7 +577,7 @@ nav .nav-links a:hover::after {
 
 .products-section {
   padding: 60px 30px;
-  background-color: #fcfcfd;
+  background-color: #ffffff;
 }
 
 .products-text {
@@ -1009,9 +1009,9 @@ footer {
   transform: translateY(-5px);
 }
 
-.hero-overlay-modern {
-  background-color: #fcfcfd;
-  padding: 20px;
+.hero-products-section {
+  background-color: #ffffff;
+  padding: 60px;
   position: relative;
   overflow: visible;
 }
@@ -1022,7 +1022,6 @@ footer {
   align-items: center;
   position: relative;
   min-height: 500px;
-  padding: 0 20px;
 }
 
 .hero-visual-frame {
@@ -1054,26 +1053,14 @@ footer {
   z-index: 10;
   background: #ffffff;
   width: 500px;
-  padding: 60px;
+  padding: 50px;
   border-radius: 30px;
   box-shadow: 0 30px 60px rgba(57, 69, 217, 0.12);
   border: 1px solid rgba(57, 69, 217, 0.05);
 }
 
-.custom-tag-blue {
-  display: inline-block;
-  background: rgba(57, 69, 217, 0.1);
-  color: #3945d9;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  margin-bottom: 25px;
-}
-
 .hero-floating-card h1 {
-  font-size: 3.5rem;
+  font-size: var(--desktop-fs-h);
   color: #1a1a1a;
   line-height: 1.1;
   font-weight: 800;
@@ -1086,7 +1073,7 @@ footer {
 }
 
 .hero-floating-card p {
-  font-size: 1.05rem;
+  font-size: var(--desktop-fs-p);
   color: #666;
   line-height: 1.7;
   margin-bottom: 35px;
@@ -1124,14 +1111,10 @@ footer {
   background: #ddd;
 }
 
-.products-catalog-section {
-  padding: 20px 0 20px;
-}
-
 .category-filter-wrapper {
   display: flex;
   justify-content: center;
-  padding: 0 20px 20px;
+  padding: 0 20px;
 }
 
 .category-pill-box {
@@ -1180,6 +1163,26 @@ footer {
   animation: fadeInUp 0.5s forwards;
 }
 
+.products-container {
+  padding: 30px;
+}
+
+.products-catalog-text {
+  padding: 10px 30px 30px;
+  text-align: center;
+}
+
+.products-catalog-text h2 {
+  font-size: var(--desktop-fs-h);
+  padding: 5px;
+}
+
+.products-catalog-text p {
+  font-size: var(--desktop-fs-p);
+  padding: 5px;
+  color: #666;
+}
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -1187,9 +1190,8 @@ footer {
   }
 }
 
-/* --- CLOSING MODERN --- */
-#closing {
-  padding: 10px 60px 50px;
+.closing-section {
+  padding: 30px 60px 60px;
   background-color: #ffffff;
 }
 
@@ -1227,7 +1229,7 @@ footer {
 }
 
 .closing-content-box h1 {
-  font-size: 3.5rem;
+  font-size: var(--desktop-fs-h);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 20px;
@@ -1238,7 +1240,7 @@ footer {
 }
 
 .closing-content-box p {
-  font-size: 1.2rem;
+  font-size: var(--desktop-fs-p);
   color: rgba(255, 255, 255, 0.9);
   max-width: 600px;
   margin: 0 auto 40px;
@@ -1834,13 +1836,12 @@ footer {
   }
 
   /* PRODUCT HALAMAN */
-  .hero-overlay-modern {
-    padding: 50px 0 20px;
+  .hero-products-section {
+    padding: 30px 20px 30px;
   }
 
   .overlay-container {
     flex-direction: column;
-    padding: 0 20px;
   }
 
   .hero-visual-frame {
@@ -1852,10 +1853,6 @@ footer {
 
   .hero-img-main {
     border-radius: 30px;
-  }
-
-  .hero-image-products {
-    padding-bottom: 20px;
   }
 
   .hero-image-gradient {
@@ -1873,20 +1870,30 @@ footer {
     justify-content: center;
   }
 
-  .custom-tag-blue {
-    margin-bottom: 20px;
+  .hero-floating-card h1 {
+    font-size: var(--phone-fs-h);
   }
 
-  .hero-floating-card h1 {
-    font-size: 2.2rem;
+  .hero-floating-card p {
+    font-size: var(--phone-fs-p);
   }
 
   .products-catalog-section {
     padding: 0px 0 30px;
   }
 
-  .category-pill-box {
+  .products-catalog-text h2 {
+    font-size: 1.7rem;
     padding: 5px;
+  }
+
+  .products-catalog-text p {
+    font-size: var(--phone-fs-p);
+    padding: 5px;
+  }
+
+  .category-pill-box {
+    padding: 8px;
     gap: 4px;
     border-radius: 50px;
     justify-content: center;
@@ -1896,13 +1903,17 @@ footer {
 
   .category-pill-btn {
     padding: 6px 12px;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.5px;
   }
 
-  #closing {
-    padding: 20px 25px 40px;
+  .products-container {
+    padding: 20px;
+  }
+
+  .closing-section {
+    padding: 0px 30px 30px;
   }
 
   .closing-container {
@@ -1911,11 +1922,11 @@ footer {
   }
 
   .closing-content-box h1 {
-    font-size: 2.2rem;
+    font-size: var(--phone-fs-h);
   }
 
   .closing-content-box p {
-    font-size: 1rem;
+    font-size: var(--phone-fs-p);
     margin-bottom: 30px;
   }
 
@@ -2148,15 +2159,32 @@ footer {
   }
 
   /* PRODUCT HALAMAN */
+  .hero-products-section {
+    padding: 20px;
+  }
+
   .hero-floating-card {
     width: 450px;
     padding: 40px;
   }
+
   .hero-floating-card h1 {
-    font-size: 2.8rem;
+    font-size: var(--tablet-fs-h);
   }
 
-  #closing {
+  .hero-floating-card p {
+    font-size: var(--tablet-fs-p);
+  }
+
+  .closing-section {
     padding: 20px 25px 40px;
+  }
+
+  .closing-content-box h1 {
+    font-size: var(--tablet-fs-h);
+  }
+
+  .closing-content-box p {
+    font-size: var(--tablet-fs-p);
   }
 }
