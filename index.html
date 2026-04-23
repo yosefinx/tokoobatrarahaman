@@ -370,6 +370,86 @@
             konsultasi kesehatan.
           </p>
         </div>
+        <div class="contact-form-container">
+          <div class="contact-form">
+            <h2>Form Pembelian Obat</h2>
+            <form action="#" class="modern-form">
+              <div class="form-group">
+                <label for="name">Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Tulis nama Anda"
+                  required
+                  autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label for="location">Lokasi (Kota/Kecamatan)</label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Contoh: Jl Purnama 2"
+                  required
+                  autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label for="medicine">Obat yang Dibutuhkan</label>
+                <input
+                  type="text"
+                  id="medicine"
+                  name="medicine"
+                  placeholder="Nama obat yang dibutuhkan"
+                  required
+                  autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label for="recipe">
+                  Resep dari Sinse
+                  <span class="optional">(Upload Gambar/PDF jika ada)</span>
+                </label>
+                <div class="file-input-wrapper">
+                  <input
+                    type="file"
+                    id="recipe"
+                    name="recipe"
+                    accept=".jpg, .jpeg, .png, .pdf"
+                    class="file-input-hidden" />
+                  <label for="recipe" class="file-input-label">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path
+                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span id="file-name-text">Pilih Foto Resep atau PDF</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="notes">Catatan Tambahan</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  rows="4"
+                  placeholder="Tambahkan instruksi khusus atau detail lainnya..."></textarea>
+              </div>
+              <button type="submit" class="btn-primary" style="border: none">
+                <span>Kirim Pesan Sekarang</span>
+              </button>
+            </form>
+          </div>
+        </div>
         <div class="contact-grid-layout">
           <div class="contact-map-wrapper">
             <iframe
@@ -382,9 +462,13 @@
           <div class="contact-cards-container">
             <div class="contact-card-solid">
               <div class="contact-icon-box">
-                <svg viewBox="0 0 24 24" fill="currentColor">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 640 640"
+                  fill="currentColor">
+                  <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                   <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z" />
                 </svg>
               </div>
               <div class="contact-info-text">
@@ -397,7 +481,11 @@
               target="_blank"
               class="contact-card-solid link-card">
               <div class="contact-icon-box wa-bg">
-                <svg viewBox="0 0 24 24" fill="currentColor">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor">
+                  <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                   <path
                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.63 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
@@ -409,9 +497,13 @@
             </a>
             <div class="contact-card-solid full-width">
               <div class="contact-icon-box">
-                <svg viewBox="0 0 24 24" fill="currentColor">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 640 640"
+                  fill="currentColor">
+                  <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                   <path
-                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+                    d="M216 64C229.3 64 240 74.7 240 88L240 128L400 128L400 88C400 74.7 410.7 64 424 64C437.3 64 448 74.7 448 88L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 88C192 74.7 202.7 64 216 64zM216 176L160 176C151.2 176 144 183.2 144 192L144 240L496 240L496 192C496 183.2 488.8 176 480 176L216 176zM144 288L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 288L144 288z" />
                 </svg>
               </div>
               <div class="contact-info-text">
@@ -458,7 +550,11 @@
             target="_blank"
             class="wa-btn-flat">
             <div class="wa-icon-box">
-              <svg viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor">
+                <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                 <path
                   d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.63 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
@@ -468,7 +564,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        © 2026 Toko Obat Arah Aman. All Rights Reserved
+        © 2026 Toko Obat Arah Aman. Semua hak dilindungi.
       </div>
     </footer>
     <!-- END FOOTER -->
@@ -493,6 +589,65 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="confirmModal" class="modal-overlay-form">
+      <div class="modal-content">
+        <h3>Konfirmasi Pesanan</h3>
+        <p>Silakan periksa kembali detail pesanan Anda:</p>
+
+        <div class="order-summary">
+          <div class="summary-item">
+            <span>Nama:</span> <strong id="res-name">-</strong>
+          </div>
+          <div class="summary-item">
+            <span>Lokasi:</span> <strong id="res-location">-</strong>
+          </div>
+          <div class="summary-item">
+            <span>Obat:</span> <strong id="res-medicine">-</strong>
+          </div>
+          <div class="summary-item">
+            <span>Resep:</span> <strong id="res-recipe">-</strong>
+          </div>
+          <div class="summary-item">
+            <span>Catatan:</span> <strong id="res-notes">-</strong>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn-cancel"
+            onclick="closeModalForm('confirmModal')">
+            Batal
+          </button>
+          <button type="button" class="btn-confirm" onclick="processPurchase()">
+            Beli Sekarang
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="successModal" class="modal-overlay-form">
+      <div class="modal-content success-box">
+        <div class="success-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h3>Pemesanan Berhasil!</h3>
+        <p style="margin-bottom: 10px">
+          Pesanan Anda telah diterima. Kami akan segera menghubungi Anda melalui
+          WhatsApp.
+        </p>
+        <button
+          type="button"
+          class="btn-confirm"
+          onclick="closeModalForm('successModal')">
+          Tutup
+        </button>
       </div>
     </div>
     <!-- END MODAL -->
@@ -528,7 +683,7 @@
         let count = 0;
         const target = 40;
         const duration = 2000;
-        const increment = target / (duration / 50);
+        const increment = target / (duration / 50); //1 langkah 50ms hasilny 1
 
         const timer = setInterval(() => {
           count += increment;
@@ -539,25 +694,24 @@
             clearInterval(timer);
           }
           counter.textContent = Math.floor(count);
-        }, 50);
+        }, 50); //animasi update tiap 50ms
       });
       // END COUNTER ANIMATION
       // START SCROLL REVEAL
       const reveals = document.querySelectorAll(".reveal");
-
-      const observer = new IntersectionObserver(
+      const observer = new IntersectionObserver( //mendeteksi apakah elemen masuk ke viewport
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              //elemen sudah masuk ke layar
               entry.target.classList.add("show");
             }
           });
         },
         {
-          threshold: 0.15,
+          threshold: 0.15, //animasi aktif saat 15% elemen terlihat
         },
       );
-
       reveals.forEach((el) => observer.observe(el));
       // END SCROLL REVEAL
       // NAVBAR ACTIVE LINK ON SCROLL
@@ -566,16 +720,13 @@
 
       window.addEventListener("scroll", () => {
         let current = "";
-
         sections.forEach((section) => {
-          const sectionTop = section.offsetTop - 120;
-          const sectionHeight = section.offsetHeight;
-
+          const sectionTop = section.offsetTop - 120; //section dari atas halaman, karena navbar fixed position
           if (window.scrollY >= sectionTop) {
+            //apakah scroll sudah melewati section
             current = section.getAttribute("id");
           }
         });
-
         navItems.forEach((li) => {
           li.classList.remove("active");
 
@@ -598,27 +749,27 @@
           const badge = card.getAttribute("data-badge");
           const badgeClass = card.getAttribute("data-class");
 
-          document.getElementById("modalTitle").innerText = name;
-          document.getElementById("modalPrice").innerText = price;
-          document.getElementById("modalDesc").innerText = desc;
+          document.getElementById("modalTitle").textContent = name;
+          document.getElementById("modalPrice").textContent = price;
+          document.getElementById("modalDesc").textContent = desc;
           document.getElementById("modalImg").src = img;
 
           const modalBadge = document.getElementById("modalBadge");
-          modalBadge.innerText = badge;
+          modalBadge.textContent = badge;
           modalBadge.className = "product-badge " + badgeClass;
 
-          const waText = `Halo, saya ingin memesan produk \n*${name}* (${price})`;
+          const waText = `Halo, saya ingin memesan produk \n*${name}*`;
           const waLink = `https://wa.me/6285393988929?text=${encodeURIComponent(waText)}`;
           document.getElementById("modalWA").href = waLink;
 
           modal.classList.add("active");
-          document.body.style.overflow = "hidden";
+          document.body.style.overflow = "hidden"; //halaman tidak bsia discroll saat modal dibuka
         }
       });
 
       function closeModal() {
         modal.classList.remove("active");
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "auto"; //halaman bisa discroll saat modal ditutup kembali
       }
 
       document
@@ -628,13 +779,69 @@
         .querySelector(".modal-overlay")
         .addEventListener("click", closeModal);
       // END PRODUCT POPUP
+
+      // START MODAL FORM PRODUCT
+      document.getElementById("recipe").addEventListener("change", function () {
+        const file = this.files[0];
+        const fileText = document.getElementById("file-name-text");
+        if (file) {
+          fileText.textContent = file.name;
+        }
+      });
+
+      const contactForm = document.querySelector(".modern-form");
+
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const location = document.getElementById("location").value;
+        const medicine = document.getElementById("medicine").value;
+        const recipeInput = document.getElementById("recipe");
+        const recipeName =
+          recipeInput.files.length > 0
+            ? recipeInput.files[0].name
+            : "Tidak ada file";
+        const notes = document.getElementById("notes").value || "-";
+
+        document.getElementById("res-name").textContent = name;
+        document.getElementById("res-location").textContent = location;
+        document.getElementById("res-medicine").textContent = medicine;
+        document.getElementById("res-recipe").textContent = recipeName;
+        document.getElementById("res-notes").textContent = notes;
+
+        document.getElementById("confirmModal").style.display = "flex";
+      });
+
+      function closeModalForm(modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+
+      function processPurchase() {
+        closeModalForm("confirmModal");
+        setTimeout(() => {
+          document.getElementById("successModal").style.display = "flex";
+          contactForm.reset();
+          document.getElementById("file-name-text").textContent =
+            "Pilih Foto atau PDF Resep";
+        }, 300);
+      }
+
+      window.onclick = function (event) { //klik luar modal diclosekan
+        const confirmM = document.getElementById("confirmModal");
+        const successM = document.getElementById("successModal");
+        if (event.target == confirmM) closeModalForm("confirmModal");
+        if (event.target == successM) closeModalForm("successModal");
+      };
+
+      // END MODAL FORM PRODUCT
       // START BACK TO UP
       const backToTopBtn = document.getElementById("backToTop");
 
       window.onscroll = function () {
         if (
-          document.body.scrollTop > 300 ||
-          document.documentElement.scrollTop > 300
+          document.body.scrollTop > 300 || //browser lama (kalau scroll udh lebih dari 300px dari atas)
+          document.documentElement.scrollTop > 300 //browser baru
         ) {
           backToTopBtn.style.display = "block";
         } else {
