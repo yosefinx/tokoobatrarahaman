@@ -136,25 +136,61 @@ document.getElementById("recipe").addEventListener("change", function () {
 });
 
 const contactForm = document.querySelector(".modern-form");
-
 contactForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const location = document.getElementById("location").value;
-  const medicine = document.getElementById("medicine").value;
-  const recipeInput = document.getElementById("recipe");
+  const name = document.getElementById("name");
+  const location = document.getElementById("location");
+  const medicine = document.getElementById("medicine");
+  const recipe = document.getElementById("recipe");
+  const notes = document.getElementById("notes");
+
+  const nameValue = name.value;
+  const locationValue = location.value;
+  const medicineValue = medicine.value || "-";
   const recipeName =
-    recipeInput.files.length > 0 ? recipeInput.files[0].name : "Tidak ada file";
-  const notes = document.getElementById("notes").value || "-";
+    recipe.files.length > 0 ? recipe.files[0].name : "Tidak ada file";
+  const notesValue = notes.value || "-";
 
-  document.getElementById("res-name").textContent = name;
-  document.getElementById("res-location").textContent = location;
-  document.getElementById("res-medicine").textContent = medicine;
-  document.getElementById("res-recipe").textContent = recipeName;
-  document.getElementById("res-notes").textContent = notes;
+  let isValid = true;
 
-  document.getElementById("confirmModal").style.display = "flex";
+  if (nameValue === "") {
+    name.parentElement.classList.add("error");
+    isValid = false;
+  } else {
+    name.parentElement.classList.remove("error");
+  }
+
+  if (locationValue === "") {
+    location.parentElement.classList.add("error");
+    isValid = false;
+  } else {
+    location.parentElement.classList.remove("error");
+  }
+
+  if (isValid) {
+    document.getElementById("res-name").textContent = nameValue;
+    document.getElementById("res-location").textContent = locationValue;
+    document.getElementById("res-medicine").textContent = medicineValue;
+    document.getElementById("res-recipe").textContent = recipeName;
+    document.getElementById("res-notes").textContent = notesValue;
+
+    document.getElementById("confirmModal").style.display = "flex";
+  }
+});
+
+const inputs = document.querySelectorAll(
+  ".modern-form input, .modern-form textarea",
+);
+
+inputs.forEach((input) => {
+  input.addEventListener("input", function () {
+    const formGroup = this.closest(".form-group");
+
+    if (formGroup.classList.contains("error")) {
+      formGroup.classList.remove("error");
+    }
+  });
 });
 
 function closeModalForm(modalId) {

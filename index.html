@@ -379,24 +379,31 @@
             <h2>Form Pembelian Obat</h2>
             <form action="#" class="modern-form">
               <div class="form-group">
-                <label for="name">Nama Lengkap</label>
+                <label for="name"
+                  >Nama Lengkap <span style="color: red">*</span></label
+                >
                 <input
                   type="text"
                   id="name"
                   name="name"
                   placeholder="Tulis nama Anda"
-                  required
                   autocomplete="off" />
+                <span class="error-text" id="name-error">Nama wajib diisi</span>
               </div>
               <div class="form-group">
-                <label for="location">Lokasi (Kota/Kecamatan)</label>
+                <label for="location"
+                  >Lokasi (Kota/Kecamatan)
+                  <span style="color: red">*</span></label
+                >
                 <input
                   type="text"
                   id="location"
                   name="location"
                   placeholder="Contoh: Jl Purnama 2"
-                  required
                   autocomplete="off" />
+                <span class="error-text" id="location-error"
+                  >Lokasi wajib diisi</span
+                >
               </div>
               <div class="form-group">
                 <label for="medicine">Obat yang Dibutuhkan</label>
@@ -405,7 +412,6 @@
                   id="medicine"
                   name="medicine"
                   placeholder="Nama obat yang dibutuhkan"
-                  required
                   autocomplete="off" />
               </div>
               <div class="form-group">
@@ -655,7 +661,7 @@
       </div>
     </div>
     <!-- END MODAL -->
-    <button id="backToTop" title="Kembali ke Atas">
+    <button id="backToTop" title="Kembali ke atas">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
     <script src="js/main.js"></script>

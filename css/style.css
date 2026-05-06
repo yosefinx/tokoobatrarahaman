@@ -846,6 +846,22 @@ nav .nav-links a:hover::after {
   color: #718096;
 }
 
+.error-text {
+  color: #ff4f4d;
+  font-size: 0.95rem;
+  margin-top: 2px;
+  display: none;
+  font-style: italic;
+}
+
+.form-group.error input {
+  border-color: #ff4f4d;
+}
+
+.form-group.error .error-text {
+  display: block;
+}
+
 .contact-grid-layout {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -1483,6 +1499,7 @@ footer {
 
 .btn-cancel,
 .btn-confirm {
+  font-family: inherit;
   padding: 12px;
   border-radius: 10px;
   border: none;
