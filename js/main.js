@@ -108,7 +108,7 @@ document.addEventListener("click", (e) => {
     modalBadge.textContent = badge;
     modalBadge.className = "product-badge " + badgeClass;
 
-    const waText = `Halo, saya ingin memesan produk \n*${name}*`;
+    const waText = `Halo, saya ingin memesan produk *${name}*`;
     const waLink = `https://wa.me/6285393988929?text=${encodeURIComponent(waText)}`;
     document.getElementById("modalWA").href = waLink;
 
@@ -129,9 +129,20 @@ document.querySelector(".modal-overlay").addEventListener("click", closeModal);
 // START MODAL FORM PRODUCT
 document.getElementById("recipe").addEventListener("change", function () {
   const file = this.files[0];
+  const formGroup = this.closest(".form-group");
   const fileText = document.getElementById("file-name-text");
   if (file) {
-    fileText.textContent = file.name;
+    const fileSize = file.size / (1024 * 1024); //ke mb
+
+    if (fileSize > 10) {
+      formGroup.classList.add("error");
+      this.value = "";
+    } else {
+      formGroup.classList.remove("error");
+      fileText.textContent = file.name;
+    }
+  } else {
+    formGroup.classList.textContent.remove("error");
   }
 });
 
@@ -169,12 +180,12 @@ contactForm.addEventListener("submit", function (e) {
   }
 
   if (isValid) {
+    recipe.closest(".form-group").classList.remove("error");
     document.getElementById("res-name").textContent = nameValue;
     document.getElementById("res-location").textContent = locationValue;
     document.getElementById("res-medicine").textContent = medicineValue;
     document.getElementById("res-recipe").textContent = recipeName;
     document.getElementById("res-notes").textContent = notesValue;
-
     document.getElementById("confirmModal").style.display = "flex";
   }
 });
@@ -242,7 +253,7 @@ function showCategory(id, btn) {
   const buttons = document.querySelectorAll(".category-pill-btn");
 
   contents.forEach((content) => {
-    //semua konten disembunyikan (default)
+    //semua konten disembunyikan
     content.classList.remove("active");
     content.style.display = "none";
   });

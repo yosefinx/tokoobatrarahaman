@@ -854,7 +854,8 @@ nav .nav-links a:hover::after {
   font-style: italic;
 }
 
-.form-group.error input {
+.form-group.error input,
+.form-group.error .file-input-label {
   border-color: #ff4f4d;
 }
 
