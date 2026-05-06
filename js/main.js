@@ -27,10 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let count = 0;
   const target = 40;
   const duration = 2000; //2s
-  const increment = target / (duration / 50); //1 langkah 50ms hasilny 1
 
   const timer = setInterval(() => {
-    count += increment;
+    count++;
     if (count >= target) {
       //40 >= 40
       count = target;
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       statsHeading.classList.add("bounce");
       clearInterval(timer);
     }
-    counter.textContent = Math.floor(count);
+    counter.textContent = count;
   }, 50); //animasi update tiap 50ms
 });
 // END COUNTER ANIMATION
@@ -66,22 +65,25 @@ const sections = document.querySelectorAll("section");
 const navItems = document.querySelectorAll(".nav-links li");
 
 window.addEventListener("scroll", () => {
+  const isIndexPage = document.getElementById("about");
+  if (!isIndexPage) return;
+
   let current = "";
   sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 120; //section dari atas halaman, karena navbar fixed position
+    const sectionTop = section.offsetTop - 150;
     if (window.scrollY >= sectionTop) {
-      //apakah scroll sudah melewati section
       current = section.getAttribute("id");
     }
   });
-  navItems.forEach((li) => {
-    li.classList.remove("active");
-
-    const link = li.querySelector("a");
-    if (link.getAttribute("href") === "#" + current) {
-      li.classList.add("active");
-    }
-  });
+  if (current !== "") {
+    navItems.forEach((li) => {
+      li.classList.remove("active");
+      const link = li.querySelector("a");
+      if (link.getAttribute("href").includes("#" + current)) {
+        li.classList.add("active");
+      }
+    });
+  }
 });
 // END NAVBAR ACTIVE LINK ON SCROLL
 
@@ -111,7 +113,7 @@ document.addEventListener("click", (e) => {
     document.getElementById("modalWA").href = waLink;
 
     modal.classList.add("active");
-    document.body.style.overflow = "hidden"; //halaman tidak bsia discroll saat modal dibuka
+    document.body.style.overflow = "hidden"; //halaman tidak bisa discroll saat modal dibuka
   }
 });
 
@@ -183,8 +185,7 @@ const backToTopBtn = document.getElementById("backToTop");
 
 window.onscroll = function () {
   if (
-    document.body.scrollTop > 300 || //browser lama (kalau scroll udh lebih dari 300px dari atas)
-    document.documentElement.scrollTop > 300 //browser baru
+    document.documentElement.scrollTop > 300 //kalau scroll udh lebih dari 300px dari atas
   ) {
     backToTopBtn.style.display = "block";
   } else {
@@ -221,4 +222,4 @@ function showCategory(id, btn) {
   }
   btn.classList.add("active");
 }
-// START CATEGORY TOGGLE
+// END CATEGORY TOGGLE

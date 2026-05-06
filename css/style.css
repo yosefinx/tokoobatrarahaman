@@ -163,6 +163,7 @@ nav .nav-links a:hover::after {
 }
 
 .btn-primary {
+  font-family: inherit;
   padding: 16px 35px;
   background-color: var(--primary-color);
   color: #ffffff;
@@ -478,7 +479,7 @@ nav .nav-links a:hover::after {
 
 .why-grid-layout {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   margin: 0 auto;
 }
@@ -1195,7 +1196,7 @@ footer {
   border-radius: 100px;
   background: transparent;
   color: #64748b;
-  font-family: "DM Sans", sans-serif;
+  font-family: inherit;
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
