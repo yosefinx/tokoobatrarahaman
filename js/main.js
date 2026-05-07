@@ -75,6 +75,15 @@ window.addEventListener("scroll", () => {
       current = section.getAttribute("id");
     }
   });
+
+  if (current === "why") {
+    current = "about";
+  }
+
+  if (current === "stats") {
+    current = "home";
+  }
+
   if (current !== "") {
     navItems.forEach((li) => {
       li.classList.remove("active");
@@ -142,7 +151,7 @@ document.getElementById("recipe").addEventListener("change", function () {
       fileText.textContent = file.name;
     }
   } else {
-    formGroup.classList.textContent.remove("error");
+    formGroup.classList.remove("error");
   }
 });
 

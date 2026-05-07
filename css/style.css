@@ -8,6 +8,9 @@
   --desktop-fs-p: 1.2rem;
   --tablet-fs-p: 1.1rem;
   --phone-fs-p: 1.05rem;
+
+  --gray-fc: #777;
+  --black-fc: #1a1a1a;
 }
 
 @font-face {
@@ -66,7 +69,7 @@ nav .nav-links {
 nav a {
   position: relative;
   text-decoration: none;
-  color: #333;
+  color: var(--black-fc);
   font-weight: 500;
   padding-bottom: 4px;
 }
@@ -139,7 +142,7 @@ nav .nav-links a:hover::after {
 
 .hero-text h1 {
   font-size: var(--desktop-fs-h);
-  color: #1a1a1a;
+  color: var(--black-fc);
   line-height: 1.15;
   margin-bottom: 25px;
   font-weight: 800;
@@ -152,7 +155,7 @@ nav .nav-links a:hover::after {
 
 .hero-text p {
   font-size: var(--desktop-fs-p);
-  color: #555;
+  color: var(--gray-fc);
   line-height: 1.8;
   margin-bottom: 40px;
 }
@@ -243,12 +246,12 @@ nav .nav-links a:hover::after {
 
 .badge-text strong {
   font-size: 0.95rem;
-  color: #1a1a1a;
+  color: var(--black-fc);
 }
 
 .badge-text span {
   font-size: 0.8rem;
-  color: #777;
+  color: var(--gray-fc);
 }
 /* END HERO SECTION */
 
@@ -274,10 +277,6 @@ nav .nav-links a:hover::after {
   font-weight: 900;
   display: inline-block;
   margin-right: 5px;
-}
-
-#plus::after {
-  content: none;
 }
 
 .stats-container p::before {
@@ -344,7 +343,7 @@ nav .nav-links a:hover::after {
 
 .about-text h2 {
   font-size: 2.8rem;
-  color: #1a1a1a;
+  color: var(--black-fc);
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 20px;
@@ -352,7 +351,7 @@ nav .nav-links a:hover::after {
 
 .intro-p {
   font-size: var(--desktop-fs-p);
-  color: #666;
+  color: var(--gray-fc);
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -388,13 +387,13 @@ nav .nav-links a:hover::after {
 
 .vm-item h4 {
   font-size: var(--desktop-fs-p);
-  color: #1a1a1a;
+  color: var(--black-fc);
   margin: 0;
 }
 
 .vm-text {
   font-size: var(--tablet-fs-p);
-  color: #777;
+  color: var(--gray-fc);
   line-height: 1.5;
 }
 
@@ -412,7 +411,7 @@ nav .nav-links a:hover::after {
 
 .stat-desc {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--gray-fc);
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -500,13 +499,13 @@ nav .nav-links a:hover::after {
 }
 
 .why-card-solid h3 {
-  color: #1a1a1a;
+  color: var(--black-fc);
   font-size: 1.4rem;
   margin-bottom: 15px;
 }
 
 .why-card-solid p {
-  color: #555555;
+  color: var(--gray-fc);
   line-height: 1.6;
 }
 
@@ -549,13 +548,13 @@ nav .nav-links a:hover::after {
 
 .products-text h2 {
   font-size: var(--desktop-fs-h);
-  color: #1a1a1a;
+  color: var(--black-fc);
   font-weight: 700;
   margin-bottom: 20px;
 }
 
 .products-text p {
-  color: #666;
+  color: var(--gray-fc);
   font-size: var(--desktop-fs-p);
   line-height: 1.6;
 }
@@ -635,14 +634,14 @@ nav .nav-links a:hover::after {
 
 .product-info h3 {
   font-size: 1.2rem;
-  color: #222;
+  color: var(--black-fc);
   margin-bottom: 8px;
   line-height: 1.4;
 }
 
 .product-desc {
   font-size: 1rem;
-  color: #777;
+  color: var(--gray-fc);
   margin-bottom: 10px;
   line-height: 1.5;
   display: -webkit-box;
@@ -661,7 +660,7 @@ nav .nav-links a:hover::after {
 .product-price {
   font-size: 1.15rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: var(--black-fc);
 }
 
 .btn-detail {
@@ -688,7 +687,7 @@ nav .nav-links a:hover::after {
 
 .btn-view-all {
   text-decoration: none;
-  color: #1a1a1a;
+  color: var(--black-fc);
   font-weight: 700;
   font-size: 1.1rem;
   display: inline-flex;
@@ -777,7 +776,7 @@ nav .nav-links a:hover::after {
 .form-group label .optional {
   font-weight: 400;
   font-size: 0.8rem;
-  color: #888;
+  color: var(--gray-fc);
   font-style: italic;
 }
 
@@ -813,13 +812,9 @@ nav .nav-links a:hover::after {
 
 .file-input-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
+  width: 0px;
+  height: 0px;
   clip: rect(0, 0, 0, 0);
-  border: 0;
 }
 
 .file-input-label {
@@ -901,7 +896,7 @@ nav .nav-links a:hover::after {
   flex-direction: column;
   transition: all 0.3s ease;
   text-decoration: none;
-  color: #333;
+  color: var(--black-fc);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -930,13 +925,13 @@ nav .nav-links a:hover::after {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #1a1a1a;
+  color: var(--black-fc);
 }
 
 .contact-info-text p,
 .contact-info-text {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--gray-fc);
   line-height: 1.5;
   margin: 0;
 }
@@ -1125,7 +1120,7 @@ footer {
 
 .hero-floating-card h1 {
   font-size: var(--desktop-fs-h);
-  color: #1a1a1a;
+  color: var(--black-fc);
   line-height: 1.1;
   font-weight: 800;
   margin-bottom: 20px;
@@ -1138,7 +1133,7 @@ footer {
 
 .hero-floating-card p {
   font-size: var(--desktop-fs-p);
-  color: #666;
+  color: var(--gray-fc);
   line-height: 1.7;
   margin-bottom: 35px;
 }
@@ -1158,13 +1153,13 @@ footer {
 
 .info-item strong {
   font-size: 1.2rem;
-  color: #1a1a1a;
+  color: var(--black-fc);
   font-weight: 800;
 }
 
 .info-item span {
   font-size: 0.8rem;
-  color: #999;
+  color: var(--gray-fc);
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -1188,7 +1183,7 @@ footer {
 .products-catalog-text p {
   font-size: var(--desktop-fs-p);
   padding: 5px;
-  color: #666;
+  color: var(--gray-fc);
 }
 
 .category-filter-wrapper {
@@ -1270,7 +1265,7 @@ footer {
 .pill-tag-gold {
   display: inline-block;
   background: #ffcc00;
-  color: #1a1a1a;
+  color: var(--black-fc);
   padding: 8px 20px;
   border-radius: 50px;
   font-size: 0.8rem;
@@ -1404,11 +1399,11 @@ footer {
 .modal-details h2 {
   font-size: 1.8rem;
   margin: 10px 0;
-  color: #1a1a1a;
+  color: var(--black-fc);
 }
 
 .modal-details p {
-  color: #666;
+  color: var(--gray-fc);
   line-height: 1.6;
   margin-bottom: 25px;
 }
@@ -1489,7 +1484,7 @@ footer {
 }
 
 .summary-item span {
-  color: #666;
+  color: var(--gray-fc);
 }
 
 .modal-actions {
