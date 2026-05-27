@@ -218,7 +218,23 @@ function closeModalForm(modalId) {
 }
 
 function processPurchase() {
+  const nameValue = document.getElementById("res-name").textContent;
+  const locationValue = document.getElementById("res-location").textContent;
+  const medicineValue = document.getElementById("res-medicine").textContent;
+  const notesValue = document.getElementById("res-notes").textContent;
+
+  let pesan = `*Pesanan Obat Baru*\n\n`;
+  pesan += `*Nama:* ${nameValue}\n`;
+  pesan += `*Lokasi:* ${locationValue}\n`;
+  pesan += `*Obat:* ${medicineValue}\n`;
+  pesan += `*Catatan:* ${notesValue}\n\n`;
+  pesan += `_Mohon segera diproses, terima kasih._`;
+
+  const pesanEncoded = encodeURIComponent(pesan);
+  const urlWa = `https://wa.me/6285393988929?text=${pesanEncoded}`;
+  window.open(urlWa, "_blank");
   closeModalForm("confirmModal");
+
   setTimeout(() => {
     document.getElementById("successModal").style.display = "flex";
     contactForm.reset();
