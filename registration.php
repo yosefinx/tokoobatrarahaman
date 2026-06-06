@@ -11,6 +11,16 @@
 <body class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div class="p-3" style="width: 100%; max-width: 650px;">
         <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+            <?php 
+            if (isset($_GET['error']) && $_GET['error'] == '1') { 
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm mb-3 rounded-3" role="alert">
+                    <strong>Registrasi Gagal!</strong> Terjadi kesalahan saat menyimpan data, silakan coba lagi.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php 
+            } 
+            ?>
             <div class="d-flex align-items-center mb-4">
                 <div class="bg-white rounded-2 d-flex align-items-center justify-content-center text-white me-3" style="width: 40px; height: 40px;">
                     <img src="images/logo/logo.png" alt="Logo" style="width: 40px;">
@@ -24,8 +34,8 @@
                 <img src="images/hero/hero-image.jpeg" class="img-fluid rounded-3 border w-100" style="height: 100px; object-fit: cover;" alt="Dashboard Preview">
             </div>
             <h2 class="fw-bold text-dark mb-3">Registration</h2>
-            <form action="sv_registration.php" method="POST">
-                <div class="row">
+            <form action="actions/sv_registration.php" method="POST">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -47,6 +57,7 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+                <input type="hidden" name="role" value="Admin">
                 <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2">
                     Register
                 </button>

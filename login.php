@@ -10,6 +10,16 @@
 
 <body class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+        <?php 
+        if (isset($_GET['success']) && $_GET['success'] == '1') { 
+        ?>
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
+                <strong>Registrasi Berhasil!</strong> Akun kamu sudah terdaftar, silakan login.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php 
+        } 
+        ?>
         <div class="d-flex align-items-center mb-4">
             <div class="bg-white rounded-2 d-flex align-items-center justify-content-center text-white me-3" style="width: 40px; height: 40px;">
                 <img src="images/logo/logo.png" alt="Logo" style="width: 40px;">
