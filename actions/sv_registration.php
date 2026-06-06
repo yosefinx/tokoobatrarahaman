@@ -12,7 +12,7 @@ if (isset($_POST['username']) && isset($_POST['full_name']) && isset($_POST['pho
     $email        = trim($_POST['email']);
     $role         = trim($_POST['role']);
     $password_raw = $_POST['password'];
-    $password = password_hash($password_raw, PASSWORD_DEFAULT);
+    $password = md5($password_raw);
 
     $sql = "INSERT INTO users (username, full_name, phone_number, email, password, role) VALUES ('$username', '$full_name', '$phone_number', '$email', '$password', '$role')";
     if (mysqli_query($conn, $sql)) {

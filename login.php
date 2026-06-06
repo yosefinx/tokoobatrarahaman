@@ -33,7 +33,7 @@
             <img src="images/hero/hero-image.jpeg" class="img-fluid rounded-3 border w-100" style="height: 100px; object-fit: cover;" alt="Dashboard Preview">
         </div>
         <h2 class="fw-bold text-dark mb-3">Login</h2>
-        <form action="sv_login.php" method="POST">
+        <form action="actions/sv_login.php" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
