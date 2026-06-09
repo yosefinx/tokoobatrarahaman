@@ -1,24 +1,8 @@
 <?php
-session_start();
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
-    exit();
-}
-
-$username = $_SESSION["username"];
+$page = 'dashboard';
+include "../middleware/security.php";
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Obat Arah Aman</title>
-</head>
-
-<body>
-    <h1> <?= 'Hello ' . $username ?></h1>
-</body>
-
-</html>
+<?php include "includes/header.php"; ?>
+<?php include "includes/sidebar.php"; ?>
+<?php include "includes/footer.php"; ?>
