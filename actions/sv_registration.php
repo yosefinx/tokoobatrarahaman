@@ -8,7 +8,7 @@ if (!isset($_POST)) {
 if (isset($_POST['username']) && isset($_POST['full_name']) && isset($_POST['phone_number']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['role'])) {
     $username     = trim($_POST['username']);
     $full_name    = trim($_POST['full_name']);
-    $phone_number = trim($_POST['phone_number']);
+    $phone_number = (trim($_POST['phone_number']) ?? '');
     $email        = trim($_POST['email']);
     $role         = trim($_POST['role']);
     $password_raw = $_POST['password'];
@@ -26,5 +26,3 @@ if (isset($_POST['username']) && isset($_POST['full_name']) && isset($_POST['pho
     header("Location: ../registration.php?error=1");
     exit();
 }
-
-?>
