@@ -3,17 +3,17 @@
         <div>
             <ul class="nav nav-pills flex-column gap-1">
                 <li class="nav-item">
-                    <a href="../dashboard.php" class="nav-link <?= ($page == 'dashboard') ? 'active' : 'link-dark'; ?>">
+                    <a href="/toko-obat-arah-aman/admin/dashboard.php" class="nav-link <?= ($page == 'dashboard') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-speedometer2 me-2"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="produk.html" class="nav-link <?= ($page == 'products') ? 'active' : 'link-dark'; ?>">
+                    <a href="/toko-obat-arah-aman/admin/products/index.php" class="nav-link <?= ($page == 'products') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-capsule me-2"></i> Data Obat / Produk
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="categories/index.php" class="nav-link <?= ($page == 'categories') ? 'active' : 'link-dark'; ?>">
+                    <a href="/toko-obat-arah-aman/admin/categories/index.php" class="nav-link <?= ($page == 'categories') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-tags me-2"></i> Kategori Produk
                     </a>
                 </li>
