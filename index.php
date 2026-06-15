@@ -1,3 +1,10 @@
+<?php
+
+include "../middleware/security.php";
+include "../../config/connection.php";
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -387,22 +394,22 @@
               <span class="error-text" id="name-error">Nama wajib diisi</span>
             </div>
             <div class="form-group">
-              <label for="location">Lokasi (Kota/Kecamatan)
+              <label for="shipping_address">Lokasi (Kota/Kecamatan)
                 <span style="color: red">*</span></label>
               <input
                 type="text"
-                id="location"
-                name="location"
+                id="shipping_address"
+                name="shipping_address"
                 placeholder="Contoh: Jl Purnama 2"
                 autocomplete="off" />
               <span class="error-text" id="location-error">Lokasi wajib diisi</span>
             </div>
             <div class="form-group">
-              <label for="medicine">Obat yang Dibutuhkan</label>
+              <label for="id_product">Obat yang Dibutuhkan</label>
               <input
                 type="text"
-                id="medicine"
-                name="medicine"
+                id="id_product"
+                name="id_product"
                 placeholder="Nama obat yang dibutuhkan"
                 autocomplete="off" />
             </div>
