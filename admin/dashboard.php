@@ -1,6 +1,6 @@
 <?php
 $page = 'dashboard';
-include "middleware/security.php";
+include "middleware/admin_security.php";
 
 ?>
 <?php include "includes/header.php"; ?>

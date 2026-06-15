@@ -11,7 +11,12 @@ if (mysqli_num_rows($query) > 0) {
     $user = mysqli_fetch_assoc($query);
     $_SESSION['id_user'] = $user['id'];
     $_SESSION['username'] = $user['username'];
-    header("Location: ../admin/dashboard.php");
+    $_SESSION['role'] = $user['role'];
+    if ($user['role'] == 'Admin') {
+        header("Location: ../admin/dashboard.php");
+    } else {
+        header("Location: ../index.php");
+    }
     exit;
 } else {
     header("Location: ../login.php");

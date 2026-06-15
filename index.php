@@ -1,8 +1,7 @@
 <?php
+session_start();
 
-include "admin/middleware/security.php";
 include "config/connection.php";
-
 $products_query = mysqli_query($conn, "SELECT * FROM products ORDER BY name ASC");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -517,13 +516,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 rows="4"
                 placeholder="Tambahkan instruksi khusus atau detail lainnya..."></textarea>
             </div>
-            <button
-              type="submit"
-              class="btn-primary"
-              style="border: none"
-              id="buttonSendWa">
-              <span>Kirim Pesan Sekarang</span>
-            </button>
+            <?php
+            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'User')) : ?>
+              <button
+                type="submit"
+                class="btn-primary"
+                style="border:none"
+                id="buttonSendWa">
+                <span>Kirim Pesan Sekarang</span>
+              </button>
+              <?php else : ?>
+              <a href="login.php" class="btn-primary">
+                Login untuk Memesan
+              </a>
+              <?php endif; ?>
           </form>
         </div>
       </div>

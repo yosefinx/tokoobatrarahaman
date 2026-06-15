@@ -1,5 +1,5 @@
 <?php
-include "../middleware/security.php";
+include "../middleware/admin_security.php";
 include "../../config/connection.php";
 
 $id = $_GET['id'] ?? '';

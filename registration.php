@@ -57,7 +57,7 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" autocomplete="new-password" required>
                 </div>
-                <input type="hidden" name="role" value="Admin">
+                <input type="hidden" name="role">
                 <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2">
                     Register
                 </button>

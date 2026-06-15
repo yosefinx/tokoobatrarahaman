@@ -10,7 +10,7 @@ if (isset($_POST['username']) && isset($_POST['full_name']) && isset($_POST['pho
     $full_name    = trim($_POST['full_name']);
     $phone_number = (trim($_POST['phone_number']) ?? '');
     $email        = trim($_POST['email']);
-    $role         = trim($_POST['role']);
+    $role         = "User";
     $password_raw = $_POST['password'];
     $password = md5($password_raw);
 
