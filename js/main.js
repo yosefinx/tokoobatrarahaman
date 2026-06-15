@@ -155,101 +155,101 @@ document.getElementById("recipe").addEventListener("change", function () {
   }
 });
 
-const contactForm = document.querySelector(".modern-form");
-contactForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+// const contactForm = document.querySelector(".modern-form");
+// contactForm.addEventListener("submit", function (e) {
+//   e.preventDefault();
 
-  const name = document.getElementById("name");
-  const location = document.getElementById("location");
-  const medicine = document.getElementById("medicine");
-  const recipe = document.getElementById("recipe");
-  const notes = document.getElementById("notes");
+//   const name = document.getElementById("name");
+//   const location = document.getElementById("location");
+//   const medicine = document.getElementById("medicine");
+//   const recipe = document.getElementById("recipe");
+//   const notes = document.getElementById("notes");
 
-  const nameValue = name.value;
-  const locationValue = location.value;
-  const medicineValue = medicine.value || "-";
-  const recipeName =
-    recipe.files.length > 0 ? recipe.files[0].name : "Tidak ada file";
-  const notesValue = notes.value || "-";
+//   const nameValue = name.value;
+//   const locationValue = location.value;
+//   const medicineValue = medicine.value || "-";
+//   const recipeName =
+//     recipe.files.length > 0 ? recipe.files[0].name : "Tidak ada file";
+//   const notesValue = notes.value || "-";
 
-  let isValid = true;
+//   let isValid = true;
 
-  if (nameValue === "") {
-    name.parentElement.classList.add("error");
-    isValid = false;
-  } else {
-    name.parentElement.classList.remove("error");
-  }
+//   if (nameValue === "") {
+//     name.parentElement.classList.add("error");
+//     isValid = false;
+//   } else {
+//     name.parentElement.classList.remove("error");
+//   }
 
-  if (locationValue === "") {
-    location.parentElement.classList.add("error");
-    isValid = false;
-  } else {
-    location.parentElement.classList.remove("error");
-  }
+//   if (locationValue === "") {
+//     location.parentElement.classList.add("error");
+//     isValid = false;
+//   } else {
+//     location.parentElement.classList.remove("error");
+//   }
 
-  if (isValid) {
-    recipe.closest(".form-group").classList.remove("error");
-    document.getElementById("res-name").textContent = nameValue;
-    document.getElementById("res-location").textContent = locationValue;
-    document.getElementById("res-medicine").textContent = medicineValue;
-    document.getElementById("res-recipe").textContent = recipeName;
-    document.getElementById("res-notes").textContent = notesValue;
-    document.getElementById("confirmModal").style.display = "flex";
-  }
-});
+//   if (isValid) {
+//     recipe.closest(".form-group").classList.remove("error");
+//     document.getElementById("res-name").textContent = nameValue;
+//     document.getElementById("res-location").textContent = locationValue;
+//     document.getElementById("res-medicine").textContent = medicineValue;
+//     document.getElementById("res-recipe").textContent = recipeName;
+//     document.getElementById("res-notes").textContent = notesValue;
+//     document.getElementById("confirmModal").style.display = "flex";
+//   }
+// });
 
-const inputs = document.querySelectorAll(
-  ".modern-form input, .modern-form textarea",
-);
+// const inputs = document.querySelectorAll(
+//   ".modern-form input, .modern-form textarea",
+// );
 
-inputs.forEach((input) => {
-  input.addEventListener("input", function () {
-    const formGroup = this.closest(".form-group");
+// inputs.forEach((input) => {
+//   input.addEventListener("input", function () {
+//     const formGroup = this.closest(".form-group");
 
-    if (formGroup.classList.contains("error")) {
-      formGroup.classList.remove("error");
-    }
-  });
-});
+//     if (formGroup.classList.contains("error")) {
+//       formGroup.classList.remove("error");
+//     }
+//   });
+// });
 
-function closeModalForm(modalId) {
-  document.getElementById(modalId).style.display = "none";
-}
+// function closeModalForm(modalId) {
+//   document.getElementById(modalId).style.display = "none";
+// }
 
-function processPurchase() {
-  const nameValue = document.getElementById("res-name").textContent;
-  const locationValue = document.getElementById("res-location").textContent;
-  const medicineValue = document.getElementById("res-medicine").textContent;
-  const notesValue = document.getElementById("res-notes").textContent;
+// function processPurchase() {
+//   const nameValue = document.getElementById("res-name").textContent;
+//   const locationValue = document.getElementById("res-location").textContent;
+//   const medicineValue = document.getElementById("res-medicine").textContent;
+//   const notesValue = document.getElementById("res-notes").textContent;
 
-  let pesan = `*Pesanan Obat Baru*\n\n`;
-  pesan += `*Nama:* ${nameValue}\n`;
-  pesan += `*Lokasi:* ${locationValue}\n`;
-  pesan += `*Obat:* ${medicineValue}\n`;
-  pesan += `*Catatan:* ${notesValue}\n\n`;
-  pesan += `_Mohon segera diproses, terima kasih._`;
+//   let pesan = `*Pesanan Obat Baru*\n\n`;
+//   pesan += `*Nama:* ${nameValue}\n`;
+//   pesan += `*Lokasi:* ${locationValue}\n`;
+//   pesan += `*Obat:* ${medicineValue}\n`;
+//   pesan += `*Catatan:* ${notesValue}\n\n`;
+//   pesan += `_Mohon segera diproses, terima kasih._`;
 
-  const pesanEncoded = encodeURIComponent(pesan);
-  const urlWa = `https://wa.me/6285393988929?text=${pesanEncoded}`;
-  window.open(urlWa, "_blank");
-  closeModalForm("confirmModal");
+//   const pesanEncoded = encodeURIComponent(pesan);
+//   const urlWa = `https://wa.me/6285393988929?text=${pesanEncoded}`;
+//   window.open(urlWa, "_blank");
+//   closeModalForm("confirmModal");
 
-  setTimeout(() => {
-    document.getElementById("successModal").style.display = "flex";
-    contactForm.reset();
-    document.getElementById("file-name-text").textContent =
-      "Pilih Foto atau PDF Resep";
-  }, 300);
-}
+//   setTimeout(() => {
+//     document.getElementById("successModal").style.display = "flex";
+//     contactForm.reset();
+//     document.getElementById("file-name-text").textContent =
+//       "Pilih Foto atau PDF Resep";
+//   }, 300);
+// }
 
-window.onclick = function (event) {
-  //klik luar modal diclosekan
-  const confirmM = document.getElementById("confirmModal");
-  const successM = document.getElementById("successModal");
-  if (event.target == confirmM) closeModalForm("confirmModal");
-  if (event.target == successM) closeModalForm("successModal");
-};
+// window.onclick = function (event) {
+//   //klik luar modal diclosekan
+//   const confirmM = document.getElementById("confirmModal");
+//   const successM = document.getElementById("successModal");
+//   if (event.target == confirmM) closeModalForm("confirmModal");
+//   if (event.target == successM) closeModalForm("successModal");
+// };
 // END MODAL FORM PRODUCT
 
 // START BACK TO UP
@@ -295,3 +295,30 @@ function showCategory(id, btn) {
   btn.classList.add("active");
 }
 // END CATEGORY TOGGLE
+
+//START ADD NEW PRODUCT
+document
+  .getElementById("btn-add-product")
+  .addEventListener("click", function () {
+    const container = document.getElementById("produk-container");
+    const firstRow = document.querySelector(".produk-row");
+
+    const newRow = firstRow.cloneNode(true);
+
+    newRow.querySelector("select").value = "";
+    newRow.querySelector("input").value = "";
+
+    container.appendChild(newRow);
+  });
+
+function hapusBaris(button) {
+  const rows = document.querySelectorAll(".produk-row");
+  if (rows.length > 1) {
+    button.closest(".produk-row").remove();
+  } else {
+    const row = button.closest(".produk-row");
+    row.querySelector("select").value = "";
+    row.querySelector("input").value = "";
+  }
+}
+//END ADD NEW PRODUCT

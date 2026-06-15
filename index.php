@@ -1,8 +1,50 @@
 <?php
 
-include "../middleware/security.php";
-include "../../config/connection.php";
+include "admin/middleware/security.php";
+include "config/connection.php";
 
+$products_query = mysqli_query($conn, "SELECT * FROM products ORDER BY name ASC");
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $id_user = $_SESSION['id_user'];
+  $shipping_address = $_POST['shipping_address'];
+  $notes = $_POST['notes'];
+  $id_products = $_POST['id_product'];
+  $quantities = $_POST['quantity'];
+
+  $nama_file_resep = null;
+  $apakah_ada_resep = isset($_FILES['recipe']) && $_FILES['recipe']['error'] === UPLOAD_ERR_OK;
+  if ($apakah_ada_resep) {
+    $ekstensi = pathinfo($_FILES['recipe']['name'], PATHINFO_EXTENSION);
+    $nama_file_resep = "RCP_" . time() . "." . $ekstensi;
+    move_uploaded_file($_FILES['recipe']['tmp_name'], "recipe/" . $nama_file_resep);
+  }
+
+  if (empty(array_filter($id_products)) && !$apakah_ada_resep) {
+    echo "<script>alert('Gagal! Anda harus memilih obat atau upload resep.'); window.history.back();</script>";
+    exit;
+  }
+
+  $order_code = "ORD" . strtoupper(substr(uniqid(), 7, 7));
+  $query_orders = "INSERT INTO orders (id_user, order_code, shipping_address, recipe, notes, status) 
+  VALUES ('$id_user', '$order_code', '$shipping_address', '$nama_file_resep', '$notes', 'Menunggu Konfirmasi')";
+
+  if (mysqli_query($conn, $query_orders)) {
+    $id_order_terakhir = mysqli_insert_id($conn);
+    foreach ($id_products as $index => $id_produk_pilihan) {
+      $qty_pilihan = $quantities[$index];
+      if (!empty($id_produk_pilihan) && $qty_pilihan > 0) {
+        $query_detail = "INSERT INTO orders_details (id_order, id_product, quantity) 
+        VALUES ('$id_order_terakhir', '$id_produk_pilihan', '$qty_pilihan')";
+        mysqli_query($conn, $query_detail);
+      }
+    }
+    echo "<script>alert('Pesanan Berhasil! Kode: $order_code'); window.location.href='index.php';</script>";
+    exit;
+  } else {
+    echo "Database gagal: " . mysqli_error($conn);
+  }
+}
 ?>
 
 <!doctype html>
@@ -382,8 +424,8 @@ include "../../config/connection.php";
       <div class="contact-form-container">
         <div class="contact-form">
           <h2>Form Pembelian Obat</h2>
-          <form action="#" class="modern-form">
-            <div class="form-group">
+          <form action="" method="POST" class="modern-form" enctype="multipart/form-data">
+            <!-- <div class="form-group">
               <label for="name">Nama Lengkap <span style="color: red">*</span></label>
               <input
                 type="text"
@@ -392,7 +434,7 @@ include "../../config/connection.php";
                 placeholder="Tulis nama Anda"
                 autocomplete="off" />
               <span class="error-text" id="name-error">Nama wajib diisi</span>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="shipping_address">Lokasi (Kota/Kecamatan)
                 <span style="color: red">*</span></label>
@@ -404,14 +446,35 @@ include "../../config/connection.php";
                 autocomplete="off" />
               <span class="error-text" id="location-error">Lokasi wajib diisi</span>
             </div>
-            <div class="form-group">
-              <label for="id_product">Obat yang Dibutuhkan</label>
-              <input
-                type="text"
-                id="id_product"
-                name="id_product"
-                placeholder="Nama obat yang dibutuhkan"
-                autocomplete="off" />
+            <div class="form-group" id="produk-container">
+              <label>Obat yang Dibutuhkan <span class="optional">(Kosongkan jika hanya memakai resep)</span></label>
+              <div class="produk-row">
+                <div class="produk-inputs">
+                  <select name="id_product[]" class="select-obat">
+                    <option value="" selected>-- Pilih Obat --</option>
+                    <?php
+                    mysqli_data_seek($products_query, 0);
+                    while ($products = mysqli_fetch_assoc($products_query)) :
+                    ?>
+                      <option value="<?= htmlspecialchars($products['id']) ?>">
+                        <?= htmlspecialchars($products['name']) ?>
+                      </option>
+                    <?php endwhile; ?>
+                  </select>
+                  <input type="number" name="quantity[]" min="1" placeholder="Qty" class="input-qty" />
+                </div>
+                <button type="button" class="btn-remove" onclick="hapusBaris(this)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <button type="button" id="btn-add-product" class="btn-tambahproduct">
+                + Tambah Obat Lain
+              </button>
             </div>
             <div class="form-group">
               <label for="recipe">
