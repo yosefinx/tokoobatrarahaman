@@ -1,5 +1,5 @@
 <?php
-$page = 'orders';
+$page = 'categories';
 
 include "../middleware/admin_security.php";
 include "../../config/connection.php";

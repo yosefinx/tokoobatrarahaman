@@ -1,5 +1,5 @@
 <?php
-$page = 'categories';
+$page = 'orders';
 
 include "../middleware/admin_security.php";
 include "../../config/connection.php";
@@ -18,7 +18,7 @@ $query = mysqli_query($conn, $sql);
             <h1 class="h4 mb-0 text-dark fw-bold">Halaman Pemesanan</h1>
             <p class="text-muted small mb-0">Kelola pesanan di sini.</p>
         </div>
- 
+
     </div>
     <div class="card border-0 shadow-sm">
         <?php if (isset($_GET['success-update']) && $_GET['success-update'] == '1') : ?>
