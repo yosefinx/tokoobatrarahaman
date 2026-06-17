@@ -37,7 +37,7 @@ if (isset($_POST['create'])) {
     }
 }
 ?>
-<main class="flex-grow-1 p-4 bg-light min-vh-100">
+<main class="flex-grow-1 p-4 bg-light">
     <div class="d-flex align-items-center gap-3 mb-4">
         <a href="index.php" class="btn btn-white border shadow-sm rounded-3 px-2 py-1.5 text-dark d-flex align-items-center justify-content-center" title="Kembali">
             <i class="bi bi-arrow-left fs-5"></i>

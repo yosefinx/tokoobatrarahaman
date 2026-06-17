@@ -12,7 +12,7 @@ $sql = "SELECT * FROM orders ORDER BY id DESC";
 $query = mysqli_query($conn, $sql);
 
 ?>
-<main class="flex-grow-1 p-4 bg-light min-vh-100">
+<main class="flex-grow-1 p-4 bg-light">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h4 mb-0 text-dark fw-bold">Halaman Pemesanan</h1>

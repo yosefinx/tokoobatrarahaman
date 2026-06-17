@@ -34,4 +34,9 @@
                 </li>
             </ul>
         </div>
+        <div class="pt-3 border-top">
+            <a href="/toko-obat-arah-aman/actions/logout.php" class="nav-link text-danger">
+                <i class="bi bi-box-arrow-left me-2"></i> Logout
+            </a>
+        </div>
     </aside>
