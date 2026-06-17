@@ -25,6 +25,7 @@ if (isset($_POST['create'])) {
     $photo_name = "";
     $fileTmpName = null;
     $fileDestination = "";
+    $is_uploading = false;
 
     if (empty($name)) {
         $errors['name'] = "Nama produk wajib diisi.";
@@ -58,10 +59,12 @@ if (isset($_POST['create'])) {
         $fileError = $file['error'];
 
         $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+        $allowedExtensions = ['png', 'jpg', 'jpeg'];
+
+        $is_uploading = true;
 
         if (!in_array($fileExt, $allowedExtensions)) {
-            $errors['photo'] = "Format file salah! Hanya diperbolehkan PDF, PNG, atau JPG.";
+            $errors['photo'] = "Format file salah! Hanya diperbolehkan PNG, JPG, atau JPEG.";
         } elseif ($fileError !== 0) {
             $errors['photo'] = "Terjadi kesalahan saat mengupload file.";
         } elseif ($fileSize > 5 * 1024 * 1024) {
@@ -85,7 +88,6 @@ if (isset($_POST['create'])) {
             }
         }
         if ($upload_success) {
-
             $query = "INSERT INTO products (name, description, photo, id_category, price, stock) VALUES ('$name', '$description', '$photo_name', '$id_category', '$price', '$stock')";
 
             if (mysqli_query($conn, $query)) {
@@ -99,7 +101,7 @@ if (isset($_POST['create'])) {
     }
 }
 ?>
-<main class="flex-grow-1 p-4 bg-light min-vh-100">
+<main class="flex-grow-1 p-4 bg-light">
     <div class="d-flex align-items-center gap-3 mb-4">
         <a href="index.php" class="btn btn-white border shadow-sm rounded-3 px-2 py-1.5 text-dark d-flex align-items-center justify-content-center" title="Kembali">
             <i class="bi bi-arrow-left fs-5"></i>

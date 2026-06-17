@@ -11,41 +11,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $id_products = $_POST['id_product'];
   $quantities = $_POST['quantity'];
 
+  $errors = [];
   $nama_file_resep = null;
-  $apakah_ada_resep = isset($_FILES['recipe']) && $_FILES['recipe']['error'] === UPLOAD_ERR_OK;
-  if ($apakah_ada_resep) {
-    $ekstensi = pathinfo($_FILES['recipe']['name'], PATHINFO_EXTENSION);
-    $nama_file_resep = "RCP_" . time() . "." . $ekstensi;
-    move_uploaded_file($_FILES['recipe']['tmp_name'], "recipe/" . $nama_file_resep);
+  $fileTmpName = null;
+  $fileDestination = "";
+  $is_uploading = false;
+
+  if (empty($shipping_address)) {
+    $errors['shipping_address'] = "Lokasi/Alamat pengiriman wajib diisi.";
   }
 
-  if (empty(array_filter($id_products)) && !$apakah_ada_resep) {
-    echo "<script>alert('Gagal! Anda harus memilih obat atau upload resep.'); window.history.back();</script>";
-    exit;
+  if (isset($_FILES['recipe']) && $_FILES['recipe']['error'] != 4) {
+    $is_uploading = true;
+
+    $file = $_FILES['recipe'];
+    $fileName = $file['name'];
+    $fileTmpName = $file['tmp_name'];
+    $fileSize = $file['size'];
+    $fileError = $file['error'];
+
+    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+
+    if (!in_array($fileExt, $allowedExtensions)) {
+      $errors['recipe'] = "Format resep salah! Hanya diperbolehkan PDF, PNG, atau JPG.";
+    } elseif ($fileError !== 0) {
+      $errors['recipe'] = "Terjadi kesalahan saat mengupload resep.";
+    } elseif ($fileSize > 10 * 1024 * 1024) {
+      $errors['recipe'] = "Ukuran file resep terlalu besar! Maksimal 10MB.";
+    } else {
+      $nama_file_resep = "RCP_" . time() . "_" . uniqid() . "." . $fileExt;
+      $fileDestination = 'recipe/' . $nama_file_resep;
+    }
   }
 
-  $order_code = "ORD" . strtoupper(substr(uniqid(), 7, 7));
-  $query_orders = "INSERT INTO orders (id_user, order_code, shipping_address, recipe, notes, status) 
-  VALUES ('$id_user', '$order_code', '$shipping_address', '$nama_file_resep', '$notes', 'Menunggu Konfirmasi')";
+  if (empty(array_filter($id_products)) && !$is_uploading) {
+    $errors['global'] =
+      "Anda harus memilih minimal satu obat atau mengupload resep.";
+  }
 
-  if (mysqli_query($conn, $query_orders)) {
-    $id_order_terakhir = mysqli_insert_id($conn);
-    foreach ($id_products as $index => $id_produk_pilihan) {
-      $qty_pilihan = $quantities[$index];
-      if (!empty($id_produk_pilihan) && $qty_pilihan > 0) {
-        $query_detail = "INSERT INTO orders_details (id_order, id_product, quantity) 
-        VALUES ('$id_order_terakhir', '$id_produk_pilihan', '$qty_pilihan')";
-        mysqli_query($conn, $query_detail);
+  if (empty($errors)) {
+    $upload_success = true;
+
+    if ($is_uploading) {
+      if (!move_uploaded_file($fileTmpName, $fileDestination)) {
+        $upload_success = false;
+        $errors['recipe'] = "Gagal memindahkan file resep ke server.";
       }
     }
-    echo "<script>alert('Pesanan Berhasil! Kode: $order_code'); window.location.href='index.php';</script>";
-    exit;
-  } else {
-    echo "Database gagal: " . mysqli_error($conn);
+    if ($upload_success) {
+      $order_code = "OD" . date('md') . strtoupper(substr(uniqid(), -4));
+      $query_orders = "INSERT INTO orders (id_user, order_code, shipping_address, recipe, notes, status) 
+      VALUES ('$id_user', '$order_code', '$shipping_address', '$nama_file_resep', '$notes', 'Menunggu Konfirmasi')";
+
+      if (mysqli_query($conn, $query_orders)) {
+        $id_order_terakhir = mysqli_insert_id($conn);
+        foreach ($id_products as $index => $id_produk_pilihan) {
+          $qty_pilihan = $quantities[$index];
+          if (!empty($id_produk_pilihan) && $qty_pilihan > 0) {
+            $query_detail = "INSERT INTO orders_details (id_order, id_product, quantity) 
+            VALUES ('$id_order_terakhir', '$id_produk_pilihan', '$qty_pilihan')";
+            mysqli_query($conn, $query_detail);
+          }
+        }
+        echo "<script>alert('Pesanan Berhasil! Kode: $order_code'); window.location.href='index.php';</script>";
+        exit;
+      } else {
+        if ($is_uploading && file_exists($fileDestination)) {
+          unlink($fileDestination);
+        }
+        $errors['database'] = "Gagal menyimpan pesanan: " . mysqli_error($conn);
+      }
+    }
   }
 }
 ?>
-
+<?php if (!empty($errors)) : ?>
+  <script>
+    window.location.hash = "contact";
+  </script>
+<?php endif; ?>
 <!doctype html>
 <html lang="en">
 
@@ -434,7 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 autocomplete="off" />
               <span class="error-text" id="name-error">Nama wajib diisi</span>
             </div> -->
-            <div class="form-group">
+            <div class="form-group <?= isset($errors['shipping_address']) ? 'error' : '' ?>">
               <label for="shipping_address">Lokasi (Kota/Kecamatan)
                 <span style="color: red">*</span></label>
               <input
@@ -443,7 +488,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 name="shipping_address"
                 placeholder="Contoh: Jl Purnama 2"
                 autocomplete="off" />
-              <span class="error-text" id="location-error">Lokasi wajib diisi</span>
+              <?php if (isset($errors['shipping_address'])) : ?>
+                <span class="error-text">
+                  <?= $errors['shipping_address'] ?>
+                </span>
+              <?php endif; ?>
             </div>
             <div class="form-group" id="produk-container">
               <label>Obat yang Dibutuhkan <span class="optional">(Kosongkan jika hanya memakai resep)</span></label>
@@ -452,7 +501,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <select name="id_product[]" class="select-obat">
                     <option value="" selected>-- Pilih Obat --</option>
                     <?php
-                    mysqli_data_seek($products_query, 0);
                     while ($products = mysqli_fetch_assoc($products_query)) :
                     ?>
                       <option value="<?= htmlspecialchars($products['id']) ?>">
@@ -475,7 +523,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 + Tambah Obat Lain
               </button>
             </div>
-            <div class="form-group">
+            <div class="form-group <?= isset($errors['recipe']) ? 'error' : '' ?>">
               <label for="recipe">
                 Resep dari Sinse
                 <span class="optional">(Upload Gambar/PDF jika ada)</span>
@@ -506,7 +554,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <span id="file-name-text">Pilih Foto Resep atau PDF</span>
                 </label>
               </div>
-              <span class="error-text">Ukuran file terlalu besar (Maksimal 10MB)</span>
+              <?php if (isset($errors['recipe'])) : ?>
+                <span class="error-text">
+                  <?= $errors['recipe'] ?>
+                </span>
+              <?php endif; ?>
             </div>
             <div class="form-group">
               <label for="notes">Catatan Tambahan</label>
@@ -516,6 +568,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 rows="4"
                 placeholder="Tambahkan instruksi khusus atau detail lainnya..."></textarea>
             </div>
+            <?php if (isset($errors['global'])) : ?>
+              <div class="error-text">
+                <?= $errors['global'] ?>
+              </div>
+            <?php endif; ?>
             <?php
             if (isset($_SESSION['role']) && ($_SESSION['role'] == 'User')) : ?>
               <button
@@ -525,11 +582,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 id="buttonSendWa">
                 <span>Kirim Pesan Sekarang</span>
               </button>
-              <?php else : ?>
+            <?php else : ?>
               <a href="login.php" class="btn-primary">
                 Login untuk Memesan
               </a>
-              <?php endif; ?>
+            <?php endif; ?>
           </form>
         </div>
       </div>
