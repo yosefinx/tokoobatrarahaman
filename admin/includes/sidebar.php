@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pesanan.html" class="nav-link <?= ($page == 'orders') ? 'active' : 'link-dark'; ?>">
+                    <a href="/toko-obat-arah-aman/admin/orders/index.php" class="nav-link <?= ($page == 'orders') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-cart-check me-2"></i> Manajemen Pesanan
                     </a>
                 </li>
