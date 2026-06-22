@@ -23,12 +23,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pengaturan.html" class="nav-link <?= ($page == 'settings') ? 'active' : 'link-dark'; ?>">
+                    <a href="/toko-obat-arah-aman/admin/settings_store/edit.php?id=1" class="nav-link <?= ($page == 'settings_store') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-shop me-2"></i> Pengaturan Toko
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="users.html" class="nav-link <?= ($page == 'users') ? 'active' : 'link-dark'; ?>">
+                    <a href="/toko-obat-arah-aman/admin/users/index.php" class="nav-link <?= ($page == 'users') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-people me-2"></i> Manajemen User
                     </a>
                 </li>
