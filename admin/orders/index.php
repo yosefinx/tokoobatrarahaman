@@ -26,15 +26,9 @@ $query = mysqli_query($conn, $sql);
 
     </div>
     <div class="card border-0 shadow-sm">
-        <?php if (isset($_GET['success-update']) && $_GET['success-update'] == '1') : ?>
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
-                <strong>Berhasil!</strong> Kategori berhasil diubah.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
         <?php if (isset($_GET['success-delete']) && $_GET['success-delete'] == '1') : ?>
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
-                <strong>Berhasil!</strong> Kategori berhasil dihapus.
+                <strong>Berhasil!</strong> Pesanan berhasil dihapus.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
