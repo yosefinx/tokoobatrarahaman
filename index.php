@@ -61,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($upload_success) {
       $order_code = "OD" . date('md') . strtoupper(substr(uniqid(), -4));
-      $query_orders = "INSERT INTO orders (id_user, order_code, shipping_address, recipe, notes, status) 
-      VALUES ('$id_user', '$order_code', '$shipping_address', '$nama_file_resep', '$notes', 'Menunggu Konfirmasi')";
+      $query_orders = "INSERT INTO orders (id_user, order_code, shipping_address, recipe, notes, status, followed_up_by) 
+      VALUES ('$id_user', '$order_code', '$shipping_address', '$nama_file_resep', '$notes', 1, NULL)";
 
       if (mysqli_query($conn, $query_orders)) {
         $id_order_terakhir = mysqli_insert_id($conn);

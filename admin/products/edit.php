@@ -184,11 +184,17 @@ if (isset($_POST['update'])) {
                         class="form-control <?= isset($errors['photo']) ? 'is-invalid' : ''; ?>"
                         id="photo"
                         name="photo"
-                        placeholder="Masukkan foto produk"
-                        value="<?= htmlspecialchars($photo); ?>">
+                        onchange="previewImage(this)"
+                        placeholder="Masukkan foto produk">
                     <?php if (isset($errors['photo'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['photo']; ?></div>
                     <?php endif; ?>
+                    <div class="mt-3">
+                        <?php $foto_lama = (!empty($result['photo']) && file_exists('../../images/products/' . $result['photo']))
+                            ? '../../images/products/' . $result['photo']
+                            : ''; ?>
+                        <img id="img-preview" src="<?= $foto_lama ?: '#'; ?>" class="img-thumbnail <?= $foto_lama ? '' : 'd-none'; ?>" style="max-height: 200px;" alt="Pratinjau Gambar">
+                    </div>
                     <div class="form-text text-muted small">Foto saat ini: <?= ($result['photo']) ?: '-'; ?></div>
                 </div>
                 <div class="mb-3">

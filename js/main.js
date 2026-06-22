@@ -322,3 +322,23 @@ function hapusBaris(button) {
   }
 }
 //END ADD NEW PRODUCT
+//START PREVIEW PHOTO
+function previewImage() {
+  const image = document.querySelector("#photo");
+  const imgPreview = document.querySelector("#img-preview");
+
+  if (image.files && image.files[0]) {
+    imgPreview.classList.remove("d-none");
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function (oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    };
+  } else {
+    imgPreview.src = "";
+    imgPreview.classList.add("d-none");
+  }
+}
+//END PREVIEW PHOTO

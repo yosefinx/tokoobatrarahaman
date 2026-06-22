@@ -157,11 +157,14 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['photo']) ? 'is-invalid' : ''; ?>"
                         id="photo"
                         name="photo"
-                        placeholder="Masukkan foto produk"
-                        value="<?= htmlspecialchars($photo); ?>">
+                        onchange="previewImage()"
+                        placeholder="Masukkan foto produk">
                     <?php if (isset($errors['photo'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['photo']; ?></div>
                     <?php endif; ?>
+                    <div class="mt-3">
+                        <img id="img-preview" class="img-thumbnail d-none" style="max-height: 200px;" alt="Pratinjau Gambar">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="id_category" class="form-label">Kategori</label>

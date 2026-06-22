@@ -45,10 +45,11 @@ $query = mysqli_query($conn, $sql);
                         <tr>
                             <th scope="col" class="ps-3">#</th>
                             <th scope="col">Nama Produk</th>
-                            <th scope="col" class="w-50">Deskripsi</th>
+                            <th scope="col" class="w-25">Deskripsi</th>
                             <th scope="col">Harga</th>
                             <th scope="col">Stock</th>
                             <th scope="col">Kategori</th>
+                            <th scope="col">Gambar Produk</th>
                             <th scope="col" class="text-end pe-3">Aksi</th>
                         </tr>
                     </thead>
@@ -59,13 +60,16 @@ $query = mysqli_query($conn, $sql);
                             <tr>
                                 <th scope="row" class="ps-3"><?= $no++ ?></th>
                                 <td><?= $result['name'] ?></td>
-                                <td><?= mb_strimwidth($result['description'], 0, 200, "..."); ?></td>
+                                <td><?= mb_strimwidth($result['description'], 0, 80, "..."); ?></td>
                                 <td>Rp <?= number_format($result['price'], 0, ',', '.') ?></td>
                                 <td><?= $result['stock'] ?></td>
                                 <td><?= $result['category_name'] ?></td>
+                                <td><img style="width: 50px; height: 50px; object-fit: cover;" src="../../images/products/<?= $result['photo'] ?>"></td>
                                 <td class="text-end pe-3">
-                                    <a href="edit.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
-                                    <a href="delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?');"><i class="bi bi-trash"></i></a>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <a href="edit.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
+                                        <a href="delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?');"><i class="bi bi-trash"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php
