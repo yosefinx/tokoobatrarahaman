@@ -1,5 +1,5 @@
 <div class="d-flex" style="height: calc(100vh - 56px);">
-    <aside class="d-none d-lg-flex flex-column justify-content-between bg-white border-end p-3" style="width: 280px;">
+    <aside class="d-none d-lg-flex flex-column justify-content-between bg-white border-end p-3" style="min-width: 300px;">
         <div>
             <ul class="nav nav-pills flex-column gap-1">
                 <li class="nav-item">
