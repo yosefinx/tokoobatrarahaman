@@ -82,7 +82,7 @@ $query = mysqli_query($conn, $sql);
                                 <td><?= $result['followed_up_at'] ?></td>
                                 <td class="text-end pe-3">
                                     <div class="d-inline-flex gap-1 align-items-center">
-                                        <a href="edit.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
+                                        <a href="detail.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
                                         <a href="delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
                                         <form action="../../actions/update_status.php" method="POST" class="d-inline">
                                             <input type="hidden" name="order_code" value="<?= $result['order_code']; ?>">
