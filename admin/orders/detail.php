@@ -87,105 +87,109 @@ while ($row = mysqli_fetch_assoc($query)) {
         </div>
 
         <?php if ($order_info): ?>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-white fw-bold py-3">
-                        Informasi Transaksi
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Kode Pesanan</label>
-                            <span class="fw-bold text-primary"><?= $order_info['order_code'] ?></span>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-white fw-bold py-3">
+                            Informasi Transaksi
                         </div>
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Tanggal Pemesanan</label>
-                            <span><?= $order_info['order_date'] ?></span>
-                        </div>
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Status</label>
-                            <?php if ($order_info['status'] == '1'): ?>
-                                <span class="badge bg-warning text-dark">Diproses</span>
-                            <?php elseif ($order_info['status'] == '2'): ?>
-                                <span class="badge bg-success">Selesai</span>
-                            <?php else: ?>
-                                <span class="badge bg-danger">Dibatalkan</span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Resep</label>
-                            <?= $order_info['recipe'] ? '<a href="../../recipe/'.$order_info['recipe'].'" target="_blank" class="btn btn-sm btn-outline-info p-1 py-0 small">Lihat Resep</a>' : '<span class="text-muted">-</span>' ?>
-                        </div>
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Alamat Pengiriman</label>
-                            <p class="mb-0 bg-light p-2 rounded small"><?= $order_info['shipping_address'] ?></p>
-                        </div>
-                        <div class="mb-0">
-                            <label class="text-muted small d-block">Catatan Tambahan</label>
-                            <span class="small italic text-secondary"><?= $order_info['notes'] ?: '-' ?></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-white fw-bold py-3">
-                        Item yang Dibeli
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table align-middle mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th scope="col" class="ps-3" style="width: 80px;">Foto</th>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col" class="text-end">Harga Satuan</th>
-                                        <th scope="col" class="text-center">Jumlah</th>
-                                        <th scope="col" class="text-end pe-3">Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                    $total_belanja = 0;
-                                    if (!empty($products)): 
-                                        foreach ($products as $item): 
-                                            $total_belanja += $item['subtotal'];
-                                    ?>
-                                        <tr>
-                                            <td class="ps-3">
-                                                <img src="../../images/products/<?= $item['product_photo'] ?: '#' ?>" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;" alt="">
-                                            </td>
-                                            <td>
-                                                <span class="fw-semibold d-block"><?= $item['product_name'] ?></span>
-                                            </td>
-                                            <td class="text-end">Rp <?= number_format($item['product_price'], 0, ',', '.') ?></td>
-                                            <td class="text-center"><?= $item['quantity'] ?></td>
-                                            <td class="text-end pe-3 fw-bold text-dark">Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></td>
-                                        </tr>
-                                    <?php 
-                                        endforeach; 
-                                    else: 
-                                    ?>
-                                        <tr>
-                                            <td colspan="5" class="text-center py-4 text-muted">Tidak ada detail produk untuk pesanan ini.</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                                <?php if ($total_belanja > 0): ?>
-                                <tfoot class="table-light">
-                                    <tr>
-                                        <td colspan="4" class="text-end fw-bold py-3">Total Pembayaran:</td>
-                                        <td class="text-end pe-3 fw-bold text-success fs-5 py-3">Rp <?= number_format($total_belanja, 0, ',', '.') ?></td>
-                                    </tr>
-                                </tfoot>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="text-muted small d-block">Kode Pesanan</label>
+                                <span class="fw-bold text-primary"><?= htmlspecialchars($order_info['order_code']) ?></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted small d-block">Tanggal Pemesanan</label>
+                                <span><?= htmlspecialchars($order_info['order_date']) ?></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted small d-block">Status</label>
+                                <?php if ($order_info['status'] == '1'): ?>
+                                    <span class="badge bg-warning text-dark">Diproses</span>
+                                <?php elseif ($order_info['status'] == '2'): ?>
+                                    <span class="badge bg-success">Selesai</span>
+                                <?php else: ?>
+                                    <span class="badge bg-danger">Dibatalkan</span>
                                 <?php endif; ?>
-                            </table>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted small d-block">Resep</label>
+                                <?php if ($order_info['recipe']): ?>
+                                    <a href="../../recipe/<?= htmlspecialchars($order_info['recipe']) ?>" target="_blank" class="btn btn-sm btn-outline-info p-1 py-0 small">Lihat Resep</a>
+                                <?php else: ?>
+                                    <span class="text-muted">-</span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted small d-block">Alamat Pengiriman</label>
+                                <p class="mb-0 bg-light p-2 rounded small"><?= htmlspecialchars($order_info['shipping_address']) ?></p>
+                            </div>
+                            <div class="mb-0">
+                                <label class="text-muted small d-block">Catatan Tambahan</label>
+                                <span class="small italic text-secondary"><?= htmlspecialchars($order_info['notes'] ?: '-') ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-white fw-bold py-3">
+                            Item yang Dibeli
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" class="ps-3" style="width: 80px;">Foto</th>
+                                            <th scope="col">Nama Produk</th>
+                                            <th scope="col" class="text-end">Harga Satuan</th>
+                                            <th scope="col" class="text-center">Jumlah</th>
+                                            <th scope="col" class="text-end pe-3">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $total_belanja = 0;
+                                        if (!empty($products)):
+                                            foreach ($products as $item):
+                                                $total_belanja += $item['subtotal'];
+                                        ?>
+                                                <tr>
+                                                    <td class="ps-3">
+                                                        <img src="../../images/products/<?= $item['product_photo'] ? htmlspecialchars($item['product_photo']) : '#' ?>" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;" alt="">
+                                                    </td>
+                                                    <td>
+                                                        <span class="fw-semibold d-block"><?= htmlspecialchars($item['product_name']) ?></span>
+                                                    </td>
+                                                    <td class="text-end">Rp <?= number_format($item['product_price'], 0, ',', '.') ?></td>
+                                                    <td class="text-center"><?= htmlspecialchars($item['quantity']) ?></td>
+                                                    <td class="text-end pe-3 fw-bold text-dark">Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></td>
+                                                </tr>
+                                            <?php
+                                            endforeach;
+                                        else:
+                                            ?>
+                                            <tr>
+                                                <td colspan="5" class="text-center py-4 text-muted">Tidak ada detail produk untuk pesanan ini.</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                    <?php if ($total_belanja > 0): ?>
+                                        <tfoot class="table-light">
+                                            <tr>
+                                                <td colspan="4" class="text-end fw-bold py-3">Total Pembayaran:</td>
+                                                <td class="text-end pe-3 fw-bold text-success fs-5 py-3">Rp <?= number_format($total_belanja, 0, ',', '.') ?></td>
+                                            </tr>
+                                        </tfoot>
+                                    <?php endif; ?>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php else: ?>
             <div class="alert alert-danger">Data pesanan tidak ditemukan.</div>
         <?php endif; ?>

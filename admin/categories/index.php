@@ -54,11 +54,11 @@ $query = mysqli_query($conn, $sql);
                         while ($result = mysqli_fetch_assoc($query)) : ?>
                             <tr>
                                 <th scope="row" class="ps-3"><?= $no++ ?></th>
-                                <td><?= $result['name'] ?></td>
-                                <td><?= mb_strimwidth($result['description'], 0, 200, "..."); ?></td>
+                                <td><?= htmlspecialchars($result['name']) ?></td>
+                                <td><?= htmlspecialchars(mb_strimwidth($result['description'], 0, 200, "...")) ?></td>
                                 <td class="text-end pe-3">
-                                    <a href="edit.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
-                                    <a href="delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
+                                    <a href="edit.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
+                                    <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         <?php

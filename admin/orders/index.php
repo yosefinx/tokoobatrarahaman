@@ -17,7 +17,7 @@ $query = mysqli_query($conn, $sql);
 
 
 ?>
-<main class="flex-grow-1 p-4 bg-light">
+<main class="flex-grow-1 p-4 bg-light overflow-auto">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h4 mb-0 text-dark fw-bold">Halaman Pemesanan</h1>
@@ -55,9 +55,9 @@ $query = mysqli_query($conn, $sql);
                         while ($result = mysqli_fetch_assoc($query)) : ?>
                             <tr>
                                 <th scope="row" class="ps-3"><?= $no++ ?></th>
-                                <td><?= $result['order_code'] ?></td>
-                                <td><?= $result['shipping_address'] ?></td>
-                                <td><a href="../../recipe/<?= $result['recipe'] ?: '' ?>" target="_blank">
+                                <td><?= htmlspecialchars($result['order_code']) ?></td>
+                                <td><?= htmlspecialchars($result['shipping_address']) ?></td>
+                                <td><a href="../../recipe/<?= htmlspecialchars($result['recipe'] ?? '') ?>" target="_blank">
                                         <?= $result['recipe'] ? 'Lihat resep' : '' ?>
                                     </a></td>
                                 <td><?php if ($result['status'] == '1'): ?>
@@ -71,13 +71,13 @@ $query = mysqli_query($conn, $sql);
                                     <?php endif; ?>
                                 </td>
                                 <td><?= $result['order_date'] ?></td>
-                                <td><?= $result['notes'] ?></td>
-                                <td><?= $result['username_admin'] ?></td>
+                                <td><?= htmlspecialchars($result['notes']) ?></td>
+                                <td><?= htmlspecialchars($result['username_admin']) ?></td>
                                 <td><?= $result['followed_up_at'] ?></td>
                                 <td class="text-end pe-3">
                                     <div class="d-inline-flex gap-1 align-items-center">
-                                        <a href="detail.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
-                                        <a href="delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
+                                        <a href="detail.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
+                                        <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
                                         <form action="../../actions/update_status.php" method="POST" class="d-inline">
                                             <input type="hidden" name="order_code" value="<?= $result['order_code']; ?>">
                                             <?php if ($result['status'] == '1'): ?>

@@ -13,6 +13,12 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-3">
         <div class="container-fluid">
+            <button class="btn btn-outline-secondary d-lg-none me-2"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#sidebarMenu">
+                <i class="bi bi-list"></i>
+            </button>
             <a class="navbar-brand fw-bold" href="#">
                 </i>Toko Obat Arah Aman
             </a>

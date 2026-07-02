@@ -45,10 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
-  if (empty(array_filter($id_products)) && !$is_uploading) {
-    $errors['global'] =
-      "Anda harus memilih minimal satu obat atau mengupload resep.";
-  }
 
   if (empty($errors)) {
     $upload_success = true;
@@ -85,6 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 }
+
+//CONTACT
+
+$contact_query = mysqli_query($conn, "SELECT * FROM contacts LIMIT 1");
+$contact = mysqli_fetch_assoc($contact_query);
 ?>
 <?php if (!empty($errors)) : ?>
   <script>
@@ -490,7 +491,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 autocomplete="off" />
               <?php if (isset($errors['shipping_address'])) : ?>
                 <span class="error-text">
-                  <?= $errors['shipping_address'] ?>
+                  <?= htmlspecialchars($errors['shipping_address']) ?>
                 </span>
               <?php endif; ?>
             </div>
@@ -556,7 +557,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
               <?php if (isset($errors['recipe'])) : ?>
                 <span class="error-text">
-                  <?= $errors['recipe'] ?>
+                  <?= htmlspecialchars($errors['recipe']) ?>
                 </span>
               <?php endif; ?>
             </div>
@@ -570,7 +571,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <?php if (isset($errors['global'])) : ?>
               <div class="error-text">
-                <?= $errors['global'] ?>
+                <?= htmlspecialchars($errors['global']) ?>
               </div>
             <?php endif; ?>
             <?php
@@ -613,11 +614,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="contact-info-text">
               <h4>Lokasi</h4>
-              <p>Jl. Nusa Indah 1, Darat Sekip, Kec. Pontianak Kota</p>
+              <p><?= htmlspecialchars($contact['location']) ?></p>
             </div>
           </div>
           <a
-            href="https://wa.me/6285393988929"
+            href="https://wa.me/<?= htmlspecialchars($contact['whatsapp_number']) ?>"
             target="_blank"
             class="contact-card-solid link-card">
             <div class="contact-icon-box wa-bg">
@@ -648,7 +649,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="contact-info-text">
               <h4>Jam Operasional</h4>
-              <p>Senin – Minggu | 08:00 – 17:00</p>
+              <p><?= htmlspecialchars($contact['operational_time']) ?></p>
             </div>
           </div>
         </div>

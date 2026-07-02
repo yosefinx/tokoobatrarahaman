@@ -1,8 +1,24 @@
 <?php
 session_start();
 include '../config/connection.php';
-$username = $_POST['username'];
-$password = md5($_POST['password']);
+$username = trim($_POST['username'] ?? '');
+$password_raw = trim($_POST['password'] ?? '');
+
+if (empty($username)) {
+    $errors['username'] = "Username wajib diisi.";
+}
+
+if (empty($password_raw)) {
+    $errors['password'] = "Password wajib diisi.";
+}
+
+if (!empty($errors)) {
+    $_SESSION['errors'] = $errors;
+    header("Location: ../login.php");
+    exit();
+} else {
+    $password = md5($password_raw);
+}
 
 $sql = "select * from users where username='$username' and password='$password'";
 $query = mysqli_query($conn, $sql);
@@ -19,6 +35,7 @@ if (mysqli_num_rows($query) > 0) {
     }
     exit;
 } else {
+    $_SESSION['login_error'] = "Username atau password salah.";
     header("Location: ../login.php");
     exit;
 }

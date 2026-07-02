@@ -59,16 +59,16 @@ $query = mysqli_query($conn, $sql);
                         while ($result = mysqli_fetch_assoc($query)) : ?>
                             <tr>
                                 <th scope="row" class="ps-3"><?= $no++ ?></th>
-                                <td><?= $result['name'] ?></td>
-                                <td><?= mb_strimwidth($result['description'], 0, 80, "..."); ?></td>
+                                <td><?= htmlspecialchars($result['name']) ?></td>
+                                <td><?= htmlspecialchars(mb_strimwidth($result['description'], 0, 80, "...")); ?></td>
                                 <td>Rp <?= number_format($result['price'], 0, ',', '.') ?></td>
-                                <td><?= $result['stock'] ?></td>
-                                <td><?= $result['category_name'] ?></td>
-                                <td><img style="width: 50px; height: 50px; object-fit: cover;" src="../../images/products/<?= $result['photo'] ?>"></td>
+                                <td><?= htmlspecialchars($result['stock']) ?></td>
+                                <td><?= htmlspecialchars($result['category_name']) ?></td>
+                                <td><img style="width: 50px; height: 50px; object-fit: cover;" src="../../images/products/<?= htmlspecialchars($result['photo']) ?>"></td>
                                 <td class="text-end pe-3">
                                     <div class="d-flex justify-content-end align-items-center">
-                                        <a href="edit.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
-                                        <a href="delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?');"><i class="bi bi-trash"></i></a>
+                                        <a href="edit.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
+                                        <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?');"><i class="bi bi-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>

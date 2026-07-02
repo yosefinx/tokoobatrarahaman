@@ -73,10 +73,10 @@ if (isset($_POST['update'])) {
         $fileError = $file['error'];
 
         $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+        $allowedExtensions = ['png', 'jpg', 'jpeg'];
 
         if (!in_array($fileExt, $allowedExtensions)) {
-            $errors['photo'] = "Format file salah! Hanya diperbolehkan PDF, PNG, atau JPG.";
+            $errors['photo'] = "Format file salah! Hanya diperbolehkan PNG, JPEG atau JPG.";
         } elseif ($fileError !== 0) {
             $errors['photo'] = "Terjadi kesalahan saat mengupload file.";
         } elseif ($fileSize > 5 * 1024 * 1024) {
@@ -191,11 +191,11 @@ if (isset($_POST['update'])) {
                     <?php endif; ?>
                     <div class="mt-3">
                         <?php $foto_lama = (!empty($result['photo']) && file_exists('../../images/products/' . $result['photo']))
-                            ? '../../images/products/' . $result['photo']
+                            ? '../../images/products/' . htmlspecialchars($result['photo'])
                             : ''; ?>
                         <img id="img-preview" src="<?= $foto_lama ?: '#'; ?>" class="img-thumbnail <?= $foto_lama ? '' : 'd-none'; ?>" style="max-height: 200px;" alt="Pratinjau Gambar">
                     </div>
-                    <div class="form-text text-muted small">Foto saat ini: <?= ($result['photo']) ?: '-'; ?></div>
+                    <div class="form-text text-muted small">Foto saat ini: <?= (htmlspecialchars($result['photo'])) ?: '-'; ?></div>
                 </div>
                 <div class="mb-3">
                     <label for="id_category" class="form-label">Kategori</label>

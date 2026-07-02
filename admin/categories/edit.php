@@ -71,7 +71,7 @@ if (isset($_POST['edit'])) {
         <div class="card-body">
             <?php if (isset($errors['database'])) : ?>
                 <div class="alert alert-danger border-0 shadow-sm mb-4 rounded-3" role="alert">
-                    <strong>Gagal!</strong> <?= $errors['database']; ?>
+                    <strong>Gagal!</strong> <?= htmlspecialchars($errors['database']); ?>
                 </div>
             <?php endif; ?>
             <form action="" method="POST">
@@ -79,14 +79,14 @@ if (isset($_POST['edit'])) {
                     <label for="name" class="form-label">Nama Kategori</label>
                     <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>" id="name" name="name" value="<?= htmlspecialchars($result['name']) ?>" placeholder="Masukkan nama kategori">
                     <?php if (isset($errors['name'])) : ?>
-                        <div class="invalid-feedback small"><?= $errors['name']; ?></div>
+                        <div class="invalid-feedback small"><?= htmlspecialchars($errors['name']); ?></div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi</label>
                     <textarea class="form-control <?= isset($errors['description']) ? 'is-invalid' : ''; ?>" id="description" name="description" rows="3" placeholder="Masukkan deskripsi kategori"><?= htmlspecialchars($result['description']) ?></textarea>
                     <?php if (isset($errors['description'])) : ?>
-                        <div class="invalid-feedback small"><?= $errors['description']; ?></div>
+                        <div class="invalid-feedback small"><?= htmlspecialchars($errors['description']); ?></div>
                     <?php endif; ?>
                 </div>
                 <button type="submit" class="btn btn-primary" name="edit">Ubah Kategori</button>

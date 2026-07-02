@@ -101,7 +101,7 @@ if (isset($_POST['create'])) {
     }
 }
 ?>
-<main class="flex-grow-1 p-4 bg-light">
+<main class="flex-grow-1 p-3 p-md-4 bg-light">
     <div class="d-flex align-items-center gap-3 mb-4">
         <a href="index.php" class="btn btn-white border shadow-sm rounded-3 px-2 py-1.5 text-dark d-flex align-items-center justify-content-center" title="Kembali">
             <i class="bi bi-arrow-left fs-5"></i>
@@ -134,8 +134,7 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>"
                         id="name"
                         name="name"
-                        placeholder="Masukkan nama produk"
-                        value="<?= htmlspecialchars($name); ?>">
+                        placeholder="Masukkan nama produk">
                     <?php if (isset($errors['name'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['name']; ?></div>
                     <?php endif; ?>
@@ -146,7 +145,7 @@ if (isset($_POST['create'])) {
                         id="description"
                         name="description"
                         rows="3"
-                        placeholder="Masukkan deskripsi produk"><?= htmlspecialchars($description); ?></textarea>
+                        placeholder="Masukkan deskripsi produk"></textarea>
                     <?php if (isset($errors['description'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['description']; ?></div>
                     <?php endif; ?>
@@ -190,8 +189,7 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['price']) ? 'is-invalid' : ''; ?>"
                         id="price"
                         name="price"
-                        placeholder="Masukkan harga produk"
-                        value="<?= htmlspecialchars($price); ?>">
+                        placeholder="Masukkan harga produk">
                     <?php if (isset($errors['price'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['price']; ?></div>
                     <?php endif; ?>
@@ -202,8 +200,7 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['stock']) ? 'is-invalid' : ''; ?>"
                         id="stock"
                         name="stock"
-                        placeholder="Masukkan stok produk"
-                        value="<?= htmlspecialchars($stock); ?>">
+                        placeholder="Masukkan stok produk">
                     <?php if (isset($errors['stock'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['stock']; ?></div>
                     <?php endif; ?>
