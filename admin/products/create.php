@@ -151,7 +151,7 @@ if (isset($_POST['create'])) {
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
-                    <label for="photo" class="form-label">Upload Foto</label>
+                    <label for="photo" class="form-label">Unggah Foto</label>
                     <input type="file"
                         class="form-control <?= isset($errors['photo']) ? 'is-invalid' : ''; ?>"
                         id="photo"

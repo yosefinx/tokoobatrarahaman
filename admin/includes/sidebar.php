@@ -29,7 +29,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/toko-obat-arah-aman/admin/users/index.php" class="nav-link <?= ($page == 'users') ? 'active' : 'link-dark'; ?>">
-                        <i class="bi bi-people me-2"></i> Manajemen User
+                        <i class="bi bi-people me-2"></i> Manajemen Pengguna
                     </a>
                 </li>
             </ul>
@@ -87,7 +87,7 @@
                 <li class="nav-item">
                     <a href="/toko-obat-arah-aman/admin/users/index.php"
                         class="nav-link <?= ($page == 'users') ? 'active' : 'link-dark'; ?>">
-                        <i class="bi bi-person me-2"></i> Menajemen User
+                        <i class="bi bi-person me-2"></i> Menajemen Pengguna
                     </a>
                 </li>
                 <li class="nav-item mt-3">

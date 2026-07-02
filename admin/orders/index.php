@@ -44,8 +44,8 @@ $query = mysqli_query($conn, $sql);
                             <th scope="col">Status</th>
                             <th scope="col">Tanggal Pemesanan</th>
                             <th scope="col">Catatan</th>
-                            <th scope="col">Followed Up By</th>
-                            <th scope="col">Followed Up At</th>
+                            <th scope="col">Diperbarui Oleh</th>
+                            <th scope="col">Diperbarui Pada</th>
                             <th scope="col" class="text-end pe-3">Aksi</th>
                         </tr>
                     </thead>

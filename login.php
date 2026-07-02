@@ -53,14 +53,14 @@ unset($_SESSION['login_error']);
                 </div>
             <?php endif; ?>
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">Nama Pengguna</label>
                 <input type="text" class="form-control <?= isset($errors['username']) ? 'is-invalid' : '' ?> " id="username" name="username" value="<?= htmlspecialchars($old['username'] ?? '') ?>">
                 <?php if (isset($errors['username'])): ?>
                     <div class="text-danger small"><?= $errors['username'] ?></div>
                 <?php endif; ?>
             </div>
             <div class="mb-4">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Kata Sandi</label>
                 <input type="password" class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>" id="password" name="password" autocomplete="new-password">
                 <?php if (isset($errors['password'])): ?>
                     <div class="text-danger small"><?= $errors['password'] ?></div>
