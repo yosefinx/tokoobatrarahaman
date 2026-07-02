@@ -1279,14 +1279,22 @@ footer {
 }
 
 .category-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #64748b;
+
   border: none;
   padding: 12px 28px;
   border-radius: 100px;
   background: transparent;
-  color: #64748b;
+
   font-family: inherit;
   font-weight: 700;
   font-size: 0.95rem;
+
   cursor: pointer;
   transition: all 0.4s ease;
 }

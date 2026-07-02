@@ -86,6 +86,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $contact_query = mysqli_query($conn, "SELECT * FROM contacts LIMIT 1");
 $contact = mysqli_fetch_assoc($contact_query);
+
+
+//SHOW PRODUCT UNGGULAN
+$best_products_query = mysqli_query($conn, "SELECT p.*, c.name AS category_name FROM products p LEFT JOIN categories c ON p.id_category = c.id ORDER BY p.id DESC LIMIT 4");
+
 ?>
 <?php if (!empty($errors)) : ?>
   <script>
@@ -338,120 +343,59 @@ $contact = mysqli_fetch_assoc($contact_query);
       </p>
     </div>
     <div class="product-grid">
-      <div
-        class="product-card"
-        data-name="Chi Kit Teck Aun 2,25 g"
-        data-price="Rp 7.000"
-        data-desc="Obat ramuan herbal tradisional yang disajikan dalam bentuk pil. Sangat efektif membantu meredakan sakit perut, diare ringan, muntah, mabuk perjalanan, dan membantu memperbaiki nafsu makan."
-        data-img="images/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png"
-        data-badge="Herbal"
-        data-class="badge-herbal">
-        <div class="product-img-wrapper">
-          <img
-            src="images/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png"
-            alt="Chi Kit Tech Aun" />
+      <?php while($product = mysqli_fetch_assoc($best_products_query)) : ?>
+
+<?php
+$badgeClass = "badge-general";
+
+if($product['id_category'] == 1){
+    $badgeClass = "badge-herbal";
+}elseif($product['id_category'] == 2){
+    $badgeClass = "badge-general";
+}elseif($product['id_category'] == 3){
+    $badgeClass = "badge-suplemen";
+}
+?>
+
+<div
+    class="product-card"
+    data-name="<?= htmlspecialchars($product['name']) ?>"
+    data-price="Rp <?= number_format($product['price'],0,',','.') ?>"
+    data-desc="<?= htmlspecialchars($product['description']) ?>"
+    data-img="images/products/<?= $product['photo'] ?>"
+    data-badge="<?= htmlspecialchars($product['category_name']) ?>"
+    data-class="<?= $badgeClass ?>">
+
+    <div class="product-img-wrapper">
+        <img
+            src="images/products/<?= $product['photo'] ?>"
+            alt="<?= htmlspecialchars($product['name']) ?>">
+    </div>
+
+    <div class="product-info">
+        <span class="product-badge <?= $badgeClass ?>">
+            <?= strtoupper($product['category_name']) ?>
+        </span>
+        <h3><?= htmlspecialchars($product['name']) ?></h3>
+        <p class="product-desc">
+            <?= substr(htmlspecialchars($product['description']),0,120) ?>...
+        </p>
+        <div class="product-footer">
+            <span class="product-price">
+                Rp <?= number_format($product['price'],0,',','.') ?>
+            </span>
+            <button class="btn-detail">
+                Detail
+            </button>
         </div>
-        <div class="product-info">
-          <span class="product-badge badge-herbal">Obat Herbal</span>
-          <h3>Chi Kit Teck Aun 2,25 g</h3>
-          <p class="product-desc">
-            Obat ramuan herbal tradisional yang disajikan dalam bentuk pil.
-            Sangat efektif membantu meredakan sakit perut, diare ringan,
-            muntah, mabuk perjalanan, dan membantu memperbaiki nafsu makan.
-          </p>
-          <div class="product-footer">
-            <span class="product-price">Rp 7.000</span>
-            <button class="btn-detail">Detail</button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="product-card"
-        data-name="Mixagrip Flu"
-        data-price="Rp 16.000"
-        data-desc="Obat yang mengandung Paracetamol, Dekstrometorfan HBr dan Phenylephrine HCl yang bekerja sebagai analgesik-antipiretik, antitusif dan dekongestan hidung. Digunakan untuk mengobati gejala flu seperti demam, sakit kepala, hidung tersumbat, bersin disertai batuk."
-        data-img="images/products/obat-sehari-hari/Mixagrip.png"
-        data-badge="Obat Sehari-hari"
-        data-class="badge-general">
-        <div class="product-img-wrapper">
-          <img
-            src="images/products/obat-sehari-hari/Mixagrip.png"
-            alt="Mixagrip" />
-        </div>
-        <div class="product-info">
-          <span class="product-badge badge-general">Obat Sehari-hari</span>
-          <h3>Mixagrip Flu</h3>
-          <p class="product-desc">
-            Obat yang mengandung Paracetamol, Dekstrometorfan HBr dan
-            Phenylephrine HCl yang bekerja sebagai analgesik-antipiretik,
-            antitusif dan dekongestan hidung. Digunakan untuk mengobati gejala
-            flu seperti demam, sakit kepala, hidung tersumbat, bersin disertai
-            batuk.
-          </p>
-          <div class="product-footer">
-            <span class="product-price">Rp 16.000</span>
-            <button class="btn-detail">Detail</button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="product-card"
-        data-name="Enervon-C Multivitamin 4 Tablet"
-        data-price="Rp 10.500"
-        data-desc="Suplemen kesehatan yang mengandung kombinasi Vitamin B kompleks dan Vitamin C, diformulasikan untuk membantu memenuhi kebutuhan vitamin harian dan memelihara daya tahan tubuh agar tetap fit sepanjang hari."
-        data-img="images/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png"
-        data-badge="Suplemen"
-        data-class="badge-suplemen">
-        <div class="product-img-wrapper">
-          <img
-            src="images/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png"
-            alt="Enervon-C" />
-        </div>
-        <div class="product-info">
-          <span class="product-badge badge-suplemen">Suplemen</span>
-          <h3>Enervon-C Multivitamin</h3>
-          <p class="product-desc">
-            Suplemen kesehatan yang mengandung kombinasi Vitamin B kompleks
-            dan Vitamin C, diformulasikan untuk membantu memenuhi kebutuhan
-            vitamin harian dan memelihara daya tahan tubuh agar tetap fit
-            sepanjang hari.
-          </p>
-          <div class="product-footer">
-            <span class="product-price">Rp 10.500</span>
-            <button class="btn-detail">Detail</button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="product-card"
-        data-name="Tolak Angin Cair 15 ml"
-        data-price="Rp 6.000"
-        data-desc="Obat herbal terstandar untuk membantu meredakan gejala masuk angin seperti mual, perut kembung, meriang, dan pusing. Juga membantu meningkatkan daya tahan tubuh."
-        data-img="images/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg"
-        data-badge="Herbal"
-        data-class="badge-herbal">
-        <div class="product-img-wrapper">
-          <img
-            src="images/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg"
-            alt="Tolak Angin" />
-        </div>
-        <div class="product-info">
-          <span class="product-badge badge-herbal">Obat Herbal</span>
-          <h3>Tolak Angin Cair 15 ml</h3>
-          <p class="product-desc">
-            Obat herbal terstandar untuk membantu meredakan gejala masuk angin
-            seperti mual, perut kembung, meriang, dan pusing. Juga membantu
-            meningkatkan daya tahan tubuh.
-          </p>
-          <div class="product-footer">
-            <span class="product-price">Rp 6.000</span>
-            <button class="btn-detail">Detail</button>
-          </div>
-        </div>
-      </div>
+    </div>
+</div>
+<?php endwhile; ?>
+
+</div>
     </div>
     <div class="products-action">
-      <a href="products.html" class="btn-view-all">Lihat Selengkapnya <span>→</span></a>
+      <a href="products.php" class="btn-view-all">Lihat Selengkapnya <span>→</span></a>
     </div>
   </section>
   <!-- END PRODUCTS -->
@@ -663,7 +607,7 @@ $contact = mysqli_fetch_assoc($contact_query);
       <div class="footer-brand">
         <div class="logo">
           <img
-            src="/images/logo/logo.png"
+            src="images/logo/logo.png"
             alt="Toko Obat Arah Aman Logo"
             height="30" />
           <a href="#home" style="font-weight: 600; font-size: 1.25rem">Toko Obat Arah Aman</a>

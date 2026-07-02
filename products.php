@@ -1,3 +1,37 @@
+<?php 
+session_start();
+include "config/connection.php";
+$categories = mysqli_query($conn, "SELECT * FROM categories ORDER BY id ASC");
+
+
+$category = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+
+if ($category > 0) {
+
+    $products = mysqli_query($conn,"
+        SELECT
+            p.*,
+            c.name AS category_name
+        FROM products p
+        JOIN categories c
+        ON p.id_category = c.id
+        WHERE p.id_category = $category
+    ");
+
+} else {
+
+    $products = mysqli_query($conn,"
+        SELECT
+            p.*,
+            c.name AS category_name
+        FROM products p
+        JOIN categories c
+        ON p.id_category = c.id
+    ");
+
+}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -72,489 +106,77 @@
       </div>
       <div class="category-filter-wrapper">
         <div class="category-pill-box">
-          <button
-            onclick="showCategory('obat-sehari-hari', this)"
-            class="category-pill-btn active">
-            Obat Sehari-hari
-          </button>
-          <button
-            onclick="showCategory('suplemen', this)"
-            class="category-pill-btn">
-            Suplemen
-          </button>
-          <button
-            onclick="showCategory('obat-herbal-tradisional', this)"
-            class="category-pill-btn">
-            Herbal Tradisional
-          </button>
+          <?php
+            $currentCategory = $_GET['category'] ?? '';
+          ?>
+          <a
+              href="products.php"
+              class="category-pill-btn <?= $currentCategory == '' ? 'active' : '' ?>">
+              Semua
+          </a>
+          <?php while($category = mysqli_fetch_assoc($categories)) : ?>
+          <a
+              href="products.php?category=<?= $category['id'] ?>"
+              class="category-pill-btn <?= $currentCategory == $category['id'] ? 'active' : '' ?>">
+              <?= htmlspecialchars($category['name']) ?>
+          </a>
+          <?php endwhile; ?>
         </div>
       </div>
       <div class="products-container">
-        <div id="obat-sehari-hari" class="category-content active">
-          <div class="product-grid">
+        <div class="product-grid">
+
+          <?php while($row = mysqli_fetch_assoc($products)) : ?>
+
+            <?php
+            switch($row['id_category']){
+                case 1:
+                    $badge = "badge-herbal";
+                    break;
+                case 2:
+                    $badge = "badge-general";
+                    break;
+                case 3:
+                    $badge = "badge-suplemen";
+                    break;
+                default:
+                    $badge = "";
+            }
+            ?>
+
             <div
-              class="product-card"
-              data-name="Antimo 50 mg 10 Tablet"
-              data-price="Rp 7.000"
-              data-desc="Obat dengan kandungan Dimenhydrinate yang digunakan untuk mengatasi mual, muntah, dan pusing akibat mabuk perjalanan."
-              data-img="images/products/obat-sehari-hari/Antimo 50 mg 10 Tablet - Rp 7000.png"
-              data-badge="Obat Sehari-hari"
-              data-class="badge-general">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-sehari-hari/Antimo 50 mg 10 Tablet - Rp 7000.png"
-                  alt="Antimo" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-general"
-                  >Obat Sehari-hari</span
-                >
-                <h3>Antimo 50 mg 10 Tablet</h3>
-                <p class="product-desc">
-                  Obat dengan kandungan Dimenhydrinate yang digunakan untuk
-                  mengatasi mual, muntah, dan pusing akibat mabuk perjalanan.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 7.000</span>
-                  <button class="btn-detail">Detail</button>
+                class="product-card"
+                data-name="<?= htmlspecialchars($row['name']) ?>"
+                data-price="Rp <?= number_format($row['price'],0,',','.') ?>"
+                data-desc="<?= htmlspecialchars($row['description']) ?>"
+                data-img="images/products/<?= $row['photo'] ?>"
+                data-badge="<?= htmlspecialchars($row['category_name']) ?>"
+                data-class="<?= $badge ?>">
+
+                <div class="product-img-wrapper">
+                    <img
+                        src="images/products/<?= $row['photo'] ?>"
+                        alt="<?= htmlspecialchars($row['name']) ?>">
                 </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Mixagrip Flu"
-              data-price="Rp 16.000"
-              data-desc="Obat yang mengandung Paracetamol, Dekstrometorfan HBr dan Phenylephrine HCl yang bekerja sebagai analgesik-antipiretik, antitusif dan dekongestan hidung. Digunakan untuk mengobati gejala flu seperti demam, sakit kepala, hidung tersumbat, bersin disertai batuk."
-              data-img="images/products/obat-sehari-hari/Mixagrip.png"
-              data-badge="Obat Sehari-hari"
-              data-class="badge-general">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-sehari-hari/Mixagrip.png"
-                  alt="Mixagrip" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-general"
-                  >Obat Sehari-hari</span
-                >
-                <h3>Mixagrip Flu</h3>
-                <p class="product-desc">
-                  Obat yang mengandung Paracetamol, Dekstrometorfan HBr dan
-                  Phenylephrine HCl yang bekerja sebagai analgesik-antipiretik,
-                  antitusif dan dekongestan hidung. Obat ini digunakan untuk
-                  mengobati gejala flu seperti demam, sakit kepala, hidung
-                  tersumbat, bersin disertai batuk.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 16.000</span>
-                  <button class="btn-detail">Detail</button>
+                <div class="product-info">
+                    <span class="product-badge <?= $badge ?>">
+                        <?= htmlspecialchars($row['category_name']) ?>
+                    </span>
+                    <h3><?= htmlspecialchars($row['name']) ?></h3>
+                    <p class="product-desc">
+                        <?= htmlspecialchars($row['description']) ?>
+                    </p>
+                    <div class="product-footer">
+                        <span class="product-price">
+                            Rp <?= number_format($row['price'],0,',','.') ?>
+                        </span>
+                        <button class="btn-detail">
+                            Detail
+                        </button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div
-              class="product-card"
-              data-name="Mylanta Sirup 150 mL"
-              data-price="Rp 54.000"
-              data-desc="Obat maag dalam bentuk suspensi cair dengan rasa mint yang menyegarkan dan diformulasikan untuk meredakan gejala-gejala yang berhubungan dengan kelebihan asam lambung, perih ulu hati, dan kembung."
-              data-img="images/products/obat-sehari-hari/Mylanta Sirup 150 mL - Rp 54000.png"
-              data-badge="Obat Sehari-hari"
-              data-class="badge-general">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-sehari-hari/Mylanta Sirup 150 mL - Rp 54000.png"
-                  alt="Mylanta Sirup" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-general"
-                  >Obat Sehari-hari</span
-                >
-                <h3>Mylanta Sirup 150 mL</h3>
-                <p class="product-desc">
-                  Obat maag dalam bentuk suspensi cair dengan rasa mint yang
-                  menyegarkan dan diformulasikan untuk meredakan gejala-gejala
-                  yang berhubungan dengan kelebihan asam lambung, perih ulu
-                  hati, dan kembung.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 54.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Panadol Extra 10 kaplet"
-              data-price="Rp 15.000"
-              data-desc="Obat pereda nyeri dan penurun demam yang diformulasikan dengan kombinasi Paracetamol 500 mg dan Caffeine 65 mg untuk meredakan sakit kepala membandel dan nyeri yang tidak tertahankan."
-              data-img="images/products/obat-sehari-hari/Panadol Extra 10 kaplet - Rp 15000.png"
-              data-badge="Obat Sehari-hari"
-              data-class="badge-general">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-sehari-hari/Panadol Extra 10 kaplet - Rp 15000.png"
-                  alt="Panadol Extra" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-general"
-                  >Obat Sehari-hari</span
-                >
-                <h3>Panadol Extra 10 kaplet</h3>
-                <p class="product-desc">
-                  Obat pereda nyeri dan penurun demam yang diformulasikan dengan
-                  kombinasi Paracetamol 500 mg dan Caffeine 65 mg untuk
-                  meredakan sakit kepala membandel dan nyeri yang tidak
-                  tertahankan.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 15.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Woods Obat Batuk Herbal 60 mL"
-              data-price="Rp 29.200"
-              data-desc="Sirup Obat Batuk Herbal Plus Madu yang mengandung ekstrak daun Ivy, ekstrak daun meniran dan ekstrak daun mint. Sangat efektif untuk membantu mengencerkan dahak dan meredakan batuk secara alami."
-              data-img="images/products/obat-sehari-hari/Woods Obat Batuk Herbal 60 mL - Rp 29200.png"
-              data-badge="Obat Sehari-hari"
-              data-class="badge-general">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-sehari-hari/Woods Obat Batuk Herbal 60 mL - Rp 29200.png"
-                  alt="Woods Obat Batuk Herbal" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-general"
-                  >Obat Sehari-hari</span
-                >
-                <h3>Woods Obat Batuk Herbal 60 mL</h3>
-                <p class="product-desc">
-                  Sirup Obat Batuk Herbal Plus Madu yang mengandung ekstrak daun
-                  Ivy, ekstrak daun meniran dan ekstrak daun mint. Sangat
-                  efektif untuk membantu mengencerkan dahak dan meredakan batuk
-                  secara alami.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 29.200</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="suplemen" class="category-content">
-          <div class="product-grid">
-            <div
-              class="product-card"
-              class="btn-detail"
-              data-name="Blackmores Pregnancy & Breast Feeding Gold"
-              data-price="Rp 315.000"
-              data-desc="Suplemen multivitamin dan mineral yang diformulasikan khusus untuk memenuhi kebutuhan nutrisi yang meningkat pada ibu selama masa kehamilan dan menyusui. Mengandung DHA, Kalsium, dan Zat Besi."
-              data-img="images/products/suplemen/Blackmores Pregnancy & Breast Feeding Gold - Rp 315000.png"
-              data-badge="Suplemen"
-              data-class="badge-suplemen">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/suplemen/Blackmores Pregnancy & Breast Feeding Gold - Rp 315000.png"
-                  alt="Blackmores Pregnancy & Breast Feeding Gold" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-suplemen">Suplemen</span>
-                <h3>Blackmores Pregnacy & Breast Feeding Gold</h3>
-                <p class="product-desc">
-                  Suplemen multivitamin dan mineral yang diformulasikan khusus
-                  untuk memenuhi kebutuhan nutrisi yang meningkat pada ibu
-                  selama masa kehamilan dan menyusui. Mengandung DHA, Kalsium,
-                  dan Zat Besi.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 315.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Enervon-C Multivitamin 4 Tablet"
-              data-price="Rp 10.500"
-              data-desc="Suplemen kesehatan yang mengandung kombinasi Vitamin B kompleks dan Vitamin C, diformulasikan untuk membantu memenuhi kebutuhan vitamin harian dan memelihara daya tahan tubuh agar tetap fit sepanjang hari."
-              data-img="images/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png"
-              data-badge="Suplemen"
-              data-class="badge-suplemen">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/suplemen/Enervon-C Multivitamin 4 Tablet - Rp 10500.png"
-                  alt="Enervon-C Multivitamin 4 Tablet" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-suplemen">Suplemen</span>
-                <h3>Enervon-C Multivitamin 4 Tablet</h3>
-                <p class="product-desc">
-                  Suplemen kesehatan yang mengandung kombinasi Vitamin B
-                  kompleks dan Vitamin C, diformulasikan untuk membantu memenuhi
-                  kebutuhan vitamin harian dan memelihara daya tahan tubuh agar
-                  tetap fit sepanjang hari.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 10.500</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Halowell D3 1000 10 Tablet"
-              data-price="Rp 28.000"
-              data-desc="Suplemen makanan yang mengandung Vitamin D3 tingkat tinggi (1000 IU). Membantu memenuhi kebutuhan Vitamin D dengan cepat pada kondisi tertentu seperti lanjut usia, ibu hamil dan menyusui, atau penderita penyakit infeksi."
-              data-img="images/products/suplemen/Halowell D3 1000 10 Tablet - Rp 28000.png"
-              data-badge="Suplemen"
-              data-class="badge-suplemen">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/suplemen/Halowell D3 1000 10 Tablet - Rp 28000.png"
-                  alt="Halowell D3 1000 10 Tablet" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-suplemen">Suplemen</span>
-                <h3>Halowell D3 1000 10 Tablet</h3>
-                <p class="product-desc">
-                  Suplemen makanan yang mengandung Vitamin D3 tingkat tinggi
-                  (1000 IU). Membantu memenuhi kebutuhan Vitamin D dengan cepat
-                  pada kondisi tertentu seperti lanjut usia, ibu hamil dan
-                  menyusui, atau penderita penyakit infeksi.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 28.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Natur-e 16 Kapsul"
-              data-price="Rp 37.000"
-              data-desc="Suplemen yang mengandung Vitamin E alami (dari biji gandum dan biji bunga matahari) untuk menjaga kesehatan kulit dari dalam, kelembapan kulit, dan sebagai antioksidan alami."
-              data-img="images/products/suplemen/Natur-e 16 Kapsul - Rp 37000.png"
-              data-badge="Suplemen"
-              data-class="badge-suplemen">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/suplemen/Natur-e 16 Kapsul - Rp 37000.png"
-                  alt="Natur-e 16 Kapsul" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-suplemen">Suplemen</span>
-                <h3>Natur-e 16 Kapsul</h3>
-                <p class="product-desc">
-                  Suplemen yang mengandung Vitamin E alami (dari biji gandum dan
-                  biji bunga matahari) untuk menjaga kesehatan kulit dari dalam,
-                  kelembapan kulit, dan sebagai antioksidan alami.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 37.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="obat-herbal-tradisional" class="category-content">
-          <div class="product-grid">
-            <div
-              class="product-card"
-              data-name="Tolak Angin Cair 15 ml"
-              data-price="Rp 6.000"
-              data-desc="Obat herbal terstandar untuk membantu meredakan gejala masuk angin seperti mual, perut kembung, meriang, dan pusing. Juga membantu meningkatkan daya tahan tubuh."
-              data-img="images/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/Tolak Angin 15 ml - Rp 6000.jpg"
-                  alt="Tolak Angin" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>Tolak Angin Cair 15 ml</h3>
-                <p class="product-desc">
-                  Obat herbal terstandar untuk membantu meredakan gejala masuk
-                  angin seperti mual, perut kembung, meriang, dan pusing. Juga
-                  membantu meningkatkan daya tahan tubuh.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 6.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Chi Kit Teck Aun 2,25 g"
-              data-price="Rp 7.000"
-              data-desc="Obat ramuan herbal tradisional yang disajikan dalam bentuk pil. Sangat efektif membantu meredakan sakit perut, diare ringan, muntah, mabuk perjalanan, dan membantu memperbaiki nafsu makan."
-              data-img="images/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/Chi Kit Teck Aun 2,25 g - Rp 7000.png"
-                  alt="Chi Kit Teck Aun 2,25 g" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>Chi Kit Teck Aun 2,25 g</h3>
-                <p class="product-desc">
-                  Obat ramuan herbal tradisional yang disajikan dalam bentuk
-                  pil. Sangat efektif membantu meredakan sakit perut, diare
-                  ringan, muntah, mabuk perjalanan, dan membantu memperbaiki
-                  nafsu makan.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 7.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Go Thak Sua (Lima Pagoda) 30 g"
-              data-price="Rp 68.000"
-              data-desc="Bubuk obat racikan herbal alami dari Thailand. Digunakan secara tradisional untuk membantu meredakan sakit perut, kembung, mual, serta membantu melegakan pernapasan dan batuk ringan."
-              data-img="images/products/obat-herbal-tradisional/Go Thak Sua (Lima Pagoda) 30 g - Rp 68000.jpg"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/Go Thak Sua (Lima Pagoda) 30 g - Rp 68000.jpg"
-                  alt="Go Thak Sua (Lima Pagoda) 30 g" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>Go Thak Sua (Lima Pagoda) 30 g</h3>
-                <p class="product-desc">
-                  Bubuk obat racikan herbal alami dari Thailand. Digunakan
-                  secara tradisional untuk membantu meredakan sakit perut,
-                  kembung, mual, serta membantu melegakan pernapasan dan batuk
-                  ringan.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 68.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="New Hau Fung San 1,2 g"
-              data-price="Rp 7.800"
-              data-desc="Obat serbuk herbal yang sangat ampuh membantu meredakan panas dalam, sariawan pada lidah atau gusi, tenggorokan kering, dan membantu menghilangkan bau mulut secara alami."
-              data-img="images/products/obat-herbal-tradisional/New Hau Fung San 1,2 g - Rp 7800.png"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/New Hau Fung San 1,2 g - Rp 7800.png"
-                  alt="New Hau Fung San 1,2 g" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>New Hau Fung San 1,2 g</h3>
-                <p class="product-desc">
-                  Obat serbuk herbal yang sangat ampuh membantu meredakan panas
-                  dalam, sariawan pada lidah atau gusi, tenggorokan kering, dan
-                  membantu menghilangkan bau mulut secara alami.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 7.800</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Obat batuk ibu dan anak 75 ml"
-              data-price="Rp 40.000"
-              data-desc="Sirup obat batuk herbal (Pei Pa Koa) yang diformulasikan untuk membantu memelihara kesehatan paru-paru, melegakan tenggorokan, dan meredakan batuk berdahak serta mengencerkan dahak."
-              data-img="images/products/obat-herbal-tradisional/Obat batuk ibu dan anak 75 ml - Rp 40000.png"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/Obat batuk ibu dan anak 75 ml - Rp 40000.png"
-                  alt="Obat batuk ibu dan anak 75 ml" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>Obat batuk ibu dan anak 75 ml</h3>
-                <p class="product-desc">
-                  Sirup obat batuk herbal (Pei Pa Koa) yang diformulasikan untuk
-                  membantu memelihara kesehatan paru-paru, melegakan
-                  tenggorokan, dan meredakan batuk berdahak serta mengencerkan
-                  dahak.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 40.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Ren Shen (Akar Ginseng)"
-              data-price="Rp 10.000"
-              data-desc="Tonik herbal Tiongkok yang sangat dihormati untuk meningkatkan energi Qi, memperkuat stamina, menutrisi paru-paru/limpa, serta mengatasi kelelahan kronis."
-              data-img="images/products/obat-herbal-tradisional/renshen.jpeg"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/renshen.jpeg"
-                  alt="Ren Shen (Akar Ginseng)" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>Ren Shen (Akar Ginseng)</h3>
-                <p class="product-desc">
-                  Tonik herbal Tiongkok yang sangat dihormati untuk meningkatkan
-                  energi Qi, memperkuat stamina, menutrisi paru-paru/limpa,
-                  serta mengatasi kelelahan kronis.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 10.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="product-card"
-              data-name="Goji Berry (Gou Qi Zi)"
-              data-price="Rp 10.000"
-              data-desc="Buah kering berwarna merah oranye, kaya antioksidan, vitamin A/C, serta mineral. Umum digunakan dalam Pengobatan Tradisional China (TCM) untuk kesehatan mata, hati, ginjal, dan penuaan dini."
-              data-img="images/products/obat-herbal-tradisional/Berry Gojiberry.jpg"
-              data-badge="Herbal"
-              data-class="badge-herbal">
-              <div class="product-img-wrapper">
-                <img
-                  src="images/products/obat-herbal-tradisional/Berry Gojiberry.jpg"
-                  alt="Goji Berry (Gou Qi Zi)" />
-              </div>
-              <div class="product-info">
-                <span class="product-badge badge-herbal">Herbal</span>
-                <h3>Goji Berry (Gou Qi Zi)</h3>
-                <p class="product-desc">
-                  buah kering berwarna merah oranye, kaya antioksidan, vitamin
-                  A/C, serta mineral. Umum digunakan dalam Pengobatan
-                  Tradisional China (TCM) untuk kesehatan mata, hati, ginjal,
-                  dan penuaan dini.
-                </p>
-                <div class="product-footer">
-                  <span class="product-price">Rp 10.000</span>
-                  <button class="btn-detail">Detail</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endwhile; ?>
         </div>
       </div>
     </section>
@@ -567,11 +189,8 @@
             Mulailah perjalanan kesehatan Anda bersama kami. Kami siap melayani
             dengan sepenuh hati untuk kualitas hidup yang lebih baik.
           </p>
-
           <div class="closing-btns">
-            <a href="index.html#contact" class="btn-closing-primary"
-              >Hubungi Kami Sekarang</a
-            >
+            <a href="index.html#contact" class="btn-closing-primary">Hubungi Kami Sekarang</a>
           </div>
         </div>
       </div>
@@ -581,22 +200,20 @@
         <div class="footer-brand">
           <div class="logo">
             <img
-              src="/images/logo/logo.png"
+              src="images/logo/logo.png"
               alt="Toko Obat Arah Aman Logo"
               height="30" />
-            <a href="index.html" style="font-weight: 600; font-size: 1.25rem"
-              >Toko Obat Arah Aman</a
-            >
+            <a href="index.html" style="font-weight: 600; font-size: 1.25rem">Toko Obat Arah Aman</a>
           </div>
           <p>Toko Obat Terpercaya dan Berkualitas Tinggi</p>
         </div>
         <div>
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">Tentang Kami</a></li>
-            <li><a href="index.html#products">Produk</a></li>
-            <li><a href="index.html#contact">Kontak</a></li>
+            <li><a href="index.php#home">Home</a></li>
+            <li><a href="index.php#about">Tentang Kami</a></li>
+            <li><a href="index.php#products">Produk</a></li>
+            <li><a href="index.php#contact">Kontak</a></li>
           </ul>
         </div>
         <div class="footer-subscribe">
