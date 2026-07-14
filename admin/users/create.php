@@ -19,15 +19,15 @@ if (isset($_POST['create'])) {
 
     // START: validasi input
     if (empty($username)) {
-        $errors['username'] = "Username wajib diisi.";
+        $errors['username'] = "Nama pengguna wajib diisi.";
     } elseif (strlen($username) < 3) {
-        $errors['username'] = "Username minimal 3 karakter.";
+        $errors['username'] = "Nama pengguna minimal 3 karakter.";
     } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-        $errors['username'] = "Username hanya boleh huruf, angka, dan underscore.";
+        $errors['username'] = "Nama pengguna hanya boleh huruf, angka, dan underscore.";
     } else {
         $check = mysqli_query($conn, "SELECT id FROM users WHERE username='$username'");
         if (mysqli_num_rows($check) > 0) {
-            $errors['username'] = "Username sudah digunakan.";
+            $errors['username'] = "Nama pengguna sudah digunakan.";
         }
     }
 
@@ -49,15 +49,15 @@ if (isset($_POST['create'])) {
     }
 
     if (empty($password)) {
-        $errors['password'] = "Password wajib diisi.";
+        $errors['password'] = "Kata sandi wajib diisi.";
     } elseif (strlen($password) < 8) {
-        $errors['password'] = "Password minimal 8 karakter.";
+        $errors['password'] = "Kata sandi minimal 8 karakter.";
     }
 
     if (empty($phone_number)) {
         $errors['phone_number'] = "Nomor telepon wajib diisi.";
     } elseif (!preg_match('/^08[0-9]{8,13}$/', $phone_number)) {
-        $errors['phone_number'] = "Nomor HP harus diawali dengan 08 dan terdiri dari 10-15 digit.";
+        $errors['phone_number'] = "Nomor telepon harus diawali dengan 08 dan terdiri dari 10-15 digit.";
     }
     // END: validasi input
 

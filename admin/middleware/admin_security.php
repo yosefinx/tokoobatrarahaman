@@ -7,6 +7,6 @@ if (!isset($_SESSION['username'])) {
 }
 
 if ($_SESSION['role'] !== 'Admin') {
-    header("Location: /toko-obat-arah-aman/index.php");
+    header("Location: /toko-obat-arah-aman/login.php");
     exit;
 }

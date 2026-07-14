@@ -19,8 +19,8 @@ $query_products = mysqli_query($conn, "SELECT * FROM products ORDER BY name ASC"
 
 // START: proses update total
 if (isset($_POST['update_order'])) {
-    $shipping_address = mysqli_real_escape_string($conn, trim($_POST['shipping_address']));
-    $notes = mysqli_real_escape_string($conn, trim($_POST['notes']));
+    $shipping_address = trim($_POST['shipping_address']);
+    $notes = trim($_POST['notes']);
     $status = $_POST['status'];
     $admin_id = $_SESSION['id_user'] ?? 1;
 
@@ -41,7 +41,6 @@ if (isset($_POST['update_order'])) {
                 }
             }
         }
-
         if (isset($_POST['new_products']) && is_array($_POST['new_products'])) {
             foreach ($_POST['new_products'] as $item) {
                 $id_product = intval($item['id_product']);
@@ -210,26 +209,26 @@ while ($row = mysqli_fetch_assoc($query)) {
                                                 $total_belanja += $item['subtotal'];
                                                 $detail_id = $item['id_detail'];
                                         ?>
-                                            <tr>
-                                                <td class="ps-3">
-                                                    <select name="products[<?= $detail_id ?>][id_product]" class="form-select form-select-sm">
-                                                        <?php foreach ($all_products as $p): ?>
-                                                            <option value="<?= $p['id'] ?>" <?= $p['id'] == $item['id_product'] ? 'selected' : '' ?>>
-                                                                <?= htmlspecialchars($p['name']) ?> — (Rp <?= number_format($p['price'], 0, ',', '.') ?>)
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="number" name="products[<?= $detail_id ?>][quantity]" class="form-control form-control-sm text-center" min="1" value="<?= htmlspecialchars($item['quantity']) ?>" required>
-                                                </td>
-                                                <td class="text-end small text-muted">
+                                                <tr>
+                                                    <td class="ps-3">
+                                                        <select name="products[<?= $detail_id ?>][id_product]" class="form-select form-select-sm">
+                                                            <?php foreach ($all_products as $p): ?>
+                                                                <option value="<?= $p['id'] ?>" <?= $p['id'] == $item['id_product'] ? 'selected' : '' ?>>
+                                                                    <?= htmlspecialchars($p['name']) ?> — (Rp <?= number_format($p['price'], 0, ',', '.') ?>)
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="products[<?= $detail_id ?>][quantity]" class="form-control form-control-sm text-center" min="1" value="<?= htmlspecialchars($item['quantity']) ?>" required>
+                                                    </td>
+                                                    <td class="text-end small text-muted">
                                                         Rp <?= number_format($item['product_price'], 0, ',', '.') ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <input type="checkbox" name="products[<?= $detail_id ?>][delete]" value="1" class="form-check-input border-danger">
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="checkbox" name="products[<?= $detail_id ?>][delete]" value="1" class="form-check-input border-danger">
+                                                    </td>
+                                                </tr>
                                             <?php
                                             endforeach;
                                         else:
@@ -313,12 +312,12 @@ while ($row = mysqli_fetch_assoc($query)) {
     `);
         index++;
     });
-    document.addEventListener("click", function(e){
+    document.addEventListener("click", function(e) {
 
-    if(e.target.closest(".remove-row")){
-        e.target.closest(".new-product-row").remove();
-    }
+        if (e.target.closest(".remove-row")) {
+            e.target.closest(".new-product-row").remove();
+        }
 
-});
+    });
 </script>
 <?php include "../includes/footer.php"; ?>

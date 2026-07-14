@@ -9,11 +9,11 @@ $_SESSION['old'] = [
 ];
 
 if (empty($username)) {
-    $errors['username'] = "Username wajib diisi.";
+    $errors['username'] = "Nama pengguna wajib diisi.";
 }
 
 if (empty($password_raw)) {
-    $errors['password'] = "Password wajib diisi.";
+    $errors['password'] = "Kata sandi wajib diisi.";
 }
 
 if (!empty($errors)) {
@@ -39,7 +39,7 @@ if (mysqli_num_rows($query) > 0) {
     }
     exit;
 } else {
-    $_SESSION['login_error'] = "Username atau password salah.";
+    $_SESSION['login_error'] = "Nama pengguna atau kata sandi salah.";
     header("Location: ../login.php");
     exit;
 }

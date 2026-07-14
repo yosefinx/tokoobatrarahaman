@@ -124,7 +124,7 @@ $query_orders = mysqli_query($conn, "SELECT * FROM orders ORDER BY order_date DE
                             <td class="text-end pe-1">
                                 <div class="d-inline-flex gap-1 align-items-center">
                                     <a href="orders/detail.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary p-1 px-2" title="Detail" style="border-radius: 4px;">
-                                        <i class="bi bi-pencil-square"></i>
+                                        Detail
                                     </a>
                                     <a href="orders/delete.php?id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-danger p-1 px-2" style="border-radius: 4px;" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');" title="Hapus">
                                         <i class="bi bi-trash"></i>
