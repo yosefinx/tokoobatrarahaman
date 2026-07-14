@@ -4,6 +4,10 @@ include '../config/connection.php';
 $username = trim($_POST['username'] ?? '');
 $password_raw = trim($_POST['password'] ?? '');
 
+$_SESSION['old'] = [
+    'username' => $username
+];
+
 if (empty($username)) {
     $errors['username'] = "Username wajib diisi.";
 }
@@ -20,7 +24,7 @@ if (!empty($errors)) {
     $password = md5($password_raw);
 }
 
-$sql = "select * from users where username='$username' and password='$password'";
+$sql = "SELECT * from users WHERE username='$username' and password='$password'";
 $query = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($query) > 0) {

@@ -10,9 +10,8 @@ include "../includes/sidebar.php";
 <?php
 $sql = "SELECT products.*, categories.name as category_name FROM products JOIN categories ON products.id_category = categories.id ORDER BY products.id DESC";
 $query = mysqli_query($conn, $sql);
-
-
 ?>
+
 <main class="flex-grow-1 p-4 bg-light overflow-auto">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -26,6 +25,13 @@ $query = mysqli_query($conn, $sql);
         </div>
     </div>
     <div class="card border-0 shadow-sm">
+        <!-- START: menampilkan pesan alert jika ada parameter success-create, success-update atau success-delete -->
+        <?php if (isset($_GET['success-create']) && $_GET['success-create'] == '1') : ?>
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
+                <strong>Berhasil!</strong> Produk berhasil ditambahkan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
         <?php if (isset($_GET['success-update']) && $_GET['success-update'] == '1') : ?>
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
                 <strong>Berhasil!</strong> Produk berhasil diubah.
@@ -38,6 +44,8 @@ $query = mysqli_query($conn, $sql);
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+        <!-- END: menampilkan pesan alert jika ada parameter success-create, success-update atau success-delete -->
+        <!-- START: menampilkan tabel produk obat-obatan -->
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table align-middle mb-0 table-hover">
@@ -78,6 +86,7 @@ $query = mysqli_query($conn, $sql);
                 </table>
             </div>
         </div>
+        <!-- END: menampilkan tabel produk obat-obatan -->
     </div>
 </main>
 <?php include "../includes/footer.php"; ?>

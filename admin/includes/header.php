@@ -23,9 +23,7 @@
                 </i>Toko Obat Arah Aman
             </a>
             <div class="d-flex align-items-center gap-3">
-                <div class="border-start h-100 mx-2" style="min-height: 24px;"></div>
                 <a href="profile.html" class="d-flex align-items-center text-decoration-none text-dark gap-2">
-                    <img src="../images/avatar.jpg" alt="Admin" class="rounded-circle" width="32" height="32">
                     <span class="fw-semibold small d-none d-sm-inline"><?= $_SESSION['username'] ?></span>
                 </a>
             </div>

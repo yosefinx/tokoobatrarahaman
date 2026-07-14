@@ -10,10 +10,12 @@ include "../includes/sidebar.php";
 <?php
 $id = $_GET['id'] ?? '';
 
+// START: jika id kosong, redirect ke halaman index.php 
 if ($id == '') {
     header("Location: index.php");
     exit;
 }
+// END: jika id kosong, redirect ke halaman index.php
 
 $sql = "SELECT * FROM categories WHERE id = $id";
 $query = mysqli_query($conn, $sql);
@@ -28,6 +30,7 @@ if (isset($_POST['edit'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
 
+    // START: validasi input untuk mengubah kategori
     if (empty($name)) {
         $errors['name'] = "Nama kategori wajib diisi.";
     } elseif (strlen($name) < 3) {
@@ -37,7 +40,8 @@ if (isset($_POST['edit'])) {
     if (strlen($description) > 255) {
         $errors['description'] = "Deskripsi tidak boleh lebih dari 255 karakter.";
     }
-
+    // END: validasi input untuk mengubah kategori
+    // START: menyimpan perubahan kategori ke database jika tidak ada error
     if (empty($errors)) {
         $sql = "UPDATE categories SET name = '$name', description = '$description' WHERE id = $id";
         if (mysqli_query($conn, $sql)) {
@@ -47,6 +51,7 @@ if (isset($_POST['edit'])) {
             $errors['database'] = "Gagal mengubah kategori: " . mysqli_error($conn);
         }
     }
+    // END: menyimpan perubahan kategori ke database jika tidak ada error
 }
 ?>
 <main class="flex-grow-1 p-4 bg-light min-vh-100">
@@ -74,6 +79,7 @@ if (isset($_POST['edit'])) {
                     <strong>Gagal!</strong> <?= htmlspecialchars($errors['database']); ?>
                 </div>
             <?php endif; ?>
+            <!-- START: form untuk mengubah kategori -->
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama Kategori</label>
@@ -91,6 +97,7 @@ if (isset($_POST['edit'])) {
                 </div>
                 <button type="submit" class="btn btn-primary" name="edit">Ubah Kategori</button>
             </form>
+            <!-- END: form untuk mengubah kategori -->
         </div>
     </div>
 </main>

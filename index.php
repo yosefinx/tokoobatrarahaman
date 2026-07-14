@@ -1,7 +1,19 @@
 <?php
 session_start();
-
 include "config/connection.php";
+
+if (isset($_SESSION['id_user'])) {
+  $id_user = $_SESSION['id_user'];
+  $query_user = "SELECT full_name FROM users WHERE id = '$id_user' LIMIT 1";
+  $result = mysqli_query($conn, $query_user);
+  if ($result && mysqli_num_rows($result) > 0) {
+    $user = mysqli_fetch_assoc($result);
+    $full_name = $user['full_name'];
+  } else {
+    $full_name = 'Nama Lengkap';
+  }
+}
+
 $products_query = mysqli_query($conn, "SELECT * FROM products ORDER BY name ASC");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,91 +24,125 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $quantities = $_POST['quantity'];
 
   $errors = [];
-  $nama_file_resep = null;
-  $fileTmpName = null;
-  $fileDestination = "";
+
+  $file_recipe_name = null;
+  $file_tmpname = null;
+  $file_destination = "";
   $is_uploading = false;
 
+  // START: validasi input address
   if (empty($shipping_address)) {
     $errors['shipping_address'] = "Lokasi/Alamat pengiriman wajib diisi.";
   }
+  // END: validasi input address
 
+  // START: validasi input resep
   if (isset($_FILES['recipe']) && $_FILES['recipe']['error'] != 4) {
     $is_uploading = true;
 
     $file = $_FILES['recipe'];
-    $fileName = $file['name'];
-    $fileTmpName = $file['tmp_name'];
-    $fileSize = $file['size'];
-    $fileError = $file['error'];
+    $file_name = $file['name'];
+    $file_tmpname = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
 
-    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-    $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION)); //mengambil ekstensi file dan mengubahnya menjadi huruf kecil
+    $allowed_ext = ['pdf', 'png', 'jpg', 'jpeg'];
 
-    if (!in_array($fileExt, $allowedExtensions)) {
+    if (!in_array($file_ext, $allowed_ext)) { // memeriksa apakah ekstensi file termasuk dalam daftar ekstensi yang diizinkan
       $errors['recipe'] = "Format resep salah! Hanya diperbolehkan PDF, PNG, atau JPG.";
-    } elseif ($fileError !== 0) {
+    } elseif ($file_error !== 0) {
       $errors['recipe'] = "Terjadi kesalahan saat mengupload resep.";
-    } elseif ($fileSize > 10 * 1024 * 1024) {
-      $errors['recipe'] = "Ukuran file resep terlalu besar! Maksimal 10MB.";
+    } elseif ($file_size > 5 * 1024 * 1024) {
+      $errors['recipe'] = "Ukuran file resep terlalu besar! Maksimal 5MB.";
     } else {
-      $nama_file_resep = "RCP_" . time() . "_" . uniqid() . "." . $fileExt;
-      $fileDestination = 'recipe/' . $nama_file_resep;
+      $file_recipe_name = "RCP_" . date('md') . "_" . uniqid() . "." . $file_ext;
+      $file_destination = 'recipe/' . $file_recipe_name;
     }
   }
+  // END: validasi input resep
 
+  // START: validasi input obat dan jumlah (qty)
+  $has_medicine = false;
+  if (isset($id_products) && is_array($id_products)) {
+    foreach ($id_products as $index => $selected_product_id) {
+      $order_qty = isset($quantities[$index]) ? $quantities[$index] : '';
 
+      $has_prod = !empty($selected_product_id);
+      $has_qty = !empty($order_qty) && intval($order_qty) > 0; // memeriksa apakah jumlah (qty) valid (lebih dari 0) (intval digunakan untuk memastikan bahwa input adalah angka)
+
+      if ($has_prod && !$has_qty) {
+        $errors['medicine'] = "Jumlah (Qty) wajib diisi untuk obat yang Anda pilih.";
+        break;
+      } elseif (!$has_prod && !empty($order_qty)) {
+        $errors['medicine'] = "Silakan pilih nama obat untuk jumlah (Qty) yang telah Anda isi.";
+        break;
+      } elseif ($has_prod && $has_qty) {
+        $has_medicine = true;
+      }
+    }
+  }
+  if (!$has_medicine && !$is_uploading) {
+    $errors['global'] = "Anda harus memilih obat yang dibutuhkan atau mengunggah resep dari Sinshe (boleh juga keduanya).";
+  }
+  // END: validasi input obat dan jumlah (qty)
+
+  // START: jika tidak ada error, simpan data ke database
   if (empty($errors)) {
     $upload_success = true;
 
     if ($is_uploading) {
-      if (!move_uploaded_file($fileTmpName, $fileDestination)) {
+      if (!move_uploaded_file($file_tmpname, $file_destination)) {
         $upload_success = false;
         $errors['recipe'] = "Gagal memindahkan file resep ke server.";
       }
     }
+
     if ($upload_success) {
-      $order_code = "OD" . date('md') . strtoupper(substr(uniqid(), -4));
+      $order_code = "OD" . date('ymd') . rand(10, 99);
       $query_orders = "INSERT INTO orders (id_user, order_code, shipping_address, recipe, notes, status, followed_up_by) 
-      VALUES ('$id_user', '$order_code', '$shipping_address', '$nama_file_resep', '$notes', 1, NULL)";
+      VALUES ('$id_user', '$order_code', '$shipping_address', '$file_recipe_name', '$notes', 1, NULL)";
 
       if (mysqli_query($conn, $query_orders)) {
-        $id_order_terakhir = mysqli_insert_id($conn);
-        foreach ($id_products as $index => $id_produk_pilihan) {
-          $qty_pilihan = $quantities[$index];
-          if (!empty($id_produk_pilihan) && $qty_pilihan > 0) {
+        $last_order_id = mysqli_insert_id($conn); // mengambil ID order terakhir yang baru saja dimasukkan ke tabel orders
+        foreach ($id_products as $index => $selected_product_id) {
+          $order_qty = $quantities[$index];
+          if (!empty($selected_product_id) && $order_qty > 0) {
             $query_detail = "INSERT INTO orders_details (id_order, id_product, quantity) 
-            VALUES ('$id_order_terakhir', '$id_produk_pilihan', '$qty_pilihan')";
+            VALUES ('$last_order_id', '$selected_product_id', '$order_qty')";
             mysqli_query($conn, $query_detail);
           }
         }
         echo "<script>alert('Pesanan Berhasil! Kode: $order_code'); window.location.href='index.php';</script>";
         exit;
       } else {
-        if ($is_uploading && file_exists($fileDestination)) {
-          unlink($fileDestination);
+        if ($is_uploading && file_exists($file_destination)) {
+          unlink($file_destination); // menghapus file resep yang telah diunggah jika terjadi kesalahan saat menyimpan data ke database
         }
         $errors['database'] = "Gagal menyimpan pesanan: " . mysqli_error($conn);
       }
     }
   }
+  // END: jika tidak ada error, simpan data ke database
 }
 
-//CONTACT
-
+// START: menampilkan data kontak dan produk terbaru
 $contact_query = mysqli_query($conn, "SELECT * FROM contacts LIMIT 1");
 $contact = mysqli_fetch_assoc($contact_query);
 
-
-//SHOW PRODUCT UNGGULAN
-$best_products_query = mysqli_query($conn, "SELECT p.*, c.name AS category_name FROM products p LEFT JOIN categories c ON p.id_category = c.id ORDER BY p.id DESC LIMIT 4");
-
+$last_products_query = mysqli_query($conn, "SELECT products.*, categories.name AS category_name FROM products
+JOIN categories ON products.id_category = categories.id ORDER BY products.id DESC LIMIT 4");
+// END: menampilkan data kontak dan produk terbaru
 ?>
+
+<!-- START: mengatur posisi halaman setelah dimuat ulang jika ada error pada form -->
 <?php if (!empty($errors)) : ?>
   <script>
     window.location.hash = "contact";
   </script>
 <?php endif; ?>
+<!-- END: mengatur posisi halaman setelah dimuat ulang jika ada error pada form -->
+
 <!doctype html>
 <html lang="en">
 
@@ -128,6 +174,13 @@ $best_products_query = mysqli_query($conn, "SELECT p.*, c.name AS category_name 
       <li><a href="#about">Tentang Kami</a></li>
       <li><a href="#products">Produk</a></li>
       <li><a href="#contact">Kontak</a></li>
+      <!-- START: untuk check logout/login -->
+      <?php if (isset($_SESSION['id_user'])) : ?>
+        <li><a href="actions/logout.php" onclick="return confirm('Apakah Anda yakin ingin logout?')">Logout</a></li>
+      <?php else : ?>
+        <li><a href="login.php">Login</a></li>
+      <?php endif; ?>
+      <!-- END: untuk check logout/login -->
     </ul>
     <button class="menu-toggle">☰</button>
   </nav>
@@ -145,7 +198,7 @@ $best_products_query = mysqli_query($conn, "SELECT p.*, c.name AS category_name 
         </p>
         <div class="btn-container">
           <a href="#contact" class="btn-primary">Hubungi Kami</a>
-          <a href="products.html" class="btn-secondary">Lihat Produk</a>
+          <a href="products.php" class="btn-secondary">Lihat Produk</a>
         </div>
       </div>
       <div class="hero-image-wrapper">
@@ -335,64 +388,63 @@ $best_products_query = mysqli_query($conn, "SELECT p.*, c.name AS category_name 
   <!-- START PRODUCTS -->
   <section id="products" class="products-section reveal">
     <div class="products-text">
-      <span class="custom-pill">PRODUK TERBAIK</span>
-      <h2>Produk Unggulan Kami</h2>
+      <span class="custom-pill">PRODUK TERBARU</span>
+      <h2>Produk Terbaru Kami</h2>
       <p>
         Menghadirkan obat-obatan, suplemen, dan produk kesehatan berkualitas
         untuk kebutuhan keluarga Anda.
       </p>
     </div>
     <div class="product-grid">
-      <?php while($product = mysqli_fetch_assoc($best_products_query)) : ?>
+      <!-- START: menampilkan produk berdasarkan terakhir produk yang ditambahkan ke database -->
+      <?php while ($product = mysqli_fetch_assoc($last_products_query)) : ?>
+        <?php
+        $badge_class = "badge-general";
 
-<?php
-$badgeClass = "badge-general";
+        if ($product['id_category'] == 1) {
+          $badge_class = "badge-herbal";
+        } elseif ($product['id_category'] == 2) {
+          $badge_class = "badge-general";
+        } elseif ($product['id_category'] == 3) {
+          $badge_class = "badge-suplemen";
+        }
+        ?>
+        <div
+          class="product-card"
+          data-name="<?= htmlspecialchars($product['name']) ?>"
+          data-price="Rp <?= number_format($product['price'], 0, ',', '.') ?>"
+          data-desc="<?= htmlspecialchars($product['description']) ?>"
+          data-img="images/products/<?= $product['photo'] ?>"
+          data-badge="<?= htmlspecialchars($product['category_name']) ?>"
+          data-class="<?= $badge_class ?>">
 
-if($product['id_category'] == 1){
-    $badgeClass = "badge-herbal";
-}elseif($product['id_category'] == 2){
-    $badgeClass = "badge-general";
-}elseif($product['id_category'] == 3){
-    $badgeClass = "badge-suplemen";
-}
-?>
+          <div class="product-img-wrapper">
+            <img
+              src="images/products/<?= $product['photo'] ?>"
+              alt="<?= htmlspecialchars($product['name']) ?>">
+          </div>
 
-<div
-    class="product-card"
-    data-name="<?= htmlspecialchars($product['name']) ?>"
-    data-price="Rp <?= number_format($product['price'],0,',','.') ?>"
-    data-desc="<?= htmlspecialchars($product['description']) ?>"
-    data-img="images/products/<?= $product['photo'] ?>"
-    data-badge="<?= htmlspecialchars($product['category_name']) ?>"
-    data-class="<?= $badgeClass ?>">
-
-    <div class="product-img-wrapper">
-        <img
-            src="images/products/<?= $product['photo'] ?>"
-            alt="<?= htmlspecialchars($product['name']) ?>">
-    </div>
-
-    <div class="product-info">
-        <span class="product-badge <?= $badgeClass ?>">
-            <?= strtoupper($product['category_name']) ?>
-        </span>
-        <h3><?= htmlspecialchars($product['name']) ?></h3>
-        <p class="product-desc">
-            <?= substr(htmlspecialchars($product['description']),0,120) ?>...
-        </p>
-        <div class="product-footer">
-            <span class="product-price">
-                Rp <?= number_format($product['price'],0,',','.') ?>
+          <div class="product-info">
+            <span class="product-badge <?= $badge_class ?>">
+              <?= strtoupper($product['category_name']) ?>
             </span>
-            <button class="btn-detail">
+            <h3><?= htmlspecialchars($product['name']) ?></h3>
+            <p class="product-desc">
+              <?= substr(htmlspecialchars($product['description']), 0, 120) ?>...
+            </p>
+            <div class="product-footer">
+              <span class="product-price">
+                Rp <?= number_format($product['price'], 0, ',', '.') ?>
+              </span>
+              <button class="btn-detail">
                 Detail
-            </button>
+              </button>
+            </div>
+          </div>
         </div>
+      <?php endwhile; ?>
+      <!-- END: menampilkan produk berdasarkan terakhir produk yang ditambahkan ke database -->
     </div>
-</div>
-<?php endwhile; ?>
-
-</div>
     </div>
     <div class="products-action">
       <a href="products.php" class="btn-view-all">Lihat Selengkapnya <span>→</span></a>
@@ -413,17 +465,26 @@ if($product['id_category'] == 1){
       <div class="contact-form-container">
         <div class="contact-form">
           <h2>Form Pembelian Obat</h2>
+          <!-- START: menampilkan alert jika ada error global -->
+          <?php if (isset($errors['global'])) : ?>
+            <script>
+              alert("<?= htmlspecialchars($errors['global'], ENT_QUOTES) ?>");
+              window.location.hash = "contact";
+            </script>
+          <?php endif; ?>
+          <!-- END: menampilkan alert jika ada error global -->
+          <!-- START: membuat form pembelian obat -->
           <form action="" method="POST" class="modern-form" enctype="multipart/form-data">
-            <!-- <div class="form-group">
-              <label for="name">Nama Lengkap <span style="color: red">*</span></label>
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 placeholder="Tulis nama Anda"
-                autocomplete="off" />
+                autocomplete="off" value="<?= $full_name ?? '' ?>" disabled />
               <span class="error-text" id="name-error">Nama wajib diisi</span>
-            </div> -->
+            </div>
             <div class="form-group <?= isset($errors['shipping_address']) ? 'error' : '' ?>">
               <label for="shipping_address">Lokasi (Kota/Kecamatan)
                 <span style="color: red">*</span></label>
@@ -432,6 +493,7 @@ if($product['id_category'] == 1){
                 id="shipping_address"
                 name="shipping_address"
                 placeholder="Contoh: Jl Purnama 2"
+                value="<?= htmlspecialchars($_POST['shipping_address'] ?? '') ?>"
                 autocomplete="off" />
               <?php if (isset($errors['shipping_address'])) : ?>
                 <span class="error-text">
@@ -441,32 +503,49 @@ if($product['id_category'] == 1){
             </div>
             <div class="form-group" id="produk-container">
               <label>Obat yang Dibutuhkan <span class="optional">(Kosongkan jika hanya memakai resep)</span></label>
-              <div class="produk-row">
-                <div class="produk-inputs">
-                  <select name="id_product[]" class="select-obat">
-                    <option value="" selected>-- Pilih Obat --</option>
-                    <?php
-                    while ($products = mysqli_fetch_assoc($products_query)) :
-                    ?>
-                      <option value="<?= htmlspecialchars($products['id']) ?>">
-                        <?= htmlspecialchars($products['name']) ?>
-                      </option>
-                    <?php endwhile; ?>
-                  </select>
-                  <input type="number" name="quantity[]" min="1" placeholder="Qty" class="input-qty" />
+              <?php
+              $selected_products = $_POST['id_product'] ?? [''];
+              $selected_qty = $_POST['quantity'] ?? [''];
+              ?>
+              <?php foreach ($selected_products as $index => $selected_product) : ?>
+                <div class="produk-row">
+                  <div class="produk-inputs">
+                    <select name="id_product[]" class="select-obat">
+                      <option value="">-- Pilih Obat --</option>
+                      <?php
+                      mysqli_data_seek($products_query, 0); // mengembalikan hasil query produk ke awal agar bisa digunakan lagi di setiap dropdown
+                      while ($product = mysqli_fetch_assoc($products_query)) :
+                      ?>
+                        <option
+                          value="<?= $product['id'] ?>"
+                          <?= ($selected_product == $product['id']) ? 'selected' : '' ?>>
+                          <?= htmlspecialchars($product['name']) ?>
+                        </option>
+                      <?php endwhile; ?>
+                    </select>
+                    <input
+                      type="number"
+                      name="quantity[]"
+                      min="1"
+                      class="input-qty"
+                      placeholder="Qty"
+                      value="<?= htmlspecialchars($selected_qty[$index] ?? '') ?>">
+                  </div>
+                  <button type="button" class="btn-remove" onclick="hapusBaris(this)">
+                    X
+                  </button>
                 </div>
-                <button type="button" class="btn-remove" onclick="hapusBaris(this)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
+              <?php endforeach; ?>
             </div>
-            <div class="form-group" style="margin-bottom: 20px;">
+            <div class="form-group">
               <button type="button" id="btn-add-product" class="btn-tambahproduct">
                 + Tambah Obat Lain
               </button>
+              <?php if (isset($errors['medicine'])) : ?>
+                <span class="error-text" style="display: block;">
+                  <i class="fa-solid fa-circle-exclamation"></i> <?= htmlspecialchars($errors['medicine']) ?>
+                </span>
+              <?php endif; ?>
             </div>
             <div class="form-group <?= isset($errors['recipe']) ? 'error' : '' ?>">
               <label for="recipe">
@@ -511,13 +590,8 @@ if($product['id_category'] == 1){
                 id="notes"
                 name="notes"
                 rows="4"
-                placeholder="Tambahkan instruksi khusus atau detail lainnya..."></textarea>
+                placeholder="Tambahkan instruksi khusus atau detail lainnya..."><?= htmlspecialchars($_POST['notes'] ?? '') ?></textarea>
             </div>
-            <?php if (isset($errors['global'])) : ?>
-              <div class="error-text">
-                <?= htmlspecialchars($errors['global']) ?>
-              </div>
-            <?php endif; ?>
             <?php
             if (isset($_SESSION['role']) && ($_SESSION['role'] == 'User')) : ?>
               <button
@@ -533,6 +607,7 @@ if($product['id_category'] == 1){
               </a>
             <?php endif; ?>
           </form>
+          <!-- END: membuat form pembelian obat -->
         </div>
       </div>
       <div class="contact-grid-layout">
@@ -544,6 +619,7 @@ if($product['id_category'] == 1){
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
+        <!-- START: menampilkan informasi toko obat arah aman -->
         <div class="contact-cards-container">
           <div class="contact-card-solid">
             <div class="contact-icon-box">
@@ -597,6 +673,7 @@ if($product['id_category'] == 1){
             </div>
           </div>
         </div>
+        <!-- END: menampilkan informasi toko obat arah aman -->
       </div>
     </div>
   </section>

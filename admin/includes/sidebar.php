@@ -35,7 +35,7 @@
             </ul>
         </div>
         <div class="pt-3 border-top">
-            <a href="/toko-obat-arah-aman/actions/logout.php" class="nav-link text-danger">
+            <a href="/toko-obat-arah-aman/actions/logout.php" class="nav-link text-danger" onclick="return confirm('Apakah Anda yakin ingin logout?')">
                 <i class="bi bi-box-arrow-left me-2"></i> Logout
             </a>
         </div>
@@ -80,19 +80,19 @@
                 </li>
                 <li class="nav-item">
                     <a href="/toko-obat-arah-aman/admin/settings_store/edit.php?id=1"
-                        class="nav-link <?= ($page == 'settings') ? 'active' : 'link-dark'; ?>">
+                        class="nav-link <?= ($page == 'settings_store') ? 'active' : 'link-dark'; ?>">
                         <i class="bi bi-gear me-2"></i> Pengaturan Toko
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/toko-obat-arah-aman/admin/users/index.php"
                         class="nav-link <?= ($page == 'users') ? 'active' : 'link-dark'; ?>">
-                        <i class="bi bi-person me-2"></i> Menajemen Pengguna
+                        <i class="bi bi-person me-2"></i> Manajemen Pengguna
                     </a>
                 </li>
                 <li class="nav-item mt-3">
                     <a href="/toko-obat-arah-aman/actions/logout.php"
-                        class="nav-link text-danger">
+                        class="nav-link text-danger" onclick="return confirm('Apakah Anda yakin ingin logout?')">
                         <i class="bi bi-box-arrow-right me-2"></i> Logout
                     </a>
                 </li>

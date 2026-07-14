@@ -2,22 +2,26 @@
 $page = 'dashboard';
 include "middleware/admin_security.php";
 include "../config/connection.php";
-
+//START: query untuk menampilkan ringkasan aktivitas dan operasional toko obat
 $count_diproses  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM orders WHERE status = '1'"))['total'];
 $count_products  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM products"))['total'];
 $count_category  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM categories"))['total'];
 $count_all_order = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM orders"))['total'];
+// END: query untuk menampilkan ringkasan aktivitas dan operasional toko obat
 
+// START: query untuk menampilkan 5 pesanan terakhir
 $query_orders = mysqli_query($conn, "SELECT * FROM orders ORDER BY order_date DESC LIMIT 5");
+// END: query untuk menampilkan 5 pesanan terakhir
+
 ?>
 <?php include "includes/header.php"; ?>
 <?php include "includes/sidebar.php"; ?>
-<div class="container-fluid px-4 pt-4">
+<div class="flex-grow-1 p-4 overflow-auto">
     <div class="mb-4">
         <h2 class="fw-bold text-dark m-0 h3">Dashboard</h2>
         <small class="text-muted">Ringkasan aktivitas dan operasional toko obat saat ini.</small>
     </div>
-
+    <!-- START: menampilkan ringkasan aktivitas dan operasional toko obat -->
     <div class="row g-3 mb-5">
         <div class="col-12 col-sm-6 col-md-3">
             <div class="card border border-light-subtle bg-white rounded-2">
@@ -67,7 +71,8 @@ $query_orders = mysqli_query($conn, "SELECT * FROM orders ORDER BY order_date DE
             </div>
         </div>
     </div>
-
+    <!-- END: menampilkan ringkasan aktivitas dan operasional toko obat -->
+    <!-- START: menampilkan 5 pesanan terakhir -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="fw-bold text-dark m-0 h5">5 Pesanan Terakhir</h5>
         <a href="orders/index.php" class="btn btn-sm btn-primary px-3 rounded-2" style="font-size: 0.85rem;">Lihat Semua</a>
@@ -98,7 +103,7 @@ $query_orders = mysqli_query($conn, "SELECT * FROM orders ORDER BY order_date DE
                             <td class="text-secondary"><?= $result['shipping_address'] ?></td>
                             <td>
                                 <?php if (!empty($result['recipe'])): ?>
-                                    <a href="../../recipe/<?= $result['recipe'] ?>" target="_blank" class="text-decoration-none text-primary">
+                                    <a href="../recipe/<?= $result['recipe'] ?>" target="_blank" class="text-decoration-none text-primary">
                                         Lihat resep
                                     </a>
                                 <?php else: ?>
@@ -136,5 +141,6 @@ $query_orders = mysqli_query($conn, "SELECT * FROM orders ORDER BY order_date DE
             </tbody>
         </table>
     </div>
+    <!-- END: menampilkan 5 pesanan terakhir -->
 </div>
 <?php include "includes/footer.php"; ?>

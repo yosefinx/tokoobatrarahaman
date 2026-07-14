@@ -10,24 +10,31 @@ include "../includes/sidebar.php";
 <?php
 $id = $_GET['id'] ?? '';
 
+// START: jika id kosong, redirect ke halaman index.php
 if ($id == '') {
     header("Location: index.php");
     exit;
 }
+// END: jika id kosong, redirect ke halaman index.php
 
 $sql = "SELECT * FROM contacts WHERE id = $id";
 $query = mysqli_query($conn, $sql);
 $result = mysqli_fetch_assoc($query);
 
+// START: jika data informasi tidak ditemukan, redirect ke halaman index.php
 if (!$result) {
     header("Location: index.php");
     exit;
 }
+// END: jika data informasi tidak ditemukan, redirect ke halaman index.php
+
 
 if (isset($_POST['edit'])) {
     $location = trim($_POST['location']);
     $whatsapp_number = trim($_POST['whatsapp_number']);
     $operational_time = trim($_POST['operational_time']);
+
+    // START: validasi input
     if (empty($location)) {
         $errors['location'] = "Nama lokasi wajib diisi.";
     }
@@ -39,7 +46,9 @@ if (isset($_POST['edit'])) {
     if (empty($operational_time)) {
         $errors['operational_time'] = "Waktu operasional wajib diisi.";
     }
+    // END: validasi input
 
+    // START: menyimpan perubahan informasi toko ke database jika tidak ada error
     if (empty($errors)) {
         $sql = "UPDATE contacts SET location = '$location', whatsapp_number = '$whatsapp_number', operational_time = '$operational_time' WHERE id = $id";
         if (mysqli_query($conn, $sql)) {
@@ -49,6 +58,7 @@ if (isset($_POST['edit'])) {
             $errors['database'] = "Gagal mengubah informasi toko: " . mysqli_error($conn);
         }
     }
+    // END: menyimpan perubahan informasi toko ke database jika tidak ada error
 }
 ?>
 <main class="flex-grow-1 p-4 bg-light min-vh-100">
@@ -65,12 +75,16 @@ if (isset($_POST['edit'])) {
             <p class="text-muted small mb-0">Kelola data informasi toko di sini.</p>
         </div>
     </div>
+    <!-- START: menampilkan pesan alert jika ada parameter success-update -->
     <?php if (isset($_GET['success-update']) && $_GET['success-update'] == '1') : ?>
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
-                <strong>Berhasil!</strong> Informasi toko berhasil diubah.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
+            <strong>Berhasil!</strong> Informasi toko berhasil diubah.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+    <!-- END: menampilkan pesan alert jika ada parameter success-update -->
+
+    <!-- START: form untuk mengubah informasi toko -->
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <?php if (isset($errors['database'])) : ?>
@@ -105,5 +119,6 @@ if (isset($_POST['edit'])) {
             </form>
         </div>
     </div>
+    <!-- END: form untuk mengubah informasi toko -->
 </main>
 <?php include "../includes/footer.php"; ?>

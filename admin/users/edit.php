@@ -10,10 +10,12 @@ include "../includes/sidebar.php";
 <?php
 $id = $_GET['id'] ?? '';
 
+// START: jika id kosong, redirect ke halaman index.php
 if ($id == '') {
     header("Location: index.php");
     exit;
 }
+// END: jika id kosong, redirect ke halaman index.php
 
 $sql = "SELECT * FROM users WHERE id = $id";
 $query = mysqli_query($conn, $sql);
@@ -32,6 +34,7 @@ if (isset($_POST['edit'])) {
     $password     = trim($_POST['password']);
     $phone_number = trim($_POST['phone_number']);
 
+    // START: validasi input
     if (empty($username)) {
         $errors['username'] = "Username wajib diisi.";
     } elseif (strlen($username) < 3) {
@@ -45,13 +48,13 @@ if (isset($_POST['edit'])) {
         }
     }
 
-     if (empty($full_name)) {
+    if (empty($full_name)) {
         $errors['full_name'] = "Nama lengkap wajib diisi.";
     } elseif (strlen($full_name) < 3) {
         $errors['full_name'] = "Nama lengkap minimal 3 karakter.";
     }
 
-     if (empty($email)) {
+    if (empty($email)) {
         $errors['email'] = "Email wajib diisi.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "Format email tidak valid.";
@@ -62,23 +65,25 @@ if (isset($_POST['edit'])) {
         }
     }
 
-     if (!empty($password)) {
+    if (!empty($password)) {
         if (strlen($password) < 8) {
             $errors['password'] = "Password minimal 8 karakter.";
         }
     }
 
-     if (empty($phone_number)) {
+    if (empty($phone_number)) {
         $errors['phone_number'] = "Nomor telepon wajib diisi.";
     } elseif (!preg_match('/^[0-9]{10,15}$/', $phone_number)) {
         $errors['phone_number'] = "Nomor telepon harus terdiri dari 10-15 digit.";
     }
-    if(empty($errors)){
+    // END: validasi input
+    // START: menyimpan perubahan data admin ke database jika tidak ada error
+    if (empty($errors)) {
         if (!empty($password)) {
             $password = md5($password);
             $sql = "UPDATE users SET username='$username', full_name='$full_name', email='$email', password='$password',
             phone_number='$phone_number' WHERE id='$id'";
-        }else{
+        } else {
             $sql = "UPDATE users SET username='$username', full_name='$full_name', email='$email',
             phone_number='$phone_number' WHERE id='$id'";
         }
@@ -90,7 +95,7 @@ if (isset($_POST['edit'])) {
             $errors['database'] = "Gagal mengubah data admin: " . mysqli_error($conn);
         }
     }
-    
+    // END: menyimpan perubahan data admin ke database jika tidak ada error
 }
 ?>
 <main class="flex-grow-1 p-4 bg-light min-vh-100">
@@ -118,6 +123,7 @@ if (isset($_POST['edit'])) {
                     <strong>Gagal!</strong> <?= htmlspecialchars($errors['database']); ?>
                 </div>
             <?php endif; ?>
+            <!-- START: form untuk mengubah data admin -->
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Nama Pengguna</label>
@@ -157,7 +163,8 @@ if (isset($_POST['edit'])) {
                     <?php endif; ?>
                 </div>
                 <button type="submit" class="btn btn-primary" name="edit">Ubah Data Admin</button>
-            </form> 
+            </form>
+            <!-- END: form untuk mengubah data admin -->
         </div>
     </div>
 </main>

@@ -8,14 +8,12 @@ include "../includes/header.php";
 include "../includes/sidebar.php";
 ?>
 <?php
+// START: melakukan query untuk mengambil data pesanan beserta username pembeli dan admin yang menindaklanjuti
 $sql = "SELECT orders.*,  pembeli.username AS username_pembeli,  admin.username AS username_admin
 FROM orders JOIN users AS pembeli ON orders.id_user = pembeli.id  LEFT JOIN users AS admin ON orders.followed_up_by = admin.id 
 ORDER BY orders.id DESC";
 $query = mysqli_query($conn, $sql);
-
-
-
-
+// END: melakukan query untuk mengambil data pesanan beserta username pembeli dan admin yang menindaklanjuti
 ?>
 <main class="flex-grow-1 p-4 bg-light overflow-auto">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -23,15 +21,17 @@ $query = mysqli_query($conn, $sql);
             <h1 class="h4 mb-0 text-dark fw-bold">Halaman Pemesanan</h1>
             <p class="text-muted small mb-0">Kelola pesanan di sini.</p>
         </div>
-
     </div>
     <div class="card border-0 shadow-sm">
+        <!-- START: menampilkan pesan alert jika ada parameter success-delete -->
         <?php if (isset($_GET['success-delete']) && $_GET['success-delete'] == '1') : ?>
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
                 <strong>Berhasil!</strong> Pesanan berhasil dihapus.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+        <!-- END: menampilkan pesan alert jika ada parameter success-delete -->
+        <!-- START: menampilkan tabel pesanan -->
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table align-middle mb-0 table-hover">
@@ -72,12 +72,13 @@ $query = mysqli_query($conn, $sql);
                                 </td>
                                 <td><?= $result['order_date'] ?></td>
                                 <td><?= htmlspecialchars($result['notes']) ?></td>
-                                <td><?= htmlspecialchars($result['username_admin']) ?></td>
-                                <td><?= $result['followed_up_at'] ?></td>
+                                <td><?= htmlspecialchars($result['username_admin'] ?? '-') ?></td>
+                                <td><?= htmlspecialchars($result['followed_up_at'] ?? '-') ?></td>
                                 <td class="text-end pe-3">
                                     <div class="d-inline-flex gap-1 align-items-center">
                                         <a href="detail.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
                                         <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
+                                        <!-- START: form untuk mengubah status pesanan -->
                                         <form action="../../actions/update_status.php" method="POST" class="d-inline">
                                             <input type="hidden" name="order_code" value="<?= $result['order_code']; ?>">
                                             <?php if ($result['status'] == '1'): ?>
@@ -89,6 +90,7 @@ $query = mysqli_query($conn, $sql);
                                                 <button class="btn btn-sm btn-outline-success" type="submit" name="status_baru" value="Selesai">Selesai</button>
                                             <?php endif; ?>
                                         </form>
+                                        <!-- END: form untuk mengubah status pesanan -->
                                     </div>
                                 </td>
                             </tr>
@@ -98,6 +100,7 @@ $query = mysqli_query($conn, $sql);
                 </table>
             </div>
         </div>
+        <!-- END: menampilkan tabel pesanan -->
     </div>
 </main>
 <?php include "../includes/footer.php"; ?>

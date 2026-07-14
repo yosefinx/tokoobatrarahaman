@@ -16,6 +16,7 @@ if (isset($_POST['create'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
 
+    // START: validasi input untuk menambahkan kategori baru
     if (empty($name)) {
         $errors['name'] = "Nama kategori wajib diisi.";
     } elseif (strlen($name) < 3) {
@@ -25,16 +26,19 @@ if (isset($_POST['create'])) {
     if (strlen($description) > 255) {
         $errors['description'] = "Deskripsi tidak boleh lebih dari 255 karakter.";
     }
+    // END: validasi input untuk menambahkan kategori baru
 
+    // START: menyimpan kategori baru ke database jika tidak ada error
     if (empty($errors)) {
         $query = "INSERT INTO categories (name, description) VALUES ('$name', '$description')";
         if (mysqli_query($conn, $query)) {
-            echo "<script>window.location.href='index.php?success=1';</script>";
+            echo "<script>window.location.href='index.php?success-create=1';</script>";
             exit;
         } else {
             $errors['database'] = "Gagal menyimpan kategori: " . mysqli_error($conn);
         }
     }
+    // END: menyimpan kategori baru ke database jika tidak ada error
 }
 ?>
 <main class="flex-grow-1 p-3 p-md-4 bg-light">
@@ -62,6 +66,7 @@ if (isset($_POST['create'])) {
                     <strong>Gagal!</strong> <?= $errors['database']; ?>
                 </div>
             <?php endif; ?>
+            <!-- START: form untuk menambahkan kategori baru -->
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama Kategori</label>
@@ -69,7 +74,7 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>"
                         id="name"
                         name="name"
-                        placeholder="Masukkan nama kategori">
+                        placeholder="Masukkan nama kategori" value="<?= htmlspecialchars($name) ?>">
                     <?php if (isset($errors['name'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['name']; ?></div>
                     <?php endif; ?>
@@ -80,13 +85,14 @@ if (isset($_POST['create'])) {
                         id="description"
                         name="description"
                         rows="3"
-                        placeholder="Masukkan deskripsi kategori"></textarea>
+                        placeholder="Masukkan deskripsi kategori"><?= htmlspecialchars($description) ?></textarea>
                     <?php if (isset($errors['description'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['description']; ?></div>
                     <?php endif; ?>
                 </div>
                 <button type="submit" class="btn btn-primary" name="create">Simpan Kategori</button>
             </form>
+            <!-- END: form untuk menambahkan kategori baru -->
         </div>
     </div>
 </main>

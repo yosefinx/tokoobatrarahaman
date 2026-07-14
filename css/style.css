@@ -873,6 +873,11 @@ nav .nav-links a:hover::after {
   display: block;
 }
 
+.form-group.error #file-name-text {
+  color: #dc2626;
+  font-weight: 500;
+}
+
 .produk-row {
   display: flex;
   align-items: center;

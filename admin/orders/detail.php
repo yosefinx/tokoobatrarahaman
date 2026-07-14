@@ -9,10 +9,15 @@ include "../includes/sidebar.php";
 ?>
 <?php
 $id_order = $_GET['id'] ?? null;
+
+// START: jika id kosong, redirect ke halaman index.php
 if (!$id_order) {
     header("Location: index.php");
     exit();
 }
+// END: jika id kosong, redirect ke halaman index.php
+
+// START: melakukan query untuk mengambil data pesanan dan detail produk berdasarkan id pesanan
 $sql = "SELECT 
     orders.id AS order_id,
     orders.id_user,
@@ -38,7 +43,9 @@ LEFT JOIN orders_details ON orders.id = orders_details.id_order
 LEFT JOIN products ON orders_details.id_product = products.id
 WHERE orders.id = $id_order";
 $query = mysqli_query($conn, $sql);
+// END: melakukan query untuk mengambil data pesanan dan detail produk berdasarkan id pesanan
 
+// START: memproses hasil query untuk menampilkan data pesanan dan detail produk
 $order_info = null;
 $products = [];
 
@@ -64,7 +71,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         ];
     }
 }
-
+// END: memproses hasil query untuk menampilkan data pesanan dan detail produk
 ?>
 <main class="flex-grow-1 p-4 bg-light">
     <div>
@@ -89,6 +96,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         <?php if ($order_info): ?>
             <div class="row g-4">
                 <div class="col-md-4">
+                    <!-- START: menampilkan informasi transaksi -->
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-white fw-bold py-3">
                             Informasi Transaksi
@@ -130,6 +138,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                             </div>
                         </div>
                     </div>
+                    <!-- END: menampilkan informasi transaksi -->
                 </div>
 
                 <div class="col-md-8">
@@ -137,6 +146,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                         <div class="card-header bg-white fw-bold py-3">
                             Item yang Dibeli
                         </div>
+                        <!-- START: menampilkan tabel detail produk yang dibeli -->
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <table class="table align-middle mb-0">
@@ -187,6 +197,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                                 </table>
                             </div>
                         </div>
+                        <!-- END: menampilkan tabel detail produk yang dibeli -->
                     </div>
                 </div>
             </div>

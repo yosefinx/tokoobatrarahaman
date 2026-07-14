@@ -2,21 +2,19 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-  if (navLinks.classList.contains("active")) {
-    menuToggle.innerHTML = "✕";
-  } else {
-    menuToggle.innerHTML = "☰";
-  }
-});
-
-document.querySelectorAll(".nav-links a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("active");
-    menuToggle.innerHTML = "☰";
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    menuToggle.innerHTML = navLinks.classList.contains("active") ? "✕" : "☰";
   });
-});
+
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+      menuToggle.innerHTML = "☰";
+    });
+  });
+}
 // END NAVBAR TOGGLE
 
 // START COUNTER ANIMATION
@@ -24,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const counter = document.getElementById("counter");
   const plus = document.getElementById("plus");
   const statsHeading = document.querySelector(".stats-container h2");
+
+  if (!counter || !plus || !statsHeading) return;
+
   let count = 0;
   const target = 40;
   const duration = 2000; //2s
@@ -44,20 +45,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // START SCROLL REVEAL
 const reveals = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver( //mendeteksi apakah elemen masuk ke viewport
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        //elemen sudah masuk ke layar
-        entry.target.classList.add("show");
-      }
-    });
-  },
-  {
-    threshold: 0.15, //animasi aktif saat 15% elemen terlihat
-  },
-);
-reveals.forEach((el) => observer.observe(el));
+
+if (reveals.length) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.15 },
+  );
+
+  reveals.forEach((el) => observer.observe(el));
+}
 // END SCROLL REVEAL
 
 // NAVBAR ACTIVE LINK ON SCROLL
@@ -98,178 +100,95 @@ window.addEventListener("scroll", () => {
 
 // MODAL PRODUCT POPUP
 const modal = document.getElementById("productModal");
-document.addEventListener("click", (e) => {
-  const card = e.target.closest(".product-card");
-  if (card) {
-    const name = card.getAttribute("data-name");
-    const price = card.getAttribute("data-price");
-    const desc = card.getAttribute("data-desc");
-    const img = card.getAttribute("data-img");
-    const badge = card.getAttribute("data-badge");
-    const badgeClass = card.getAttribute("data-class");
+if (modal) {
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".product-card");
+    if (card) {
+      const name = card.getAttribute("data-name");
+      const price = card.getAttribute("data-price");
+      const desc = card.getAttribute("data-desc");
+      const img = card.getAttribute("data-img");
+      const badge = card.getAttribute("data-badge");
+      const badgeClass = card.getAttribute("data-class");
 
-    document.getElementById("modalTitle").textContent = name;
-    document.getElementById("modalPrice").textContent = price;
-    document.getElementById("modalDesc").textContent = desc;
-    document.getElementById("modalImg").src = img;
+      document.getElementById("modalTitle").textContent = name;
+      document.getElementById("modalPrice").textContent = price;
+      document.getElementById("modalDesc").textContent = desc;
+      document.getElementById("modalImg").src = img;
 
-    const modalBadge = document.getElementById("modalBadge");
-    modalBadge.textContent = badge;
-    modalBadge.className = "product-badge " + badgeClass;
+      const modalBadge = document.getElementById("modalBadge");
+      modalBadge.textContent = badge;
+      modalBadge.className = "product-badge " + badgeClass;
 
-    const waText = `Halo, saya ingin memesan produk *${name}*`;
-    const waLink = `https://wa.me/6285393988929?text=${encodeURIComponent(waText)}`;
-    document.getElementById("modalWA").href = waLink;
+      const waText = `Halo, saya ingin memesan produk *${name}*`;
+      const waLink = `https://wa.me/6285393988929?text=${encodeURIComponent(waText)}`;
+      document.getElementById("modalWA").href = waLink;
 
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden"; //halaman tidak bisa discroll saat modal dibuka
-  }
-});
-
-function closeModal() {
-  modal.classList.remove("active");
-  document.body.style.overflow = "auto"; //halaman bisa discroll saat modal ditutup kembali
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden"; //halaman tidak bisa discroll saat modal dibuka
+    }
+  });
 }
 
-document.querySelector(".modal-close").addEventListener("click", closeModal);
-document.querySelector(".modal-overlay").addEventListener("click", closeModal);
+if (modal) {
+  function closeModal() {
+    modal.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+
+  const modalClose = document.querySelector(".modal-close");
+  const modalOverlay = document.querySelector(".modal-overlay");
+
+  if (modalClose) {
+    modalClose.addEventListener("click", closeModal);
+  }
+
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", closeModal);
+  }
+}
 // END PRODUCT POPUP
 
 // START MODAL FORM PRODUCT
-document.getElementById("recipe").addEventListener("change", function () {
-  const file = this.files[0];
-  const formGroup = this.closest(".form-group");
-  const fileText = document.getElementById("file-name-text");
-  if (file) {
-    const fileSize = file.size / (1024 * 1024); //ke mb
+const recipe = document.getElementById("recipe");
+if (recipe) {
+  recipe.addEventListener("change", function () {
+    const file = this.files[0];
+    const formGroup = this.closest(".form-group");
+    const fileText = document.getElementById("file-name-text");
 
-    if (fileSize > 10) {
-      formGroup.classList.add("error");
-      this.value = "";
+    if (file) {
+      const fileSize = file.size / (1024 * 1024);
+      if (fileSize > 5) {
+        formGroup.classList.add("error");
+        fileText.textContent = "Ukuran file terlalu besar (Maksimal 5 MB)!";
+        this.value = "";
+      } else {
+        formGroup.classList.remove("error");
+        fileText.textContent = file.name;
+      }
     } else {
       formGroup.classList.remove("error");
-      fileText.textContent = file.name;
+      fileText.textContent = "Pilih file resep...";
     }
-  } else {
-    formGroup.classList.remove("error");
-  }
-});
-
-// const contactForm = document.querySelector(".modern-form");
-// contactForm.addEventListener("submit", function (e) {
-//   e.preventDefault();
-
-//   const name = document.getElementById("name");
-//   const location = document.getElementById("location");
-//   const medicine = document.getElementById("medicine");
-//   const recipe = document.getElementById("recipe");
-//   const notes = document.getElementById("notes");
-
-//   const nameValue = name.value;
-//   const locationValue = location.value;
-//   const medicineValue = medicine.value || "-";
-//   const recipeName =
-//     recipe.files.length > 0 ? recipe.files[0].name : "Tidak ada file";
-//   const notesValue = notes.value || "-";
-
-//   let isValid = true;
-
-//   if (nameValue === "") {
-//     name.parentElement.classList.add("error");
-//     isValid = false;
-//   } else {
-//     name.parentElement.classList.remove("error");
-//   }
-
-//   if (locationValue === "") {
-//     location.parentElement.classList.add("error");
-//     isValid = false;
-//   } else {
-//     location.parentElement.classList.remove("error");
-//   }
-
-//   if (isValid) {
-//     recipe.closest(".form-group").classList.remove("error");
-//     document.getElementById("res-name").textContent = nameValue;
-//     document.getElementById("res-location").textContent = locationValue;
-//     document.getElementById("res-medicine").textContent = medicineValue;
-//     document.getElementById("res-recipe").textContent = recipeName;
-//     document.getElementById("res-notes").textContent = notesValue;
-//     document.getElementById("confirmModal").style.display = "flex";
-//   }
-// });
-
-// const inputs = document.querySelectorAll(
-//   ".modern-form input, .modern-form textarea",
-// );
-
-// inputs.forEach((input) => {
-//   input.addEventListener("input", function () {
-//     const formGroup = this.closest(".form-group");
-
-//     if (formGroup.classList.contains("error")) {
-//       formGroup.classList.remove("error");
-//     }
-//   });
-// });
-
-// function closeModalForm(modalId) {
-//   document.getElementById(modalId).style.display = "none";
-// }
-
-// function processPurchase() {
-//   const nameValue = document.getElementById("res-name").textContent;
-//   const locationValue = document.getElementById("res-location").textContent;
-//   const medicineValue = document.getElementById("res-medicine").textContent;
-//   const notesValue = document.getElementById("res-notes").textContent;
-
-//   let pesan = `*Pesanan Obat Baru*\n\n`;
-//   pesan += `*Nama:* ${nameValue}\n`;
-//   pesan += `*Lokasi:* ${locationValue}\n`;
-//   pesan += `*Obat:* ${medicineValue}\n`;
-//   pesan += `*Catatan:* ${notesValue}\n\n`;
-//   pesan += `_Mohon segera diproses, terima kasih._`;
-
-//   const pesanEncoded = encodeURIComponent(pesan);
-//   const urlWa = `https://wa.me/6285393988929?text=${pesanEncoded}`;
-//   window.open(urlWa, "_blank");
-//   closeModalForm("confirmModal");
-
-//   setTimeout(() => {
-//     document.getElementById("successModal").style.display = "flex";
-//     contactForm.reset();
-//     document.getElementById("file-name-text").textContent =
-//       "Pilih Foto atau PDF Resep";
-//   }, 300);
-// }
-
-// window.onclick = function (event) {
-//   //klik luar modal diclosekan
-//   const confirmM = document.getElementById("confirmModal");
-//   const successM = document.getElementById("successModal");
-//   if (event.target == confirmM) closeModalForm("confirmModal");
-//   if (event.target == successM) closeModalForm("successModal");
-// };
-// END MODAL FORM PRODUCT
+  });
+}
 
 // START BACK TO UP
 const backToTopBtn = document.getElementById("backToTop");
-
-window.onscroll = function () {
-  if (
-    document.documentElement.scrollTop > 300 //kalau scroll udh lebih dari 300px dari atas
-  ) {
-    backToTopBtn.style.display = "block";
-  } else {
-    backToTopBtn.style.display = "none";
-  }
-};
-backToTopBtn.addEventListener("click", function () {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+if (backToTopBtn) {
+  window.addEventListener("scroll", function () {
+    backToTopBtn.style.display =
+      document.documentElement.scrollTop > 300 ? "block" : "none";
   });
-});
+
+  backToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}
 // END BACK TO UP
 
 // START CATEGORY TOGGLE
@@ -297,36 +216,79 @@ function showCategory(id, btn) {
 // END CATEGORY TOGGLE
 
 //START ADD NEW PRODUCT
-document
-  .getElementById("btn-add-product")
-  .addEventListener("click", function () {
-    const container = document.getElementById("produk-container");
+const btnAddProduct = document.getElementById("btn-add-product");
+const produkContainer = document.getElementById("produk-container");
+
+if (btnAddProduct && produkContainer) {
+  btnAddProduct.addEventListener("click", function () {
     const firstRow = document.querySelector(".produk-row");
+    if (!firstRow) return;
 
     const newRow = firstRow.cloneNode(true);
 
     newRow.querySelector("select").value = "";
     newRow.querySelector("input").value = "";
 
-    container.appendChild(newRow);
+    produkContainer.appendChild(newRow);
+    updateSelectOptions();
   });
+
+  produkContainer.addEventListener("change", function (e) {
+    if (e.target.classList.contains("select-obat")) {
+      updateSelectOptions();
+    }
+  });
+
+  updateSelectOptions();
+}
 
 function hapusBaris(button) {
   const rows = document.querySelectorAll(".produk-row");
   if (rows.length > 1) {
     button.closest(".produk-row").remove();
+    updateSelectOptions();
   } else {
     const row = button.closest(".produk-row");
     row.querySelector("select").value = "";
     row.querySelector("input").value = "";
+    updateSelectOptions();
   }
 }
+
+function updateSelectOptions() {
+  const allSelects = document.querySelectorAll(".select-obat");
+
+  const selectedValues = Array.from(allSelects)
+    .map((select) => select.value)
+    .filter((val) => val !== "");
+
+  allSelects.forEach((currentSelect) => {
+    const options = currentSelect.querySelectorAll("option");
+
+    options.forEach((option) => {
+      if (option.value === "") return;
+      if (
+        selectedValues.includes(option.value) &&
+        currentSelect.value !== option.value
+      ) {
+        option.disabled = true;
+        option.style.color = "#ccc";
+      } else {
+        option.disabled = false;
+        option.style.color = "";
+      }
+    });
+  });
+}
+
+updateSelectOptions();
 //END ADD NEW PRODUCT
+
 //START PREVIEW PHOTO
 function previewImage() {
   const image = document.querySelector("#photo");
   const imgPreview = document.querySelector("#img-preview");
-
+  if (!image || !imgPreview) return;
   if (image.files && image.files[0]) {
     imgPreview.classList.remove("d-none");
 
@@ -344,11 +306,13 @@ function previewImage() {
 //END PREVIEW PHOTO
 
 //START HIDE PASSWORD
-document
-  .getElementById("togglePassword")
-  .addEventListener("click", function () {
+const togglePassword = document.getElementById("togglePassword");
+
+if (togglePassword) {
+  togglePassword.addEventListener("click", function () {
     const passwordInput = document.getElementById("password");
     const toggleIcon = document.getElementById("toggleIcon");
+
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
       toggleIcon.classList.remove("bi-eye");
@@ -359,4 +323,5 @@ document
       toggleIcon.classList.add("bi-eye");
     }
   });
+}
 //END HIDE PASSWORD

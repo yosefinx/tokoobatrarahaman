@@ -12,7 +12,7 @@ $sql = "SELECT * FROM users WHERE role = 'Admin' ORDER BY id DESC ";
 $query = mysqli_query($conn, $sql);
 
 ?>
-<main class="flex-grow-1 p-4 bg-light">
+<main class="flex-grow-1 p-4 bg-light overflow-auto">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h4 mb-0 text-dark fw-bold">Kelola Admin</h1>
@@ -25,6 +25,13 @@ $query = mysqli_query($conn, $sql);
         </div>
     </div>
     <div class="card border-0 shadow-sm">
+        <!-- START: menampilkan pesan alert jika ada parameter success-create, success-update atau success-delete -->
+        <?php if (isset($_GET['success-create']) && $_GET['success-create'] == '1') : ?>
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
+                <strong>Berhasil!</strong> Data admin berhasil ditambahkan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
         <?php if (isset($_GET['success-update']) && $_GET['success-update'] == '1') : ?>
             <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
                 <strong>Berhasil!</strong> Data admin berhasil diubah.
@@ -37,16 +44,18 @@ $query = mysqli_query($conn, $sql);
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+        <!-- END: menampilkan pesan alert jika ada parameter success-create, success-update atau success-delete -->
         <div class="card-body p-0">
             <div class="table-responsive">
+                <!-- START: menampilkan tabel data admin -->
                 <table class="table align-middle mb-0 table-hover">
                     <thead class="table-light">
                         <tr>
                             <th scope="col" class="ps-3">#</th>
                             <th scope="col">Nama Pengguna</th>
                             <th scope="col">Nama Lengkap</th>
-                             <th scope="col">Email</th>
-                              <th scope="col">Nomor Telepon</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Nomor Telepon</th>
                             <th scope="col" class="text-end pe-3">Aksi</th>
                         </tr>
                     </thead>
@@ -58,9 +67,9 @@ $query = mysqli_query($conn, $sql);
                                 <th scope="row" class="ps-3"><?= $no++ ?></th>
                                 <td><?= htmlspecialchars($result['username']) ?></td>
                                 <td><?= htmlspecialchars($result['full_name']) ?></td>
-                               <td><?= htmlspecialchars($result['email']) ?></td>
-                               <td><?= htmlspecialchars($result['phone_number']) ?></td>
-                                <td class="text-end pe-3">
+                                <td><?= htmlspecialchars($result['email']) ?></td>
+                                <td><?= htmlspecialchars($result['phone_number']) ?></td>
+                                <td class="d-flex justify-content-end gap-2">
                                     <a href="edit.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
                                     <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data admin ini?');"><i class="bi bi-trash"></i></a>
                                 </td>
@@ -69,6 +78,7 @@ $query = mysqli_query($conn, $sql);
                         endwhile; ?>
                     </tbody>
                 </table>
+                <!-- END: menampilkan tabel data admin -->
             </div>
         </div>
     </div>

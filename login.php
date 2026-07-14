@@ -17,6 +17,7 @@ unset($_SESSION['login_error']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Obat Arah Aman</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -61,7 +62,17 @@ unset($_SESSION['login_error']);
             </div>
             <div class="mb-4">
                 <label for="password" class="form-label">Kata Sandi</label>
-                <input type="password" class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>" id="password" name="password" autocomplete="new-password">
+                <div class="input-group">
+                    <input
+                        type="password"
+                        class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>"
+                        id="password"
+                        name="password"
+                        autocomplete="new-password">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="bi bi-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
                 <?php if (isset($errors['password'])): ?>
                     <div class="text-danger small"><?= $errors['password'] ?></div>
                 <?php endif; ?>
@@ -74,6 +85,7 @@ unset($_SESSION['login_error']);
             Baru disini? <a href="registration.php" class="text-primary text-decoration-none fw-medium">Buat akun sekarang</a>
         </div>
     </div>
+    <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 

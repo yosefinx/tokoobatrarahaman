@@ -4,13 +4,17 @@ include "../../config/connection.php";
 
 $id = $_GET['id'] ?? '';
 
+// START: jika id kosong, redirect ke halaman index.php
 if ($id == '') {
     header("Location: index.php");
     exit;
 }
+// END: jika id kosong, redirect ke halaman index.php
 
+// START: melakukan query untuk menghapus user berdasarkan id
 $sql = "DELETE FROM users WHERE id = $id";
 $query = mysqli_query($conn, $sql);
 
 header("Location: index.php?success-delete=1");
 exit;
+// END: melakukan query untuk menghapus user berdasarkan id

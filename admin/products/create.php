@@ -23,10 +23,11 @@ if (isset($_POST['create'])) {
     $description = trim($_POST['description']);
 
     $photo_name = "";
-    $fileTmpName = null;
-    $fileDestination = "";
+    $file_tmpname = null;
+    $file_destination = "";
     $is_uploading = false;
 
+    // START: validasi input 
     if (empty($name)) {
         $errors['name'] = "Nama produk wajib diisi.";
     } elseif (strlen($name) < 3) {
@@ -36,7 +37,7 @@ if (isset($_POST['create'])) {
     if (empty($id_category)) {
         $errors['id_category'] = "Kategori produk wajib dipilih.";
     } elseif (!is_numeric($id_category)) {
-        $errors['id_category'] = "Kategori produk tidak valid.";
+        $errors['id_category'] = "Kategori produk tidak valid";
     }
 
     if (empty($price)) {
@@ -53,36 +54,36 @@ if (isset($_POST['create'])) {
 
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] != 4) {
         $file = $_FILES['photo'];
-        $fileName = $file['name'];
-        $fileTmpName = $file['tmp_name'];
-        $fileSize = $file['size'];
-        $fileError = $file['error'];
+        $file_name = $file['name'];
+        $file_tmpname = $file['tmp_name'];
+        $file_size = $file['size'];
+        $file_error = $file['error'];
 
-        $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
         $allowedExtensions = ['png', 'jpg', 'jpeg'];
 
         $is_uploading = true;
 
-        if (!in_array($fileExt, $allowedExtensions)) {
+        if (!in_array($file_ext, $allowedExtensions)) {
             $errors['photo'] = "Format file salah! Hanya diperbolehkan PNG, JPG, atau JPEG.";
-        } elseif ($fileError !== 0) {
+        } elseif ($file_error !== 0) {
             $errors['photo'] = "Terjadi kesalahan saat mengupload file.";
-        } elseif ($fileSize > 5 * 1024 * 1024) {
+        } elseif ($file_size > 5 * 1024 * 1024) {
             $errors['photo'] = "Ukuran file terlalu besar! Maksimal 5MB.";
         } else {
             $clean_product_name = strtolower(trim($name));
-            $clean_product_name = preg_replace('/[^a-z0-9\-]/', '_', $clean_product_name);
-            $clean_product_name = preg_replace('/_+/', '_', $clean_product_name);
-
-            $photo_name = $clean_product_name . "_" . uniqid() . "." . $fileExt;
-            $fileDestination = '../../images/products/' . $photo_name;
+            $clean_product_name = preg_replace('/[^a-z0-9\-]/', '_', $clean_product_name); //semua karakter yang bukan huruf kecil, angka, atau tanda minus.
+            $clean_product_name = preg_replace('/_+/', '_', $clean_product_name); //mengganti beberapa tanda underscore menjadi satu underscore.
+            $photo_name = $clean_product_name . "_" . uniqid() . "." . $file_ext;
+            $file_destination = '../../images/products/' . $photo_name;
         }
     }
-
+    // END: validasi input 
+    // START: menyimpan produk baru ke database jika tidak ada error
     if (empty($errors)) {
         $upload_success = true;
         if ($is_uploading) {
-            if (!move_uploaded_file($fileTmpName, $fileDestination)) {
+            if (!move_uploaded_file($file_tmpname, $file_destination)) {
                 $upload_success = false;
                 $errors['photo'] = "Gagal mengupload foto produk.";
             }
@@ -91,14 +92,15 @@ if (isset($_POST['create'])) {
             $query = "INSERT INTO products (name, description, photo, id_category, price, stock) VALUES ('$name', '$description', '$photo_name', '$id_category', '$price', '$stock')";
 
             if (mysqli_query($conn, $query)) {
-                echo "<script>window.location.href='index.php?success=1';</script>";
+                echo "<script>window.location.href='index.php?success-create=1';</script>";
                 exit;
             } else {
                 $errors['database'] = "Gagal menyimpan produk: " . mysqli_error($conn);
-                if ($is_uploading && file_exists($fileDestination)) unlink($fileDestination);
+                if ($is_uploading && file_exists($file_destination)) unlink($file_destination);
             }
         }
     }
+    // END: menyimpan produk baru ke database jika tidak ada error
 }
 ?>
 <main class="flex-grow-1 p-3 p-md-4 bg-light">
@@ -126,7 +128,7 @@ if (isset($_POST['create'])) {
                     <strong>Gagal!</strong> <?= $errors['database']; ?>
                 </div>
             <?php endif; ?>
-
+            <!-- START: form untuk menambahkan produk baru -->
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama Produk</label>
@@ -134,7 +136,7 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>"
                         id="name"
                         name="name"
-                        placeholder="Masukkan nama produk">
+                        placeholder="Masukkan nama produk" value="<?= htmlspecialchars($name) ?>">
                     <?php if (isset($errors['name'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['name']; ?></div>
                     <?php endif; ?>
@@ -145,7 +147,7 @@ if (isset($_POST['create'])) {
                         id="description"
                         name="description"
                         rows="3"
-                        placeholder="Masukkan deskripsi produk"></textarea>
+                        placeholder="Masukkan deskripsi produk"><?= htmlspecialchars($description) ?></textarea>
                     <?php if (isset($errors['description'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['description']; ?></div>
                     <?php endif; ?>
@@ -157,7 +159,7 @@ if (isset($_POST['create'])) {
                         id="photo"
                         name="photo"
                         onchange="previewImage()"
-                        placeholder="Masukkan foto produk">
+                        placeholder="Masukkan foto produk" accept=".png,.jpg,.jpeg,image/png,image/jpeg">
                     <?php if (isset($errors['photo'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['photo']; ?></div>
                     <?php endif; ?>
@@ -174,7 +176,9 @@ if (isset($_POST['create'])) {
                         <?php
                         $categories_query = mysqli_query($conn, "SELECT * FROM categories ORDER BY name ASC");
                         while ($category = mysqli_fetch_assoc($categories_query)): ?>
-                            <option value="<?= htmlspecialchars($category['id']) ?>">
+                            <option
+                                value="<?= $category['id'] ?>"
+                                <?= (($_POST['id_category'] ?? '') == $category['id']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($category['name']) ?>
                             </option>
                         <?php endwhile; ?>
@@ -189,7 +193,7 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['price']) ? 'is-invalid' : ''; ?>"
                         id="price"
                         name="price"
-                        placeholder="Masukkan harga produk">
+                        placeholder="Masukkan harga produk" value="<?= htmlspecialchars($price) ?>">
                     <?php if (isset($errors['price'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['price']; ?></div>
                     <?php endif; ?>
@@ -200,13 +204,14 @@ if (isset($_POST['create'])) {
                         class="form-control <?= isset($errors['stock']) ? 'is-invalid' : ''; ?>"
                         id="stock"
                         name="stock"
-                        placeholder="Masukkan stok produk">
+                        placeholder="Masukkan stok produk" value="<?= htmlspecialchars($stock) ?>">
                     <?php if (isset($errors['stock'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['stock']; ?></div>
                     <?php endif; ?>
                 </div>
                 <button type="submit" class="btn btn-primary" name="create">Simpan Produk</button>
             </form>
+            <!-- END: form untuk menambahkan produk baru -->
         </div>
     </div>
 </main>
