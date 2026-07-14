@@ -75,18 +75,20 @@ $query = mysqli_query($conn, $sql);
                                 <td><?= htmlspecialchars($result['username_admin'] ?? '-') ?></td>
                                 <td><?= htmlspecialchars($result['followed_up_at'] ?? '-') ?></td>
                                 <td class="text-end pe-3">
-                                    <div class="d-inline-flex gap-1 align-items-center">
+                                    <div class="d-flex flex-nowrap justify-content-end align-items-center gap-1">
                                         <a href="detail.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
-                                        <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"><i class="bi bi-trash"></i></a>
+                                        <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus order ini?');"><i class="bi bi-trash"></i></a>
                                         <!-- START: form untuk mengubah status pesanan -->
-                                        <form action="../../actions/update_status.php" method="POST" class="d-inline">
+                                        <form action="../../actions/update_status.php" method="POST" class="d-flex flex-nowrap gap-1 m-0 justify-content-end">
                                             <input type="hidden" name="order_code" value="<?= $result['order_code']; ?>">
                                             <?php if ($result['status'] == '1'): ?>
                                                 <button class="btn btn-sm btn-outline-success" type="submit" name="status_baru" value="Selesai">Selesai</button>
                                                 <button class="btn btn-sm btn-outline-danger" type="submit" name="status_baru" value="Dibatalkan">Batalkan</button>
                                             <?php elseif ($result['status'] == '2'): ?>
+                                                <button class="btn btn-sm btn-outline-warning" type="submit" name="status_baru" value="Diproses">Diproses</button>
                                                 <button class="btn btn-sm btn-outline-danger" type="submit" name="status_baru" value="Dibatalkan">Batalkan</button>
                                             <?php else: ?>
+                                                <button class="btn btn-sm btn-outline-warning" type="submit" name="status_baru" value="Diproses">Diproses</button>
                                                 <button class="btn btn-sm btn-outline-success" type="submit" name="status_baru" value="Selesai">Selesai</button>
                                             <?php endif; ?>
                                         </form>

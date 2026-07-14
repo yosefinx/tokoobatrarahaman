@@ -170,7 +170,7 @@ JOIN categories ON products.id_category = categories.id ORDER BY products.id DES
         class="text-logo">Toko Obat Arah Aman</a>
     </div>
     <ul class="nav-links">
-      <li class="active"><a href="#home">Home</a></li>
+      <li class="active"><a href="#home">Beranda</a></li>
       <li><a href="#about">Tentang Kami</a></li>
       <li><a href="#products">Produk</a></li>
       <li><a href="#contact">Kontak</a></li>
@@ -692,9 +692,9 @@ JOIN categories ON products.id_category = categories.id ORDER BY products.id DES
         <p>Toko Obat Terpercaya dan Berkualitas Tinggi</p>
       </div>
       <div class="quick-links">
-        <h4>Quick Links</h4>
+        <h4>Navigasi</h4>
         <ul>
-          <li><a href="#home">Home</a></li>
+          <li><a href="#home">Beranda</a></li>
           <li><a href="#about">Tentang Kami</a></li>
           <li><a href="#products">Produk</a></li>
           <li><a href="#contact">Kontak</a></li>

@@ -52,22 +52,22 @@ $products = [];
 while ($row = mysqli_fetch_assoc($query)) {
     if (!$order_info) {
         $order_info = [
-            'order_code'       => $row['order_code'],
+            'order_code' => $row['order_code'],
             'shipping_address' => $row['shipping_address'],
-            'recipe'           => $row['recipe'],
-            'status'           => $row['status'],
-            'order_date'       => $row['order_date'],
-            'notes'            => $row['notes'],
-            'followed_up_at'   => $row['followed_up_at']
+            'recipe' => $row['recipe'],
+            'status' => $row['status'],
+            'order_date' => $row['order_date'],
+            'notes' => $row['notes'],
+            'followed_up_at' => $row['followed_up_at']
         ];
     }
     if ($row['id_detail']) {
         $products[] = [
-            'product_name'  => $row['product_name'],
+            'product_name' => $row['product_name'],
             'product_photo' => $row['product_photo'],
             'product_price' => $row['product_price'],
-            'quantity'      => $row['quantity'],
-            'subtotal'      => $row['product_price'] * $row['quantity']
+            'quantity' => $row['quantity'],
+            'subtotal' => $row['product_price'] * $row['quantity']
         ];
     }
 }

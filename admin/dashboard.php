@@ -3,9 +3,9 @@ $page = 'dashboard';
 include "middleware/admin_security.php";
 include "../config/connection.php";
 //START: query untuk menampilkan ringkasan aktivitas dan operasional toko obat
-$count_diproses  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM orders WHERE status = '1'"))['total'];
-$count_products  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM products"))['total'];
-$count_category  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM categories"))['total'];
+$count_process = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM orders WHERE status = '1'"))['total'];
+$count_products = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM products"))['total'];
+$count_category = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM categories"))['total'];
 $count_all_order = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM orders"))['total'];
 // END: query untuk menampilkan ringkasan aktivitas dan operasional toko obat
 
@@ -27,7 +27,7 @@ $query_orders = mysqli_query($conn, "SELECT * FROM orders ORDER BY order_date DE
             <div class="card border border-light-subtle bg-white rounded-2">
                 <div class="card-body p-3 d-flex justify-content-between align-items-center">
                     <div>
-                        <div class="text-dark fw-bold h5 mb-1"><?= $count_diproses ?></div>
+                        <div class="text-dark fw-bold h5 mb-1"><?= $count_process ?></div>
                         <span class="text-muted small">Pesanan Diproses</span>
                     </div>
                     <div class="text-warning h4 mb-0"><i class="bi bi-clock-history"></i></div>

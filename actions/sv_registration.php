@@ -19,9 +19,9 @@ $_SESSION['old'] = [
 ];
 
 if (empty($username)) {
-    $errors['username'] = "Username wajib diisi.";
+    $errors['username'] = "Nama pengguna wajib diisi.";
 } elseif (strlen($username) < 3) {
-    $errors['username'] = "Username minimal 3 karakter.";
+    $errors['username'] = "Nama pengguna minimal 3 karakter.";
 }
 
 if (empty($full_name)) {
@@ -29,9 +29,9 @@ if (empty($full_name)) {
 }
 
 if (empty($phone_number)) {
-    $errors['phone_number'] = "Nomor HP wajib diisi.";
+    $errors['phone_number'] = "Nomor telepon wajib diisi.";
 } elseif (!preg_match('/^08[0-9]{8,13}$/', $phone_number)) {
-    $errors['phone_number'] = "Nomor HP harus diawali dengan 08 dan terdiri dari 10-15 digit."; // validasi nomor HP harus diawali dengan 08 dan Jumlah angka setelah 08 minimal harus 8 digit dan maksimal 13 digit.
+    $errors['phone_number'] = "Nomor telepon harus diawali dengan 08 dan terdiri dari 10-15 digit."; // validasi nomor HP harus diawali dengan 08 dan Jumlah angka setelah 08 minimal harus 8 digit dan maksimal 13 digit.
 }
 
 if (empty($email)) {
@@ -41,14 +41,14 @@ if (empty($email)) {
 }
 
 if (empty($password_raw)) {
-    $errors['password'] = "Password wajib diisi.";
+    $errors['password'] = "Kata sandi wajib diisi.";
 } elseif (strlen($password_raw) < 8) {
-    $errors['password'] = "Password minimal 8 karakter.";
+    $errors['password'] = "Kata sandi minimal 8 karakter.";
 }
 
 $cek = mysqli_query($conn, "SELECT id FROM users WHERE username='$username'");
 if (mysqli_num_rows($cek) > 0) {
-    $errors['username'] = "Username sudah digunakan.";
+    $errors['username'] = "Nama pengguna sudah digunakan.";
 }
 
 $cek = mysqli_query($conn, "SELECT id FROM users WHERE email='$email'");

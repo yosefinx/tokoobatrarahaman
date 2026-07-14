@@ -42,7 +42,7 @@ if ($category > 0) {
         class="text-logo">Toko Obat Arah Aman</a>
     </div>
     <ul class="nav-links">
-      <li><a href="index.php">Home</a></li>
+      <li><a href="index.php">Beranda</a></li>
       <li><a href="index.php#about">Tentang Kami</a></li>
       <li class="active"><a href="index.php#products">Produk</a></li>
       <li><a href="index.php#contact">Kontak</a></li>
@@ -196,9 +196,9 @@ if ($category > 0) {
         <p>Toko Obat Terpercaya dan Berkualitas Tinggi</p>
       </div>
       <div>
-        <h4>Quick Links</h4>
+        <h4>Navigasi</h4>
         <ul>
-          <li><a href="index.php#home">Home</a></li>
+          <li><a href="index.php#home">Beranda</a></li>
           <li><a href="index.php#about">Tentang Kami</a></li>
           <li><a href="index.php#products">Produk</a></li>
           <li><a href="index.php#contact">Kontak</a></li>

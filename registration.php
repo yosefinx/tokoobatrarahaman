@@ -44,18 +44,18 @@ unset($_SESSION['old']);
             <div class="mb-4 overflow-hidden rounded-3 border">
                 <img src="images/hero/hero-image.jpeg" class="img-fluid rounded-3 border w-100" style="height: 100px; object-fit: cover;" alt="Dashboard Preview">
             </div>
-            <h2 class="fw-bold text-dark mb-3">Registration</h2>
+            <h2 class="fw-bold text-dark mb-3">Registrasi</h2>
             <form action="actions/sv_registration.php" method="POST">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">Nama Pengguna</label>
                         <input type="text" class="form-control <?= isset($errors['username']) ? 'is-invalid' : '' ?>" id="username" name="username" value="<?= htmlspecialchars($old['username'] ?? '') ?>">
                         <?php if (isset($errors['username'])) : ?>
                             <div class="invalid-feedback small"><?= $errors['username']; ?></div>
                         <?php endif; ?>
                     </div>
                     <div class="col-md-6">
-                        <label for="full_name" class="form-label">Full Name</label>
+                        <label for="full_name" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-control <?= isset($errors['full_name']) ? 'is-invalid' : '' ?>" id="full_name" name="full_name" value="<?= htmlspecialchars($old['full_name'] ?? '') ?>">
                         <?php if (isset($errors['full_name'])) : ?>
                             <div class="invalid-feedback small"><?= $errors['full_name']; ?></div>
@@ -63,7 +63,7 @@ unset($_SESSION['old']);
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <label for="phone_number" class="form-label">Nomor Telepon</label>
                     <input type="text" class="form-control <?= isset($errors['phone_number']) ? 'is-invalid' : '' ?>" id="phone_number" name="phone_number" value="<?= htmlspecialchars($old['phone_number'] ?? '') ?>">
                     <?php if (isset($errors['phone_number'])) : ?>
                         <div class="invalid-feedback small"><?= $errors['phone_number']; ?></div>
