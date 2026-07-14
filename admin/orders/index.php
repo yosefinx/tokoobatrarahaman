@@ -30,6 +30,12 @@ $query = mysqli_query($conn, $sql);
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
+        <?php if (isset($_GET['success-update']) && $_GET['success-update'] == '1') : ?>
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4 rounded-3" role="alert">
+                <strong>Berhasil!</strong> Pesanan berhasil diubah.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
         <!-- END: menampilkan pesan alert jika ada parameter success-delete -->
         <!-- START: menampilkan tabel pesanan -->
         <div class="card-body p-0">
@@ -76,8 +82,9 @@ $query = mysqli_query($conn, $sql);
                                 <td><?= htmlspecialchars($result['followed_up_at'] ?? '-') ?></td>
                                 <td class="text-end pe-3">
                                     <div class="d-flex flex-nowrap justify-content-end align-items-center gap-1">
-                                        <a href="detail.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary me-1">Detail</a>
+                                        <a href="edit.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
                                         <a href="delete.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus order ini?');"><i class="bi bi-trash"></i></a>
+                                        <a href="detail.php?id=<?= htmlspecialchars($result['id']) ?>" class="btn btn-sm btn-outline-primary">Detail</a>
                                         <!-- START: form untuk mengubah status pesanan -->
                                         <form action="../../actions/update_status.php" method="POST" class="d-flex flex-nowrap gap-1 m-0 justify-content-end">
                                             <input type="hidden" name="order_code" value="<?= $result['order_code']; ?>">

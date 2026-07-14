@@ -50,7 +50,7 @@ if (isset($_POST['update_order'])) {
                 }
             }
         }
-        echo "<script>alert('Seluruh data pesanan dan produk berhasil diperbarui!'); window.location.href='edit.php?id=$id_order';</script>";
+        echo "<script>alert('Seluruh data pesanan dan produk berhasil diperbarui!'); window.location.href='index.php?success-update=1';</script>";
         exit();
     } else {
         $errors['database'] = "Gagal memperbarui data pesanan: " . mysqli_error($conn);
@@ -211,7 +211,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                                         ?>
                                                 <tr>
                                                     <td class="ps-3">
-                                                        <select name="products[<?= $detail_id ?>][id_product]" class="form-select form-select-sm">
+                                                        <select name="products[<?= $detail_id ?>][id_product]" class="form-select form-select-sm select-obat">
                                                             <?php foreach ($all_products as $p): ?>
                                                                 <option value="<?= $p['id'] ?>" <?= $p['id'] == $item['id_product'] ? 'selected' : '' ?>>
                                                                     <?= htmlspecialchars($p['name']) ?> — (Rp <?= number_format($p['price'], 0, ',', '.') ?>)
@@ -271,15 +271,12 @@ while ($row = mysqli_fetch_assoc($query)) {
 </main>
 <script>
     let index = 0;
-
     document.getElementById("btnAddProduct").addEventListener("click", function() {
-
         const tbody = document.getElementById("new-products-container");
-
         tbody.insertAdjacentHTML("beforeend", `
         <tr class="new-product-row">
             <td class="ps-3">
-                <select class="form-select form-select-sm"
+                <select class="form-select form-select-sm select-obat"
                         name="new_products[${index}][id_product]">
                     <option value="">Pilih Produk</option>
                     <?php foreach ($all_products as $p): ?>
@@ -287,7 +284,6 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <?= htmlspecialchars($p['name']) ?>
                         </option>
                     <?php endforeach; ?>
-
                 </select>
             </td>
             <td>
@@ -311,11 +307,20 @@ while ($row = mysqli_fetch_assoc($query)) {
         </tr>
     `);
         index++;
-    });
-    document.addEventListener("click", function(e) {
+        updateSelectOptions();
 
+    });
+    
+    document.addEventListener("change", function(e) {
+        if (e.target.classList.contains("select-obat")) {
+            updateSelectOptions();
+        }
+    });
+
+    document.addEventListener("click", function(e) {
         if (e.target.closest(".remove-row")) {
             e.target.closest(".new-product-row").remove();
+            updateSelectOptions();
         }
 
     });
