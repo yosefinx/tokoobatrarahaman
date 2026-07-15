@@ -179,7 +179,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                             </div>
                             <div class="mb-0">
                                 <label for="notes" class="form-label fw-semibold small text-dark">Catatan Tambahan</label>
-                                <textarea class="form-control" id="notes" name="notes" rows="2" placeholder="Catatan internal..."><?= htmlspecialchars($order_info['notes'] ?? '') ?></textarea>
+                                <textarea class="form-control" id="notes" name="notes" rows="2" placeholder="Catatan tambahan..."><?= htmlspecialchars($order_info['notes'] ?? '') ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -310,7 +310,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         updateSelectOptions();
 
     });
-    
+
     document.addEventListener("change", function(e) {
         if (e.target.classList.contains("select-obat")) {
             updateSelectOptions();
